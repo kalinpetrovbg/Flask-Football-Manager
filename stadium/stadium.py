@@ -12,9 +12,14 @@ class Stadium:
     def __init__(self, name, capacity):
         self.name = name
         self.capacity = capacity
+        self.spectators = 0
 
     def generate_stadium(self):
         pass
 
-    def generate_number_visitors(self, weather):
-        pass                                # Todo  based on weather generate num_visitors
+    def generate_number_spectators(self, weather):
+        self.spectators = self.capacity * weather.coefficient
+
+        # if it is rainy:
+        return 	f"It had rained all day, but {self.spectators} hardy fans still made it out to {self.name}."
+

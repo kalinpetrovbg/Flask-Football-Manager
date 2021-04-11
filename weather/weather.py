@@ -1,4 +1,5 @@
 from abc import ABC
 
 class Weather(ABC):
-    pass
+    def __init__(self):
+        self.coefficient = 0
