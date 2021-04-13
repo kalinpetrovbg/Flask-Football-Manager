@@ -1,3 +1,5 @@
+# to take the info from here in the future
+
 STADIUM_NAMES = {
     "Camp Nou": 99354,
     "Wembley Stadium": 90000,
