@@ -2,8 +2,8 @@ from players.player import Player
 
 
 class Defender(Player):
-    def __init__(self, firs_name, last_name, age):
-        super().__init__(firs_name, last_name, age)
+    def __init__(self, name, age):
+        super().__init__(name, age)
         self.defending = None
         self.passing = None
         self.playmaking = None
