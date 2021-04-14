@@ -1,5 +1,4 @@
 import random
-
 from weather.sunny import Sunny
 
 STADIUM_NAMES = {

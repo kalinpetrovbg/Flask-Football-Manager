@@ -2,7 +2,6 @@ from game.awayteam import AwayTeam
 from game.hometeam import HomeTeam
 from stadium.stadium import Stadium
 
-
 class Game:
     def __init__(self, home_team: HomeTeam, away_team: AwayTeam):
         self.home_team = home_team
