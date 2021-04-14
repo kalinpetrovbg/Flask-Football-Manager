@@ -8,4 +8,4 @@ Liverpool = AwayTeam("Liverpool", "Kalin", "Ivan", "Georgi")
 RealMadrid = AwayTeam("Real Madrid")
 BayernMunich = AwayTeam("Bayern Munich")
 
-away_teams_list = [Liverpool, RealMadrid, BayernMunich]
+AWAY_TEAMS = [Liverpool, RealMadrid, BayernMunich]

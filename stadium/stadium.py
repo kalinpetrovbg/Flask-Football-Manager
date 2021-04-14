@@ -50,20 +50,11 @@ class Stadium:
         self.spectators = self.capacity * weather.coefficient
 
         if weather.type == "Rainy":
-            return 	f"It had rained all day, but {self.spectators} hardy fans still made it out to {self.name}."
+            return 	f"It had rained all day, but {int(self.spectators)} hardy fans still made it out to {self.name}."
         elif weather.type == "Sunny":
-            return f"It was an exceptionally hot day for the crowd of {self.spectators} that came out to {self.name}"
+            return f"It was an exceptionally hot day for the crowd of {int(self.spectators)} that came out to {self.name}"
         elif weather.type == "PartiallyCloudy":
-            return f"{self.spectators} spectators arrived at {self.name}, where weather conditions were pretty" \
+            return f"{int(self.spectators)} spectators arrived at {self.name}, where weather conditions were pretty" \
                    f" good for football."
         elif weather.type == "Cloudy":
             return f"Clouds darkened the skies at {self.name} as {int(self.spectators)} spectators turned up for the match."
-
-
-s = Stadium()
-s.generate_stadium()
-s.generate_number_spectators(Sunny())
-
-print(s.name)
-print(s.capacity)
-print(s.generate_number_spectators(Sunny()))
