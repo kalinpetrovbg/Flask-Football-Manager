@@ -1,4 +1,6 @@
-# intro
+from game.game_controller import Game
+
+g = Game(b, s, qa)
 
 # weather info
 

@@ -3,4 +3,5 @@ class AwayTeam:
         self.name = name
         self.players = list(players)
 
-a = AwayTeam("Liverpool", "Kalin", "Ivan", "Georgi", "Dobri")
+
+Liverpool = AwayTeam("Liverpool", "Kalin", "Ivan", "Georgi", "Dobri")

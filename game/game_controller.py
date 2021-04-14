@@ -1,5 +1,6 @@
 from game.awayteam import AwayTeam
 from game.hometeam import HomeTeam
+from stadium.stadium import Stadium
 
 
 class Game:
@@ -7,6 +8,8 @@ class Game:
         self.home_team = home_team
         self.away_team = away_team
         self.date = None
+        self.weather = ""
+        self.stadium = Stadium()
         self.result = None
 
     def intro(self):
