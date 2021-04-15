@@ -5,19 +5,15 @@ from awayteam import away_team
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
 
-
-
-
-
 home_team_name = "FC Kalin"  # input('What will be your team\'s name: ')
 away_team_name = away_team
 
 score_home = 0
 score_away = 0
 
-print(f"\n{home_team_name} : {away_team_name} = {score_home} - {score_away}")
+print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
-time.sleep(2)
+time.sleep(1)
 
 stadium = Stadium()
 weather = random.choice(WEATHER_TYPES)
@@ -26,6 +22,8 @@ stadium.generate_stadium()
 print(stadium.generate_number_spectators(weather))
 
 match_time = 0
+
+time.sleep(1)
 print("Ref blows the whistle and we're under way!")
 
 current_time = 22
@@ -37,8 +35,8 @@ LIST_OF_ATTACKS = [
 
 attack_event = random.choice(LIST_OF_ATTACKS)
 
-def attack(event, team):
-    pass
+
+print(attack_event)
 
 
 
