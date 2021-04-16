@@ -34,8 +34,15 @@ LIST_OF_ATTACKS = [
 ]
 
 attack_event = random.choice(LIST_OF_ATTACKS)
+print(attack_event)
 
+current_time = 47
+LIST_OF_ATTACKS = [
+    f"{home_team_name} broke through on the left {current_time} minutes into the game, with Panikos Moditis firing "
+    f"in from an acute angle to give the home side a {score_home + 1} - {score_away} lead.",
+]
 
+attack_event = random.choice(LIST_OF_ATTACKS)
 print(attack_event)
 
 
