@@ -2,10 +2,11 @@ import random
 import time
 
 from awayteam import away_team
+from hometeam import home_team
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
 
-home_team_name = "FC Kalin"  # input('What will be your team\'s name: ')
+home_team_name = home_team  # input('What will be your team\'s name: ')
 away_team_name = away_team
 
 score_home = 0
@@ -26,29 +27,33 @@ match_time = 0
 time.sleep(1)
 print("Ref blows the whistle and we're under way!")
 
-current_time = 22
+for x in range(1, 11):
+    number = random.randint(1, 11)
+    if number % 2 == 0:
+        attacking_team = home_team_name
+        score_home += 1
+    else:
+        attacking_team = away_team
+        score_away += 1
 
-LIST_OF_ATTACKS = [
-    f"{home_team_name} broke through on the left {current_time} minutes into the game, with Panikos Moditis firing "
-    f"in from an acute angle to give the home side a {score_home + 1} - {score_away} lead.",
-]
+print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
-attack_event = random.choice(LIST_OF_ATTACKS)
-print(attack_event)
-
-current_time = 47
-LIST_OF_ATTACKS = [
-    f"{home_team_name} broke through on the left {current_time} minutes into the game, with Panikos Moditis firing "
-    f"in from an acute angle to give the home side a {score_home + 1} - {score_away} lead.",
-]
-
-attack_event = random.choice(LIST_OF_ATTACKS)
-print(attack_event)
+# current_time = 22
+#
+# LIST_OF_ATTACKS = [
+#     f"{home_team_name} broke through on the left {current_time} minutes into the game, with Panikos Moditis firing "
+#     f"in from an acute angle to give the home side a {score_home + 1} - {score_away} lead.",
+# ]
+#
+# attack_event = random.choice(LIST_OF_ATTACKS)
+# print(attack_event)
+# current_time = 47
+# attack_event = random.choice(LIST_OF_ATTACKS)
+# print(attack_event)
 
 
 
 # print(attack(attack_event, attacking_team))
-
 
 
 # weather info
