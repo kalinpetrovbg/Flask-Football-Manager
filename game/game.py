@@ -2,7 +2,7 @@ import random
 import time
 
 from awayteam import away_team
-from hometeam import home_team
+from hometeam import *
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
 
@@ -32,6 +32,9 @@ for x in range(1, 11):
     if number % 2 == 0:
         attacking_team = home_team_name
         score_home += 1
+        random_home_scorer = random.choice(home_team_players)
+        print(f"{random_home_scorer} scores!")
+        time.sleep(2)
     else:
         attacking_team = away_team
         score_away += 1

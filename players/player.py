@@ -3,9 +3,8 @@ from players.player_names.names_data import *
 import random
 
 class Player:
-    def __init__(self, name, age):
+    def __init__(self, name):
         self.name = name
-        self.age = age
         self.experience = 0
 
     def calculate_experience(self):
