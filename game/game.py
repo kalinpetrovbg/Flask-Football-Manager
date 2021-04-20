@@ -1,7 +1,7 @@
 import random
 import time
 
-from awayteam import away_team
+from awayteam import *
 from hometeam import *
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
@@ -27,6 +27,19 @@ match_time = 0
 time.sleep(1)
 print("Ref blows the whistle and we're under way!")
 
+
+""" 
+Calculate Attacks
+Possession (your team) = 100 * ( Midfield [your team] / ( Midfield [your team] + Midfield [opponents team] ) )
+"""
+
+
+print(HOME_TEAMS.midfield)
+print(AWAY_TEAMS.midfield)
+
+calculate_attacks = 0
+
+
 for x in range(1, 11):
     number = random.randint(1, 11)
     if number % 2 == 0:
@@ -40,6 +53,8 @@ for x in range(1, 11):
         score_away += 1
 
 print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
+
+
 
 # current_time = 22
 #

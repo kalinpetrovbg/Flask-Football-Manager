@@ -11,6 +11,7 @@ class HomeTeam:
     def __init__(self, name, *players):
         self.name = name
         self.players = list(players)
+        self.midfield = 32   # later to be calculated
 
 
 Kalin = HomeTeam("FC Kalin", Keeper("Yannic Banfi"), Defender("Gasem Al-Marwani"), Midfielder("Jan Eger"),
