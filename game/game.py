@@ -3,10 +3,11 @@ import time
 
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
-from possesion_calc import *
 from attack_calc import *
+from hometeam import *
 
-home_team_name = home_team  # input('What will be your team\'s name: ')
+print(home_team_lineup())  # input('What will be your team\'s name: ')
+home_team_name = home_team
 away_team_name = away_team
 
 score_home = 0
@@ -55,12 +56,11 @@ for x in range(1, 11):
             print(f"{away_team_name} misses a chance to score!")
 
 
-print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
+print(f"\nFinal Result: {home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
 print(print_possession_message(home_team_name, away_team_name))
 print(f"Home team did {number_home_attacks} attacks")
 print(f"Away team did {number_away_attacks} attacks")
-
 
 
 # current_time = 22
