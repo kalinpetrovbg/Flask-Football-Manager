@@ -1,10 +1,9 @@
 import random
 import time
 
-from awayteam import *
-from hometeam import *
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
+from possesion_calc import *
 
 home_team_name = home_team  # input('What will be your team\'s name: ')
 away_team_name = away_team
@@ -28,19 +27,6 @@ time.sleep(1)
 print("Ref blows the whistle and we're under way!")
 
 
-""" 
-Calculate Attacks
-Possession (your team) = 100 * ( Midfield [your team] / ( Midfield [your team] + Midfield [opponents team] ) )
-"""
-
-
-print(HOME_TEAMS.midfield)
-print(AWAY_TEAMS.midfield)
-
-possession_home_team = 100 * (HOME_TEAMS.midfield / (HOME_TEAMS.midfield + AWAY_TEAMS.midfield))
-possession_away_team = 100 * (AWAY_TEAMS.midfield / (AWAY_TEAMS.midfield + HOME_TEAMS.midfield))
-
-
 for x in range(1, 11):
     number = random.randint(1, 11)
     if number % 2 == 0:
@@ -55,7 +41,7 @@ for x in range(1, 11):
 
 print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
-print(f"Possession was: {int(possession_home_team)}% : {int(possession_away_team)}%")
+print(f"Ball Possession was: {home_team_name} {int(possession_home_team)}% / {away_team_name} {int(possession_away_team)}%")
 
 # current_time = 22
 #
