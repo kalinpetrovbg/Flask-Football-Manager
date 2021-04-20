@@ -29,16 +29,32 @@ print("Ref blows the whistle and we're under way!")
 
 
 for x in range(1, 11):
-    number = random.randint(1, 11)
-    if number % 2 == 0:
-        attacking_team = home_team_name
-        score_home += 1
-        random_home_scorer = random.choice(home_team_players)
-        print(f"{random_home_scorer} scores!")
-        time.sleep(2)
-    else:
-        attacking_team = away_team
-        score_away += 1
+
+    time.sleep(2)
+    home_att = number_home_attacks
+    away_att = number_away_attacks
+    chance_to_attack = random.choice([HOME_TEAMS, AWAY_TEAMS])
+    print(chance_to_attack)
+
+    if chance_to_attack == HOME_TEAMS:
+        if home_att > 0:
+            attacking_team = HOME_TEAMS
+            home_att -= 1
+            score_home += 1
+            random_home_scorer = random.choice(home_team_players)
+            print(f"{random_home_scorer} scores!")
+        else:
+            print(f"{home_team_name} misses a chance to score!")
+    elif chance_to_attack == AWAY_TEAMS:
+        if away_att > 0:
+            attacking_team = AWAY_TEAMS
+            away_att -= 1
+            score_away += 1
+            random_away_scorer = random.choice(away_team_players)
+            print(f"{random_away_scorer} scores!")
+        else:
+            print(f"{away_team_name} misses a chance to score!")
+
 
 print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 

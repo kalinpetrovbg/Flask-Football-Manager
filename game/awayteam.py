@@ -24,3 +24,5 @@ Juventus = AwayTeam("FC Juventus", Keeper("Player 1"), Defender("Player 2"), Mid
 
 AWAY_TEAMS = random.choice([Liverpool, RealMadrid, BayernMunich, Juventus])
 away_team = AWAY_TEAMS.name
+away_team_players = [player.name for player in AWAY_TEAMS.players]
+print(', '.join(away_team_players))
