@@ -4,6 +4,7 @@ import time
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
 from possesion_calc import *
+from attack_calc import *
 
 home_team_name = home_team  # input('What will be your team\'s name: ')
 away_team_name = away_team
@@ -42,6 +43,10 @@ for x in range(1, 11):
 print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
 print(f"Ball Possession was: {home_team_name} {int(possession_home_team)}% / {away_team_name} {int(possession_away_team)}%")
+print(f"Home team did {number_home_attacks} attacks")
+print(f"Away team did {number_away_attacks} attacks")
+
+
 
 # current_time = 22
 #
