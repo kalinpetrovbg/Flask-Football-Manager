@@ -57,7 +57,7 @@ for x in range(1, 11):
 
 print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
-print(f"Ball Possession was: {home_team_name} {int(possession_home_team)}% / {away_team_name} {int(possession_away_team)}%")
+print(print_possession_message(home_team_name, away_team_name))
 print(f"Home team did {number_home_attacks} attacks")
 print(f"Away team did {number_away_attacks} attacks")
 
