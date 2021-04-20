@@ -27,14 +27,13 @@ match_time = 0
 time.sleep(1)
 print("Ref blows the whistle and we're under way!")
 
+home_att = number_home_attacks
+away_att = number_away_attacks
 
 for x in range(1, 11):
 
     time.sleep(2)
-    home_att = number_home_attacks
-    away_att = number_away_attacks
     chance_to_attack = random.choice([HOME_TEAMS, AWAY_TEAMS])
-    print(chance_to_attack)
 
     if chance_to_attack == HOME_TEAMS:
         if home_att > 0:
@@ -42,7 +41,7 @@ for x in range(1, 11):
             home_att -= 1
             score_home += 1
             random_home_scorer = random.choice(home_team_players)
-            print(f"{random_home_scorer} scores!")
+            print(f"{random_home_scorer} scores! ({score_home} : {score_away})")
         else:
             print(f"{home_team_name} misses a chance to score!")
     elif chance_to_attack == AWAY_TEAMS:
@@ -51,7 +50,7 @@ for x in range(1, 11):
             away_att -= 1
             score_away += 1
             random_away_scorer = random.choice(away_team_players)
-            print(f"{random_away_scorer} scores!")
+            print(f"{random_away_scorer} scores! ({score_home} : {score_away})")
         else:
             print(f"{away_team_name} misses a chance to score!")
 
