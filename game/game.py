@@ -37,7 +37,8 @@ Possession (your team) = 100 * ( Midfield [your team] / ( Midfield [your team] +
 print(HOME_TEAMS.midfield)
 print(AWAY_TEAMS.midfield)
 
-calculate_attacks = 0
+possession_home_team = 100 * (HOME_TEAMS.midfield / (HOME_TEAMS.midfield + AWAY_TEAMS.midfield))
+possession_away_team = 100 * (AWAY_TEAMS.midfield / (AWAY_TEAMS.midfield + HOME_TEAMS.midfield))
 
 
 for x in range(1, 11):
@@ -54,7 +55,7 @@ for x in range(1, 11):
 
 print(f"\n{home_team_name} - {away_team_name} = {score_home} : {score_away}")
 
-
+print(f"Possession was: {int(possession_home_team)}% : {int(possession_away_team)}%")
 
 # current_time = 22
 #
