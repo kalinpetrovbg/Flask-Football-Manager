@@ -34,7 +34,7 @@ away_att = number_away_attacks
 for x in range(1, 11):
 
     time.sleep(2)
-    chance_to_attack = random.choice([HOME_TEAMS, AWAY_TEAMS])
+    chance_to_attack = random.choice([HOME_TEAMS, AWAY_TEAM])
 
     if chance_to_attack == HOME_TEAMS:
         if home_att > 0:
@@ -45,9 +45,9 @@ for x in range(1, 11):
             print(f"{random_home_scorer} scores! ({score_home} : {score_away})")
         else:
             print(f"{home_team_name} misses a chance to score!")
-    elif chance_to_attack == AWAY_TEAMS:
+    elif chance_to_attack == AWAY_TEAM:
         if away_att > 0:
-            attacking_team = AWAY_TEAMS
+            attacking_team = AWAY_TEAM
             away_att -= 1
             score_away += 1
             random_away_scorer = random.choice(away_team_players)

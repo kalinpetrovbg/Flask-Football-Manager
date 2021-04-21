@@ -13,5 +13,5 @@ def print_possession_message(home_team_name, away_team_name):
 
 
 
-possession_home_team = calculate_home_team_possession(HOME_TEAMS.midfield, AWAY_TEAMS.midfield)
-possession_away_team = calculate_away_team_possession(HOME_TEAMS.midfield, AWAY_TEAMS.midfield)
+possession_home_team = calculate_home_team_possession(HOME_TEAMS.midfield, AWAY_TEAM.midfield)
+possession_away_team = calculate_away_team_possession(HOME_TEAMS.midfield, AWAY_TEAM.midfield)
