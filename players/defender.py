@@ -10,3 +10,5 @@ class Defender(Player):
 
     def generate_skills(self):
         pass
+
+

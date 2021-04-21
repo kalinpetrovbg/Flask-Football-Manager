@@ -20,6 +20,7 @@ Kalin = HomeTeam("FC Kalin", Keeper("Yannic Banfi"), Defender("Gasem Al-Marwani"
 
 HOME_TEAMS = random.choice([Kalin])
 home_team = HOME_TEAMS.name
+home_team_players = [player.name for player in HOME_TEAMS.players]
 
 def home_team_lineup():
     home_team_players = [player.name for player in HOME_TEAMS.players]
