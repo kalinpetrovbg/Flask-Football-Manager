@@ -13,6 +13,14 @@ class AwayTeam:
         self.midfield = 0
         self.tactic = "4-3-3"
 
+    @property
+    def midfield(self):
+        return self._midfield
+
+    @midfield.setter
+    def midfield(self, value):
+        value = calculate_midfield_points(AWAY_TEAM)
+        self._midfield = value
 
 Liverpool = AwayTeam(
     "Liverpool",
