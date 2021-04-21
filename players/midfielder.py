@@ -8,6 +8,5 @@ class Midfielder(Player):
         self.passing = passing
         self.defending = defending
 
-
     def generate_skills(self):
         pass

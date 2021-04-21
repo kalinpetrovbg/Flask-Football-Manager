@@ -13,8 +13,13 @@ class HomeTeam:
         self.midfield = 38   # later to be calculated
 
 
-Kalin = HomeTeam("FC Kalin", Keeper("Yannic Banfi"), Defender("Gasem Al-Marwani"), Midfielder("Jan Eger"),
-                Forward("Juraj Trška"))
+Kalin = HomeTeam(
+    "FC Kalin",
+    Keeper("Yannic Banfi", 10, 10),
+    Defender("Gasem Al-Marwani", 10, 10, 10),
+    Midfielder("Jan Eger",10, 10, 10),
+    Forward("Juraj Trška", 10, 10, 10)
+)
 
 
 HOME_TEAMS = random.choice([Kalin])

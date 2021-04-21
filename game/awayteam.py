@@ -30,8 +30,29 @@ Liverpool = AwayTeam(
 )
 
 
-AWAY_TEAMS = random.choice([Liverpool])
-away_team = AWAY_TEAMS.name
-away_team_players = [player.name for player in AWAY_TEAMS.players]
-print(', '.join(away_team_players))
+AWAY_TEAM = random.choice([Liverpool])
+away_team = AWAY_TEAM.name
+away_team_players = [player.name for player in AWAY_TEAM.players]
+# print(', '.join(away_team_players))
 
+def calculate_midfield_points(AWAY_TEAM):
+    points = sum([player.playmaking for player in AWAY_TEAM.players if player.__class__.__name__ == "Midfielder"])
+    return points
+
+def calculate_attacking_points(AWAY_TEAM):
+    points = sum([player.scoring for player in AWAY_TEAM.players if player.__class__.__name__ == "Forward"])
+    return points
+
+def calculate_defending_points(AWAY_TEAM):
+    points = sum([player.defending for player in AWAY_TEAM.players if player.__class__.__name__ == "Defender"])
+    return points
+
+def calculate_goalkeeping_points(AWAY_TEAM):
+    points = sum([player.goalkeeping for player in AWAY_TEAM.players if player.__class__.__name__ == "Keeper"])
+    return points
+
+
+mid = calculate_midfield_points(AWAY_TEAM)
+forew = calculate_attacking_points(AWAY_TEAM)
+defend = calculate_defending_points(AWAY_TEAM)
+keep = calculate_goalkeeping_points(AWAY_TEAM)
