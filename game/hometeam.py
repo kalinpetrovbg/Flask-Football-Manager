@@ -3,7 +3,6 @@ import random
 from players.defender import Defender
 from players.keeper import Keeper
 from players.midfielder import Midfielder
-from players.winger import Winger
 from players.forward import Forward
 
 
@@ -15,7 +14,7 @@ class HomeTeam:
 
 
 Kalin = HomeTeam("FC Kalin", Keeper("Yannic Banfi"), Defender("Gasem Al-Marwani"), Midfielder("Jan Eger"),
-                 Winger("Vasil Gorbanov"), Forward("Juraj Trška"))
+                Forward("Juraj Trška"))
 
 
 HOME_TEAMS = random.choice([Kalin])

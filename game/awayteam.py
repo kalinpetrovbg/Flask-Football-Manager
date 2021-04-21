@@ -3,7 +3,6 @@ import random
 from players.defender import Defender
 from players.keeper import Keeper
 from players.midfielder import Midfielder
-from players.winger import Winger
 from players.forward import Forward
 
 
@@ -17,30 +16,22 @@ class AwayTeam:
 
 Liverpool = AwayTeam(
     "Liverpool",
-    Keeper("Alison Becker"),
-    Defender("Player 2"),
-    Defender("Player 2"),
-    Defender("Player 2"),
-    Defender("Player 2"),
-    Midfielder("Player 3"),
-    Midfielder("Player 3"),
-    Midfielder("Player 3"),
-    Forward("Player 5"),
-    Forward("Player 5"),
-    Forward("Player 5"),
+    Keeper("Alison Becker", 16, 9),
+    Defender("Andrew Robertson", 13, 12, 14),
+    Defender("Virgil van Dijk", 17, 11, 15),
+    Defender("Joe Gomez", 15, 9, 14),
+    Defender("Trent Alexander-Arnold", 12, 14, 16),
+    Midfielder("Kai Havertz", 16, 14, 11),
+    Midfielder("Fabinho", 14, 12, 15),
+    Midfielder("Naby Keïta", 15, 14, 11),
+    Forward("Sadio Mané", 15, 16, 12),
+    Forward("Roberto Firmino", 15, 17, 13),
+    Forward("Mohamed Salah", 15, 15, 10),
 )
-RealMadrid = AwayTeam("Real Madrid", Keeper("Player 1"), Defender("Player 2"), Midfielder("Player 3"),
-                      Winger("Player 4"), Forward("Player 5"))
-BayernMunich = AwayTeam("Bayern Munich", Keeper("Player 1"), Defender("Player 2"), Midfielder("Player 3"),
-                        Winger("Player 4"), Forward("Player 5"))
-Juventus = AwayTeam("FC Juventus", Keeper("Player 1"), Defender("Player 2"), Midfielder("Player 3"),
-                    Winger("Player 4"), Forward("Player 5"))
 
-AWAY_TEAMS = random.choice([Liverpool, RealMadrid, BayernMunich, Juventus])
+
+AWAY_TEAMS = random.choice([Liverpool])
 away_team = AWAY_TEAMS.name
 away_team_players = [player.name for player in AWAY_TEAMS.players]
 print(', '.join(away_team_players))
 
-Keeper.generate_skills(Keeper)
-print(Keeper.goalkeeping)
-print(Keeper.defending)

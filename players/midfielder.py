@@ -2,12 +2,12 @@ from players.player import Player
 
 
 class Midfielder(Player):
-    def __init__(self, name):
+    def __init__(self, name, playmaking, passing, defending):
         super().__init__(name)
-        self.playmaking = None
-        self.passing = None
-        self.defending = None
-        self.winger = None
+        self.playmaking = playmaking
+        self.passing = passing
+        self.defending = defending
+
 
     def generate_skills(self):
         pass
