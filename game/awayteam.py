@@ -10,7 +10,7 @@ class AwayTeam:
     def __init__(self, name, *players):
         self.name = name
         self.players = list(players)
-        self.midfield = 25  # later to be calculated
+        self.midfield = 0
         self.tactic = "4-3-3"
 
 
