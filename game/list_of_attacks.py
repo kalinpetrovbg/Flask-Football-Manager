@@ -5,6 +5,7 @@ winner = HOME_TEAMS
 loser = AWAY_TEAM
 scorer = "A"
 defender = "B"
+passer = "C"
 minutes = 0
 score = 0
 
@@ -22,15 +23,12 @@ LIST_OF_ATTACKS = [
     f"through the central line of defense and finished for {score}.",
 
     f"Cheers filled the stadium as {scorer} broke through the visitors' central defense "
-    f"to put away the {score} goal for {winner}."
+    f"to put away the {score} goal for {winner}.",
 
+    f"The unexpected cross from {winner}'s {passer} opened up the defense and was "
+    f"received by {scorer} who finished it off for {score}.",
 
-
-
-
-
-
-
-
+    f"The counter-attacks of {winner} were deadly and {minutes} minutes into the game, {scorer} "
+    f"controlled a long pass from the right flank and finished to make it {score}.",
 
 ]
