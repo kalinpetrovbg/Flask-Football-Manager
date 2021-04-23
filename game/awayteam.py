@@ -19,7 +19,7 @@ class AwayTeam:
 
     @midfield.setter
     def midfield(self, value):
-        value = calculate_midfield_points(AWAY_TEAM)
+        value = 32
         self._midfield = value
 
 Liverpool = AwayTeam(
