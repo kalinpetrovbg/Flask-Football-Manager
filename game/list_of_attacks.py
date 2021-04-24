@@ -1,8 +1,8 @@
 from hometeam import *
 from awayteam import *
 
-winner = HOME_TEAMS
-loser = AWAY_TEAM
+winner = HOME_TEAMS.name
+loser = AWAY_TEAM.name
 scorer = "A"
 defender = "B"
 passer = "C"
@@ -11,7 +11,7 @@ score = 0
 
 LIST_OF_ATTACKS = [
     f"The bleachers were silenced after {minutes} minutes when {winner}'s {scorer} put the guests "
-    f"ahead {score}, following an attack on the right.",
+    f"ahead {score_home} : {score_away}, following an attack on the right.",
 
     f"After {minutes} minutes a combination in the middle resulted in a through ball for {scorer} who "
     f"increased {winner}'s lead to {score}.",

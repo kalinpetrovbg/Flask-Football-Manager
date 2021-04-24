@@ -1,6 +1,7 @@
 import random
 import time
 
+from list_of_attacks import LIST_OF_ATTACKS
 from stadium.stadium import Stadium
 from weather.weather_data import WEATHER_TYPES
 from attack_calc import *
@@ -42,6 +43,7 @@ for x in range(1, 11):
             home_att -= 1
             score_home += 1
             random_home_scorer = random.choice(home_team_players)
+            print(random.choice(LIST_OF_ATTACKS))
             print(f"{random_home_scorer} scores! ({score_home} : {score_away})")
         else:
             print(f"{home_team_name} misses a chance to score!")
