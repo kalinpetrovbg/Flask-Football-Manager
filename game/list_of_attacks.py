@@ -1,5 +1,7 @@
 from hometeam import *
 from awayteam import *
+from game.game import score_home
+from game.game import score_away
 
 winner = HOME_TEAMS.name
 loser = AWAY_TEAM.name
@@ -7,7 +9,7 @@ scorer = "A"
 defender = "B"
 passer = "C"
 minutes = 0
-score = 0
+score = f"{score_home} : {score_away}"
 
 LIST_OF_ATTACKS = [
     f"The bleachers were silenced after {minutes} minutes when {winner}'s {scorer} put the guests "
