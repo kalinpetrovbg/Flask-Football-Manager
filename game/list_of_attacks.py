@@ -1,11 +1,12 @@
 from hometeam import *
 from awayteam import *
+from score import *
 
 winner = HOME_TEAMS.name
 loser = AWAY_TEAM.name
-scorer = "A"
-defender = "B"
-passer = "C"
+scorer = random.choice(away_team_players)
+defender = random.choice(home_team_players)
+passer = random.choice(away_team_players)
 minutes = 0
 score = 0
 
@@ -32,3 +33,6 @@ LIST_OF_ATTACKS = [
     f"controlled a long pass from the right flank and finished to make it {score}.",
 
 ]
+
+def attacking_crazy(LIST_OF_ATTACKS):
+    pass
