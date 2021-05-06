@@ -32,6 +32,10 @@ print("Ref blows the whistle and we're under way!")
 home_att = number_home_attacks
 away_att = number_away_attacks
 
+def attack_with_text(LIST_OF_ATTACKS):
+    new_attack = random.choice(LIST_OF_ATTACKS)
+    return new_attack
+
 for x in range(1, 11):
     time.sleep(2)
     chance_to_attack = random.choice([HOME_TEAMS, AWAY_TEAM])
@@ -41,7 +45,7 @@ for x in range(1, 11):
             home_att -= 1
             score_home += 1
             random_home_scorer = random.choice(home_team_players)
-            # print(random.choice(LIST_OF_ATTACKS))
+            print(attack_with_text(LIST_OF_ATTACKS))
             # how to calculate scorer
             print(f"{random_home_scorer} scores! ({score_home} : {score_away})")
         else:
