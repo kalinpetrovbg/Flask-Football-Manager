@@ -21,6 +21,14 @@ Kalin = HomeTeam(
     Forward("Juraj Trška", 10, 10, 10)
 )
 
+Aliens = HomeTeam(
+    "FC Aliens",
+    Keeper("Keeper", 10, 10),
+    Defender("Defender", 10, 10, 10),
+    Midfielder("Midfielder",10, 10, 10),
+    Forward("Forward", 10, 10, 10)
+)
+
 
 HOME_TEAMS = random.choice([Kalin])
 home_team = HOME_TEAMS.name
