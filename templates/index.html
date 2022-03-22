@@ -6,38 +6,64 @@
 
 <body>
 
-
-<center>
-<br><br>
-{{ content }}
-<br><br><br><br>
-
-    <img width="30px" src="{{url_for('static', filename='images/rainy.png')}}" />
-    <div>
-          {{ welcome }}
+<div class="top-content">
+    <div class="logo">
+        <img width="150px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
     </div>
 
+    <div class="menu">
 
-<br><br><br>
-    <table>
+        <div>Home</div>
+        <div>Quick Game</div>
+        <div>Play Cup</div>
+        <div>Create Team</div>
+        <div>Settings</div>
+
+    </div>
+
+</div>
+
+<div class="flex">
+
+    <div class="nav">
+        <div class="nav-title">Title</div>
+    </div>
+
+    <div class="top">
+
+        <div class="sub-top">
+            {{ content }}
+        </div>
+
+        <div class="center-content">
+            <img width="30px" alt="weather" src="{{url_for('static', filename='images/rainy.png')}}"/>
+            <div>
+                {{ welcome }}
+            </div>
 
 
-    {% for min, team in scorers.items() %}
-        <tr>
-            <td>
-            {{ min }} min, {{ team }} scores a GOAL!
-            </td>
-        </tr>
+            <table>
+                {% for min, team in scorers.items() %}
+                <tr>
+                    <td>
+                        {{ min }} min, {{ team }} scores a GOAL!
+                    </td>
+                </tr>
 
-    {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
 
 
+            <h3>
+                {{ home.name }} VS {{ away.name }}
+                {{ score[home.name] }} : {{ score[away.name] }}
+            </h3>
 
-    <h3>
-    {{ home.name }} VS {{ away.name }}
-    {{ score[home.name] }} : {{ score[away.name] }}
-</h3>
-</center>
+        </div>
+    </div>
+
+</div>
+
+
 </body>
 </html>

@@ -8,6 +8,7 @@ body {
   max-width: 960px;
   margin: 0 auto;
   background: white;
+  border: 1px #ccc solid;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -131,4 +132,82 @@ input.danger {
 input[type=submit] {
   align-self: start;
   min-width: 10em;
+}
+
+.logo {
+    margin: 15px;
+
+}
+
+.menu {
+    height: 35;
+    background-color: #277f31;
+    color: #fff;
+    border-radius: 10px;
+    width: 97%;
+    margin-left: 1.5%;
+}
+
+.menu>div {
+    padding-left: 50px;
+    padding-right:40px;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    line-height: 35px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin: 0 0 0 10px;
+    height: 35px;
+    background: inherit;
+    }
+
+.top-content {
+    height: 100px;
+}
+
+.nav {
+    display: grid;
+    margin-top: 10px;
+    margin-left:10px;
+    background-color: #efefef;
+    height: 500px;
+    width: 25%;
+    border: 1px #ccc solid;
+}
+
+
+
+.flex {
+    display: flex;
+    width: 100%;
+}
+
+.top {
+    display: grid;
+    height:80px;
+    border: 1px #ccc solid;
+    margin-top: 10px;
+    width: 96%;
+    margin-left: 8px;
+}
+
+
+
+.sub-top {
+    display: grid;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    align-content: space-around;
+
+}
+
+.center-content {
+    display: grid;
+    border: 1px #ccc solid;
+    margin-top:10px;
+    width: 96%;
+    padding-left: 20px;
 }
