@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+
+<center>
+<br><br>
+{{ content }}
+<br><br><br>
+    <table>
+
+
+    {% for min, team in scorers.items() %}
+        <tr>
+            <td>
+            {{ min }} min, {{ team }} scores a GOAL!
+            </td>
+        </tr>
+
+    {% endfor %}
+        </table>
+
+
+
+    <h3>
+    {{ home.name }} VS {{ away.name }}
+    {{ score[home.name] }} : {{ score[away.name] }}
+</h3>
+</center>
+</body>
+</html>
