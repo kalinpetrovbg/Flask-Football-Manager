@@ -46,8 +46,7 @@ class Stadium:
     def generate_stadium(self):
         all_stadiums_as_list = list(STADIUM_NAMES.items())
         generated_stadium = random.choice(all_stadiums_as_list)
-        self.name = generated_stadium[0]
-        self.capacity = generated_stadium[1]
+        self.name, self.capacity = generated_stadium
 
     def generate_visitors(self, weather):
         self.spectators = self.capacity * weather.coefficient

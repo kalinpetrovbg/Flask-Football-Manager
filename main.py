@@ -79,7 +79,7 @@ def home():
         score[random_side] += goal
 
     return render_template("index.html", content=Game.start(), home=home_team, away=away_team, score=score,
-                           scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome)
+                           scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome, weather=weather)
 
 
 if __name__ == '__main__':
