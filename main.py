@@ -1,6 +1,12 @@
 import random
 
 from flask import Flask, render_template
+from stadium.stadium import Stadium
+from weather.weather import WEATHER_TYPES
+
+teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
+         "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
+         ]
 
 # from flask_sqlalchemy import SQLAlchemy
 
@@ -37,10 +43,6 @@ def home():
         def __str__(self):
             return f"Away team {self.name} with power {self.power}."
 
-    teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
-             "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
-             ]
-
     home_team = HomeTeam(random.choice(teams), 23)
     away_team = AwayTeam(random.choice(teams), 12)
 
@@ -48,6 +50,15 @@ def home():
     scorers = {}
 
     time = 0
+
+    weather = random.choice(WEATHER_TYPES)
+
+    stadium = Stadium()
+    stadium.generate_stadium()
+
+    visitors = stadium.generate_visitors(weather=weather)
+    welcome = stadium.print_message(weather=weather)
+
 
     while time <= 90:
 
@@ -67,11 +78,8 @@ def home():
 
         score[random_side] += goal
 
-    print(scorers)
-    print(score)
-
     return render_template("index.html", content=Game.start(), home=home_team, away=away_team, score=score,
-                           scorers=scorers)
+                           scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome)
 
 
 if __name__ == '__main__':
