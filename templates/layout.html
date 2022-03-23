@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}{% endblock %} - Manager</title>
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="top-content">
+    <div class="logo">
+        <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
+    </div>
+
+    <div class="menu">
+        <div><a href="/">Home</a></div>
+        <div><a href="/">Quick Game</a></div>
+        <div><a href="/cup">Play Cup</a></div>
+        <div><a href="/create">Create Team</a></div>
+        <div><a href="/settings">Settings</a></div>
+    </div>
+
+</div>
+
+<div class="flex">
+
+    <div class="nav">
+        <div class="nav-title">Quick Game</div>
+        <ul>
+            <li><a href="select-team.html">Select a Team</a></li>
+            <li><a href="choose-opponent.html">Choose Opponent</a></li>
+            <li><a href="lineup.html">Set Lineup</a></li>
+            <li><a href="play.html">Play</a></li>
+            <li><a href="">Quick Game Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+
+<div id="footer">
+    {% block footer %}
+    &copy; Copyright 2022 by Kalin Petrov</a>.
+    {% endblock %}
+</div>
+</body>
+
+</html>

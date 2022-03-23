@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <div class="main-title">Choose your opponent</div>
+    <div class="sub-title">Select a League</div>
+    <div class="options">
+        <div class="options-small">
+            England
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/premier2.png')}}"/>
+        </div>
+        <div class="options-small">
+            Spain
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/la-liga.png')}}"/>
+        </div>
+        <div class="options-small">
+            Italy
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/serie-a.png')}}"/>
+        </div>
+        <div class="options-small">
+            Germany
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/bundesliga.png')}}"/>
+        </div>
+        <div class="options-small">
+            France
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/france.png')}}"/>
+        </div>
+
+    </div>
+
+    <div class="options">
+        <div class="options-small">
+            England EFL
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/champ.png')}}"/>
+        </div>
+        <div class="options-small">
+            Portugal
+            <img width="100px" alt="weather" src="{{url_for('static', filename='images/portugal.png')}}"/>
+        </div>
+        <div class="options-small">
+            Netherlands
+            <img width="100px" alt="netherlands logo" src="{{url_for('static', filename='images/nether.png')}}"/>
+        </div>
+        <div class="options-small">
+            Belgium
+            <img width="100px" alt="belgium logo" src="{{url_for('static', filename='images/belgium.png')}}"/>
+        </div>
+        <div class="options-small">
+            Spain LaLiga 2
+            <img width="100px" alt="spain2 logo" src="{{url_for('static', filename='images/laliga2.png')}}"/>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,6 +1,7 @@
 import random
 
 from flask import Flask, render_template
+
 from stadium.stadium import Stadium
 from weather.weather import WEATHER_TYPES
 
@@ -19,6 +20,42 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
+
+    return render_template("index.html")
+
+@app.route("/settings")
+def settings():
+    return "Settings Page"
+
+
+@app.route("/create")
+def create():
+    return "Create a New Team"
+
+
+@app.route("/cup")
+def cup():
+    return "Play in a Cup"
+
+
+@app.route("/select-team.html")
+def select_team():
+    return render_template("select-team.html")
+
+
+@app.route("/choose-opponent.html")
+def choose_opponent():
+    return render_template("choose-opponent.html")
+
+
+@app.route("/lineup.html")
+def lineup():
+    return render_template("lineup.html")
+
+
+@app.route("/play.html")
+def play():
+
     class Game:
         pass
 
@@ -59,7 +96,6 @@ def home():
     visitors = stadium.generate_visitors(weather=weather)
     welcome = stadium.print_message(weather=weather)
 
-
     while time <= 90:
 
         minute = random.randint(1, 15)
@@ -78,8 +114,9 @@ def home():
 
         score[random_side] += goal
 
-    return render_template("index.html", content=Game.start(), home=home_team, away=away_team, score=score,
+    return render_template("play.html", content=Game.start(), home=home_team, away=away_team, score=score,
                            scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome, weather=weather)
+
 
 
 if __name__ == '__main__':
