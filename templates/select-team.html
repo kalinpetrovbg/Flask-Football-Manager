@@ -3,21 +3,18 @@
 
 
 <div class="main-content">
-    <img width="100%" alt="logos" src="{{url_for('static', filename='images/logos2.png')}}"/>
 
     <div class="main-title">Select your team</div>
-    <table>
-        {% for team in teams %}
-        <tr>
-            <td>
-                {{ team }}
-            </td>
-            {% endfor %}
-        </tr>
 
-    </table>
+    <div class="options">
+        <div class="options-left">
+            <a href="existing.html">Select from an existing team</a>
+        </div>
+        <div class="options-right">
+            <a href="build-team.html">Build your own team</a>
+        </div>
+    </div>
 
 </div>
-
 
 {% endblock %}

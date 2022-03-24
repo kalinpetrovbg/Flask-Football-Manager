@@ -40,14 +40,55 @@ def cup():
 
 @app.route("/select-team.html")
 def select_team():
-    from fm.db.teams import Teams
-    teams = Teams.query.all()
-    return render_template("select-team.html", teams=teams)
+    return render_template("select-team.html")
 
 
 @app.route("/existing.html")
 def existing():
-    return render_template("existing.html")
+    from fm.db.teams import Teams
+    from fm.db.players import Players
+
+    all_teams = Teams.query.all()
+
+    data = {}
+    for team in all_teams:
+
+        players = Players.query.filter_by(team_id=team.id).all()
+
+        stats = {'name': team.name, 'count': len(players),
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 }
+        data[team] = stats
+    return render_template("existing.html", data=data)
+
+
+@app.route("/build-team.html")
+def build_team():
+
+    # from fm.db.teams import Teams
+    # from fm.db.players import Players
+    #
+    # def add_player(self):
+    #     team = Teams.query.filter_by(id=self.team_id).first()
+    #
+    #     team.overall += self.overall
+    #     team.attack += self.attack
+    #     team.middle += self.middle
+    #     team.defence += self.defence
+    #
+    # def remove_player(self):
+    #     team = Teams.query.filter_by(id=self.team_id).first()
+    #
+    #     team.overall -= self.overall
+    #     team.attack -= self.attack
+    #     team.middle -= self.middle
+    #     team.defence -= self.defence
+
+    # p = Players(id=10, first_name="Kalin", last_name="Petrov", team_id=2, overall=20, attack=30, middle=10, defence=30)
+    # p.remove_player()
+
+    return render_template("build-team.html")
 
 
 @app.route("/choose-opponent.html")
