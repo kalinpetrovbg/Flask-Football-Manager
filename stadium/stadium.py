@@ -1,5 +1,4 @@
 import random
-from weather.sunny import Sunny
 
 STADIUM_NAMES = {
     "Camp Nou": 99354,
@@ -34,27 +33,33 @@ STADIUM_NAMES = {
     "St. James Park": 52339
 }
 
+
 class Stadium:
     def __init__(self):
         self.name = None
         self.capacity = None
         self.spectators = 0
 
+    def __str__(self):
+        return f"Stadium \"{self.name}\" with {self.capacity} capacity."
+
     def generate_stadium(self):
         all_stadiums_as_list = list(STADIUM_NAMES.items())
         generated_stadium = random.choice(all_stadiums_as_list)
-        self.name = generated_stadium[0]
-        self.capacity = generated_stadium[1]
+        self.name, self.capacity = generated_stadium
 
-    def generate_number_spectators(self, weather):
+    def generate_visitors(self, weather):
         self.spectators = self.capacity * weather.coefficient
 
+    def print_message(self, weather):
         if weather.type == "Rainy":
-            return 	f"It had rained all day, but {int(self.spectators)} hardy fans still made it out to {self.name}."
+            return f"It had rained all day, but {int(self.spectators)} hardy fans still made it out to \"{self.name}\"."
         elif weather.type == "Sunny":
-            return f"It was an exceptionally hot day for the crowd of {int(self.spectators)} that came out to {self.name}"
+            return f"It was an exceptionally hot day for the crowd of {int(self.spectators)} that came out to \"{self.name}\""
         elif weather.type == "PartiallyCloudy":
-            return f"{int(self.spectators)} spectators arrived at {self.name}, where weather conditions were pretty" \
+            return f"{int(self.spectators)} spectators arrived at \"{self.name}\", where weather conditions were pretty" \
                    f" good for football."
         elif weather.type == "Cloudy":
-            return f"Clouds darkened the skies at {self.name} as {int(self.spectators)} spectators turned up for the match."
+            return f"Clouds darkened the skies at \"{self.name}\" as {int(self.spectators)} spectators turned up for the match."
+        elif weather.type == "Storm":
+            return f"The storm has almost emptied \"{self.name}\" but there are still {int(self.spectators)} enthusiasts today."

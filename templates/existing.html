@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="main-content">
+    <img width="100%" alt="logos" src="{{url_for('static', filename='images/logos2.png')}}"/>
+
+    <div class="main-title">Select your team</div>
+    <table>
+        {% for team in data.values() %}
+        <tr>
+            <td>
+                {{ team['name'] }} / Players: {{ team['count'] }}
+                / OVR {{ team['ovr'] }} / ATT {{ team['att'] }}
+                / MID {{ team['mid'] }} / DEF {{ team['def'] }}
+            </td>
+            {% endfor %}
+        </tr>
+
+    </table>
+
+</div>
+
+
+{% endblock %}
