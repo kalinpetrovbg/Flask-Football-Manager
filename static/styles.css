@@ -258,7 +258,7 @@ input[type=submit] {
 }
 
 .main-title {
-    font-size:20px;
+    font-size:25px;
     text-align: center;
     width: 100%;
     display: block;
@@ -266,6 +266,7 @@ input[type=submit] {
     margin-left: -10px;
     color: #666;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 
@@ -277,6 +278,16 @@ input[type=submit] {
 .options {
     display: flex;
     width: 100%;
+    text-align: center;
+}
+
+.options a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.options-left a: hover{
+    transparency: 50%;
 }
 
 .options-left {
@@ -287,6 +298,9 @@ input[type=submit] {
     margin: 10px 5px 10px 10px;
     background: #7b9dd5;
     color: #fff;
+    border: 1px #ccc solid;
+    display: block;
+    cursor: pointer;
 }
 
 .options-right {
@@ -297,6 +311,8 @@ input[type=submit] {
     margin: 10px 10px 10px 5px;
     background: #f06464;
     color: #fff;
+    border: 1px #ccc solid;
+    cursor: pointer;
 }
 
 .options-small {
@@ -307,5 +323,6 @@ input[type=submit] {
     margin: 10px 10px 10px 10px;
     background: #f7f7f7;
     color: #333;
-    text-align:center;
+    text-align: center;
+    cursor: pointer;
 }

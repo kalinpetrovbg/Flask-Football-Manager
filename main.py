@@ -1,27 +1,27 @@
 import random
 
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 
-from stadium.stadium import Stadium
-from weather.weather import WEATHER_TYPES
+from fm.stadium.stadium import Stadium
+from fm.weather.weather import WEATHER_TYPES
 
 teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
          "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
          ]
 
-# from flask_sqlalchemy import SQLAlchemy
-
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db = SQLAlchemy(app)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-# db = SQLAlchemy(app)
 
 
 @app.route("/")
 def home():
-
     return render_template("index.html")
+
 
 @app.route("/settings")
 def settings():
@@ -40,7 +40,14 @@ def cup():
 
 @app.route("/select-team.html")
 def select_team():
-    return render_template("select-team.html")
+    from fm.db.teams import Teams
+    teams = Teams.query.all()
+    return render_template("select-team.html", teams=teams)
+
+
+@app.route("/existing.html")
+def existing():
+    return render_template("existing.html")
 
 
 @app.route("/choose-opponent.html")
@@ -55,7 +62,6 @@ def lineup():
 
 @app.route("/play.html")
 def play():
-
     class Game:
         pass
 
@@ -116,7 +122,6 @@ def play():
 
     return render_template("play.html", content=Game.start(), home=home_team, away=away_team, score=score,
                            scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome, weather=weather)
-
 
 
 if __name__ == '__main__':
