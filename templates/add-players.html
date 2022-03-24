@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="main-content">
+
+    <div class="main-title">Create Your Team</div>
+
+    <h3 class="h3-add">Add players to your team</h3>
+
+    <div class="form-add">
+        <form action="{{ request.path }}" method="post">
+
+            <label>First name</label><br>
+            <input type="text" name="first_name" placeholder="First name"/><br>
+            <label>Last name</label><br>
+            <input type="text" name="last_name" placeholder="Last name"/><br>
+
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+
+    {{ content }}
+
+</div>
+
+
+{% endblock %}

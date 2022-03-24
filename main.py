@@ -1,6 +1,6 @@
 import random
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from fm.stadium.stadium import Stadium
@@ -13,6 +13,7 @@ teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "I
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = "secret"
 
 db = SQLAlchemy(app)
 
@@ -63,8 +64,46 @@ def existing():
     return render_template("existing.html", data=data)
 
 
-@app.route("/build-team.html")
+@app.route("/build-team.html", methods=['GET', 'POST'])
 def build_team():
+    from fm.db.teams import Teams
+
+    if request.method == 'POST':
+        if not request.form['name'] or not request.form['country']:
+            flash('Please enter all the fields.', 'error')
+        else:
+            team = Teams(name=request.form['name'], country=request.form['country'])
+            db.session.add(team)
+            db.session.commit()
+            flash('Your team has been created.')
+
+            content = team.name
+            return render_template("add-players.html", content=content)
+
+    return render_template("build-team.html")
+
+
+@app.route("/add-players.html", methods=['GET', 'POST'])
+def add_players():
+    from db.players import Players
+    from db.teams import Teams
+
+    if request.method == 'POST':
+        if not request.form['first_name'] or not request.form['last_name']:
+            flash('Please enter all the fields.', 'error')
+        else:
+            player = Players(first_name=request.form['first_name'],
+                             last_name=request.form['last_name'],
+                             team_id=3,
+                             )
+            db.session.add(player)
+            db.session.commit()
+            flash('Your player has been created.')
+
+
+            return render_template("add-players.html")
+    return render_template("add-players.html")
+
 
     # from fm.db.teams import Teams
     # from fm.db.players import Players
@@ -87,8 +126,6 @@ def build_team():
 
     # p = Players(id=10, first_name="Kalin", last_name="Petrov", team_id=2, overall=20, attack=30, middle=10, defence=30)
     # p.remove_player()
-
-    return render_template("build-team.html")
 
 
 @app.route("/choose-opponent.html")
