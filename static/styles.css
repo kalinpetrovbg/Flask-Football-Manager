@@ -1,383 +1,368 @@
 html {
-  font-family: sans-serif;
-  background: #58965d;
-  padding: 1rem;
+     font-family: sans-serif;
+     background: #58965d;
+     padding: 1rem;
 }
-
-body {
-  max-width: 960px;
-  margin: 0 auto;
-  background: white;
-  border: 1px #ccc solid;
+ body {
+     max-width: 960px;
+     margin: 0 auto;
+     background: white;
+     border: 1px #ccc solid;
 }
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: serif;
-  color: #377ba8;
-  margin: 1rem 0;
-}
-
-a {
-  color: #377ba8;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid lightgray;
-}
-
-nav {
-  background: lightgray;
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem;
-}
-
-nav h1 {
-  flex: auto;
-  margin: 0;
-}
-
-nav h1 a {
-  text-decoration: none;
-  padding: 0.25rem 0.5rem;
-}
-
-nav ul  {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li a, nav ul li span, header .action {
-  display: block;
-  padding: 0.5rem;
-}
-
-.content {
-  padding: 0;
-  width: 100%;
-  margin-right: 25px;
-}
-
-.content > header {
-  border-bottom: 1px solid lightgray;
-  display: flex;
-  align-items: flex-end;
-}
-
-.content > header h1 {
-  flex: auto;
-  margin: 1rem 0 0.25rem 0;
-}
-
-.flash {
-  margin: 1em 0;
-  padding: 1em;
-  background: #cae6f6;
-  border: 1px solid #377ba8;
-}
-
-.post > header {
-  display: flex;
-  align-items: flex-end;
-  font-size: 0.85em;
-}
-
-.post > header > div:first-of-type {
-  flex: auto;
-}
-
-.post > header h1 {
-  font-size: 1.5em;
-  margin-bottom: 0;
-}
-
-.post .about {
-  color: slategray;
-  font-style: italic;
-}
-
-.post .body {
-  white-space: pre-line;
-}
-
-.content:last-child {
-  margin-bottom: 0;
-}
-
-.content form {
-  display: flex;
-  flex-direction: column;
-}
-
-.content label {
-  font-weight: bold;
-  margin-bottom: 0;
-}
-
-.content input, .content textarea {
-  font-size: 16px;
-  height: 25px;
-  color: #555;
-  margin: 0;
-}
-
-.content textarea {
-  min-height: 12em;
-  resize: vertical;
-}
-
-input.danger {
-  color: #cc2f2e;
-}
-
-input[type=submit] {
-  align-self: start;
-  min-width: 10em;
-  cursor: pointer;
-}
-
-.logo {
-    margin: 15px;
-
-}
-
-.menu {
-    height: 35px;
-    background-color: #277f31;
-    color: #fff;
-    border-radius: 10px;
-    width: 97%;
-    margin-left: 1.5%;
-}
-
-.menu > div {
-    padding-left: 50px;
-    padding-right:40px;
-    position: relative;
-    cursor: pointer;
-    float: left;
-    line-height: 35px;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0;
-    margin: 0 0 0 10px;
-    height: 35px;
-    background: inherit;
+.footer {
+    padding: 10px;
+    text-align: right;
+    font-size: 11px;
     }
 
-.menu>div a{
-    text-decoration: none;
-    color: #fff;
+h1, h2, h3, h4, h5, h6 {
+     font-family: serif;
+     color: #377ba8;
+     margin: 1rem 0;
+}
+ a {
+     color: #377ba8;
+}
+ hr {
+     border: none;
+     border-top: 1px solid lightgray;
+}
+ nav {
+     background: lightgray;
+     display: flex;
+     align-items: center;
+     padding: 0 0.5rem;
+}
+ nav h1 {
+     flex: auto;
+     margin: 0;
+}
+ nav h1 a {
+     text-decoration: none;
+     padding: 0.25rem 0.5rem;
+}
+ nav ul {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+}
+ nav ul li a, nav ul li span, header .action {
+     display: block;
+     padding: 0.5rem;
+}
+ .content {
+     padding: 0;
+     width: 100%;
+     margin-right: 25px;
+}
+ .content > header {
+     border-bottom: 1px solid lightgray;
+     display: flex;
+     align-items: flex-end;
+}
+ .content > header h1 {
+     flex: auto;
+     margin: 1rem 0 0.25rem 0;
+}
+ .flash {
+     margin: 1em 0;
+     padding: 1em;
+     background: #cae6f6;
+     border: 1px solid #377ba8;
+}
+ .post > header {
+     display: flex;
+     align-items: flex-end;
+     font-size: 0.85em;
+}
+ .post > header > div:first-of-type {
+     flex: auto;
+}
+ .post > header h1 {
+     font-size: 1.5em;
+     margin-bottom: 0;
+}
+ .post .about {
+     color: slategray;
+     font-style: italic;
+}
+ .post .body {
+     white-space: pre-line;
+}
+ .content:last-child {
+     margin-bottom: 0;
+}
+ .content form {
+     display: flex;
+     flex-direction: column;
+}
+ .content label {
+     font-weight: bold;
+     margin-bottom: 0;
+}
+ .content input, .content textarea, .content select {
+     font-size: 15px;
+     height: 25px;
+     color: #555;
+     margin: 0;
+}
+ .content textarea {
+     min-height: 12em;
+     resize: vertical;
+}
+ input.danger {
+     color: #cc2f2e;
+}
+ input[type=submit] {
+     align-self: start;
+     min-width: 10em;
+     cursor: pointer;
+     margin-top: 35px;
+}
+ .logo {
+     margin: 15px;
+}
+ .menu {
+     height: 35px;
+     background-color: #277f31;
+     color: #fff;
+     border-radius: 10px;
+     width: 97%;
+     margin-left: 1.5%;
+}
+ .menu > div {
+     padding-left: 50px;
+     padding-right:40px;
+     position: relative;
+     cursor: pointer;
+     float: left;
+     line-height: 35px;
+     font-size: 15px;
+     font-weight: 700;
+     letter-spacing: 0;
+     margin: 0 0 0 10px;
+     height: 35px;
+     background: inherit;
+}
+ .menu>div a{
+     text-decoration: none;
+     color: #fff;
+}
+ .top-content {
+     height: 100px;
+}
+ .nav {
+     margin-top: 10px;
+     margin-left: 15px;
+     height: 500px;
+     width: 22%;
+     font-size: 15px;
+}
+ .nav-title {
+     text-align: center;
+     background: #9aada1;
+     padding: 9px;
+     color: #fff;
+     border-radius: 10px 10px 0 0;
+}
+ .nav ul {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+     line-height: 1.5;
+}
+ .nav ul li {
+     border: 1px #ccc solid;
+     padding-left: 10px;
+     padding-top: 4px;
+     padding-bottom: 1px;
+}
+ .nav li a {
+     text-decoration: none;
+}
+ .flex {
+     display: flex;
+     width: 100%;
+}
+ .top {
+     display: grid;
+     height:80px;
+     border: 1px #ccc solid;
+     margin-top: 10px;
+     width: 95%;
+     margin-left: 8px;
+     margin-right: 15px;
+}
+ .sub-top {
+     display: grid;
+     justify-content: center;
+     height: 80px;
+     width: 100%;
+     align-content: space-around;
+}
+ .center-content {
+     display: grid;
+     border: 1px #ccc solid;
+     margin-top:10px;
+     width: 100%;
+}
+ .cnt {
+     margin: 0 auto;
+     width: 95%;
+}
+ .main-content {
+     border: 1px #ccc solid;
+     width: 100%;
+     margin: 0 auto;
+     min-height: 500px;
+     min-width: 300px;
+     margin: 10px;
+     display: block;
+}
+ .main-title {
+     font-size:25px;
+     text-align: center;
+     width: 100%;
+     display: block;
+     margin: 20px;
+     margin-left: -10px;
+     color: #666;
+     text-transform: uppercase;
+     font-weight: 600;
+}
+ .sub-title {
+     text-align: center;
+}
+ .options {
+     display: flex;
+     width: 100%;
+     text-align: center;
+}
+ .options a{
+     text-decoration: none;
+     color: #fff;
+}
+ .options-left a: hover{
+     transparency: 50%;
+}
+ .options-left {
+     width: 45%;
+     height: 200px;
+     border: 1px #ccc solid;
+     padding: 10px;
+     margin: 10px 5px 10px 10px;
+     background: #7b9dd5;
+     color: #fff;
+     border: 1px #ccc solid;
+     display: block;
+     cursor: pointer;
+}
+ .options-right {
+     width: 45%;
+     height: 200px;
+     border: 1px #ccc solid;
+     padding: 10px;
+     margin: 10px 10px 10px 5px;
+     background: #f06464;
+     color: #fff;
+     border: 1px #ccc solid;
+     cursor: pointer;
+}
+ .options-small {
+     width: 20%;
+     height: 120px;
+     border: 1px #ccc solid;
+     padding: 10px;
+     margin: 10px 10px 10px 10px;
+     background: #f7f7f7;
+     color: #333;
+     text-align: center;
+     cursor: pointer;
+}
+ .form-add {
+     display: block;
+     width:65%;
+     margin: 0 auto;
+     border: 1px #ccc solid;
+     padding: 20px;
+}
+ .h3-add {
+     padding: 10px;
+     text-align: center;
+}
+ .existing {
+     min-width: 600px;
+     width: 95%;
+     margin-left: 20px;
+     margin-right: 20px;
+}
+ .existing-header th {
+     border-bottom: 1px #ccc solid;
+     color: #adb5bd;
+     font-weight: 5000;
+     line-height: 1.75em;
+}
+ .existing tbody tr {
+     border: 1px #ccc solid;
+     color: #191919;
+}
+ .ex-stats {
+     text-align: center;
+}
+ .ex-logo {
+     width: 70px;
+}
+ .ex-league {
+     font-size:13px;
+     color: #555;
+}
+ .ex-tr tr {
+     padding: 10px;
+     margin: 10px;
+}
+ .alert-danger {
+     text-align: center;
+     color: red;
+     font-size: 14px;
+     padding: 10px;
 }
 
-.top-content {
-    height: 100px;
+.new-team {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    margin-bottom: 20px;
 }
 
-.nav {
-    margin-top: 10px;
-    margin-left: 15px;
-    height: 500px;
-    width: 22%;
-    font-size: 15px;
-}
-
-.nav-title {
-    text-align: center;
-    background: #9aada1;
-    padding: 9px;
-    color: #fff;
-    border-radius: 10px 10px 0 0;
-}
-
-.nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.new-name {
+    font-size: 22px;
+    font-weight: 500;
+    padding-top: 27px;
     line-height: 1.5;
+    color: #191919
 }
 
-.nav ul li {
+.new-league {
+    font-size: 14px;
+    color: #191919
+}
+
+.new-stats {
+    width: 80%;
     border: 1px #ccc solid;
-    padding-left: 10px;
-    padding-top: 4px;
-    padding-bottom: 1px;
+    margin: 0 auto;
+    background: #f1f3f566;
+    margin-bottom: 20px;
 }
 
-.nav li a {
-    text-decoration: none;
-}
-
-
-.flex {
+.new-values {
     display: flex;
-    width: 100%;
+    justify-content: space-around;
 }
 
-.top {
-    display: grid;
-    height:80px;
-    border: 1px #ccc solid;
-    margin-top: 10px;
-    width: 95%;
-    margin-left: 8px;
-    margin-right: 15px;
-}
-
-
-
-.sub-top {
-    display: grid;
-    justify-content: center;
-    height: 80px;
-    width: 100%;
-    align-content: space-around;
-
-}
-
-.center-content {
-    display: grid;
-    border: 1px #ccc solid;
-    margin-top:10px;
-    width: 100%;
-}
-
-.cnt {
-    margin: 0 auto;
-    width: 95%;
-}
-
-.main-content {
-    border: 1px #ccc solid;
-    width: 100%;
-    margin: 0 auto;
-    min-height: 500px;
-    min-width: 300px;
-    margin: 10px;
-    display: block;
-}
-
-.main-title {
-    font-size:25px;
+.n-val {
     text-align: center;
-    width: 100%;
-    display: block;
-    margin: 20px;
-    margin-left: -10px;
-    color: #666;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-
-.sub-title {
-    text-align: center;
-}
-
-
-.options {
-    display: flex;
-    width: 100%;
-    text-align: center;
-}
-
-.options a{
-    text-decoration: none;
-    color: #fff;
-}
-
-.options-left a: hover{
-    transparency: 50%;
-}
-
-.options-left {
-    width: 45%;
-    height: 200px;
-    border: 1px #ccc solid;
-    padding: 10px;
-    margin: 10px 5px 10px 10px;
-    background: #7b9dd5;
-    color: #fff;
-    border: 1px #ccc solid;
-    display: block;
-    cursor: pointer;
-}
-
-.options-right {
-    width: 45%;
-    height: 200px;
-    border: 1px #ccc solid;
-    padding: 10px;
-    margin: 10px 10px 10px 5px;
-    background: #f06464;
-    color: #fff;
-    border: 1px #ccc solid;
-    cursor: pointer;
-}
-
-.options-small {
-    width: 20%;
-    height: 120px;
-    border: 1px #ccc solid;
-    padding: 10px;
-    margin: 10px 10px 10px 10px;
-    background: #f7f7f7;
-    color: #333;
-    text-align: center;
-    cursor: pointer;
-}
-
-
-.form-add {
-    display: block;
-    width:65%;
-    margin: 0 auto;
-    border: 1px #ccc solid;
-    padding: 20px;
-}
-
-.h3-add {
-    padding: 10px;
-    text-align: center;
-}
-
-
-.existing {
-    min-width: 600px;
-    width: 95%;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.existing-header th {
-    border-bottom: 1px #ccc solid;
-    color: #adb5bd;
-    font-weight: 5000;
-    line-height: 1.75em;
-}
-
-.existing tbody tr {
-    border: 1px #ccc solid;
-    color: #191919;
-}
-
-.ex-stats {
-    text-align: center;
-}
-
-.ex-logo {
-    width: 70px;
-}
-
-.ex-league {
-    font-size:13px;
-    color: #555;
-}
-
-.ex-tr tr {
-    padding: 10px;
-    margin: 10px;
+    padding: 15px;
+    line-height: 1.3;
 }

@@ -3,9 +3,7 @@
 
 
 <div class="main-content">
-
     <div class="main-title">Create Your Team</div>
-
     <h3 class="h3-add">Create a team</h3>
 
     {%- for category, message in get_flashed_messages(with_categories = true) %}
@@ -23,19 +21,15 @@
             <select name="league" id="league">
                 <option value="English Premier League">English Premier League</option>
                 <option value="Spain Primera Division">Spain Primera Division</option>
+                <option value="Italian Serie A">Italian Serie A</option>
+                <option value="German Bundesliga">German Bundesliga</option>
+                <option value="French Ligue">French Ligue</option>
             </select>
 
             <input type="submit" value="Submit"/>
         </form>
     </div>
 
-    <div style="text-align: center">
-        <br><br><br>
-        <a href="existing.html">View all teams</a>
-    </div>
-
-
 </div>
-
 
 {% endblock %}

@@ -1,22 +1,18 @@
 import random
 
-from flask import Flask, render_template, request, flash, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import render_template, request, flash, redirect, url_for
+from sqlalchemy.orm.attributes import flag_modified
 
+from app import app
+from app import db
+from fm.db.players import Players
+from fm.db.teams import Teams
 from fm.stadium.stadium import Stadium
 from fm.weather.weather import WEATHER_TYPES
 
 teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
          "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
          ]
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "secret"
-
-db = SQLAlchemy(app)
-
 
 
 @app.route("/")
@@ -46,31 +42,23 @@ def select_team():
 
 @app.route("/existing.html")
 def existing():
-    from fm.db.teams import Teams
-    from fm.db.players import Players
-
     all_teams = Teams.query.all()
 
     data = {}
     for team in all_teams:
-        players = []
-        try:
-            players = Players.query.filter_by(team_id=team.id).all()
-        except:
-            stats = {'name': team.name, 'logo': team.logo,
-                     'league': team.league,
-                     'ovr': team.overall, 'att': team.attack,
-                     'mid': team.middle, 'def': team.defence,
-                     'count': len(players),
-                     }
-            data[team] = stats
+        players = Players.query.filter_by(team_id=team.id).all()
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league,
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
+                 }
+        data[team] = stats
     return render_template("existing.html", data=data)
 
 
 @app.route("/build-team.html", methods=['GET', 'POST'])
 def build_team():
-    from fm.db.teams import Teams
-
     if request.method == 'POST':
         if not request.form['name'] or not request.form['league']:
             flash('Please enter all the fields.', 'error')
@@ -78,18 +66,16 @@ def build_team():
             team = Teams(name=request.form['name'], league=request.form['league'])
             db.session.add(team)
             db.session.commit()
-            flash('Your team has been created.')
 
-            content = team.name
-            return render_template("add-players.html", content=content)
+            team_id = team.id
+            return redirect(url_for('add_players', team_id=team_id))
 
     return render_template("build-team.html")
 
 
-@app.route("/add-players.html", methods=['GET', 'POST'])
-def add_players():
-    from db.players import Players
-    from db.teams import Teams
+@app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
+def add_players(team_id):
+    team = Teams.query.filter_by(id=team_id).first()
 
     if request.method == 'POST':
         if not request.form['first_name'] or not request.form['last_name']:
@@ -97,16 +83,26 @@ def add_players():
         else:
             player = Players(first_name=request.form['first_name'],
                              last_name=request.form['last_name'],
-                             team_id=3,
+                             team_id=request.form['team_id'],
+                             overall=10,
+                             attack=10,
+                             middle=15,
+                             defence=20,
                              )
+
+            team.overall += player.overall
+            team.attack += player.attack
+            team.middle += player.middle
+            team.defence += player.defence
+
+            db.session.merge(team)
             db.session.add(player)
             db.session.commit()
             flash('Your player has been created.')
 
+            return render_template("/add-players.html", team_id=team_id, team=team)
 
-            return render_template("add-players.html")
-    return render_template("add-players.html")
-
+    return render_template("add-players.html", team_id=team_id, team=team)
 
     # from fm.db.teams import Teams
     # from fm.db.players import Players

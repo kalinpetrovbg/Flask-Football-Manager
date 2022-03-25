@@ -18,10 +18,10 @@
 
     <div class="new-stats">
         <div class="new-values">
-            <div class="n-val">Overall<br/>{{ team.overall }}</div>
-            <div class="n-val">Attack<br/>{{ team.attack }}</div>
-            <div class="n-val">Middle<br/>{{ team.middle }}</div>
-            <div class="n-val">Defence<br/>{{ team.defence }}</div>
+            <div class="n-val">Overall<br/>team.overall</div>
+            <div class="n-val">Attack<br/>team.attack</div>
+            <div class="n-val">Middle<br/>team.middle</div>
+            <div class="n-val">Defence<br/>team.defence</div>
         </div>
     </div>
 
@@ -39,10 +39,8 @@
             <input type="text" name="first_name" placeholder="First name"/><br>
             <label>Last name</label><br>
             <input type="text" name="last_name" placeholder="Last name"/><br>
-
-            <div class="hidden">
-                <label>Team ID</label><br>
-                <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
+            <div class="hidden" style="display: none">
+                <input type="text" name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
             </div>
 
 

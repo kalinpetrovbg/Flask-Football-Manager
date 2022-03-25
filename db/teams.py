@@ -1,4 +1,4 @@
-from fm.main import db
+from fm.app import db
 
 
 class Teams(db.Model):
