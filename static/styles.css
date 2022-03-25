@@ -343,3 +343,41 @@ input[type=submit] {
     padding: 10px;
     text-align: center;
 }
+
+
+.existing {
+    min-width: 600px;
+    width: 95%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.existing-header th {
+    border-bottom: 1px #ccc solid;
+    color: #adb5bd;
+    font-weight: 5000;
+    line-height: 1.75em;
+}
+
+.existing tbody tr {
+    border: 1px #ccc solid;
+    color: #191919;
+}
+
+.ex-stats {
+    text-align: center;
+}
+
+.ex-logo {
+    width: 70px;
+}
+
+.ex-league {
+    font-size:13px;
+    color: #555;
+}
+
+.ex-tr tr {
+    padding: 10px;
+    margin: 10px;
+}

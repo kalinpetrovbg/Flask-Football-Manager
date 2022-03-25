@@ -53,14 +53,17 @@ def existing():
 
     data = {}
     for team in all_teams:
-
-        players = Players.query.filter_by(team_id=team.id).all()
-
-        stats = {'name': team.name, 'count': len(players),
-                 'ovr': team.overall, 'att': team.attack,
-                 'mid': team.middle, 'def': team.defence,
-                 }
-        data[team] = stats
+        players = []
+        try:
+            players = Players.query.filter_by(team_id=team.id).all()
+        except:
+            stats = {'name': team.name, 'logo': team.logo,
+                     'league': team.league,
+                     'ovr': team.overall, 'att': team.attack,
+                     'mid': team.middle, 'def': team.defence,
+                     'count': len(players),
+                     }
+            data[team] = stats
     return render_template("existing.html", data=data)
 
 
@@ -69,10 +72,10 @@ def build_team():
     from fm.db.teams import Teams
 
     if request.method == 'POST':
-        if not request.form['name'] or not request.form['country']:
+        if not request.form['name'] or not request.form['league']:
             flash('Please enter all the fields.', 'error')
         else:
-            team = Teams(name=request.form['name'], country=request.form['country'])
+            team = Teams(name=request.form['name'], league=request.form['league'])
             db.session.add(team)
             db.session.commit()
             flash('Your team has been created.')
