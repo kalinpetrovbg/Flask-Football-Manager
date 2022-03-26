@@ -10,13 +10,15 @@ class Teams(db.Model):
     attack = db.Column(db.Integer, default=0)
     middle = db.Column(db.Integer, default=0)
     defence = db.Column(db.Integer, default=0)
+    players = db.Column(db.Integer, default=0)
+
 
     def __repr__(self):
         return self.name
 
 
 """Generate the database with teams."""
-
+#
 # db.create_all()
 #
 # teams = [Teams(name="Manchester United", league="English Premier League", logo="man"),

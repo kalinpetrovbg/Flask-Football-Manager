@@ -1,6 +1,7 @@
 import random
 
 from flask import render_template, request, flash, redirect, url_for
+from sqlalchemy import func
 from sqlalchemy.orm.attributes import flag_modified
 
 from app import app
@@ -30,9 +31,9 @@ def create():
     return "Create a New Team"
 
 
-@app.route("/cup")
+@app.route("/cup.html")
 def cup():
-    return "Play in a Cup"
+    return render_template("cup.html")
 
 
 @app.route("/select-team.html")
@@ -83,20 +84,24 @@ def add_players(team_id):
         else:
             player = Players(first_name=request.form['first_name'],
                              last_name=request.form['last_name'],
-                             team_id=request.form['team_id'],
-                             overall=10,
-                             attack=10,
-                             middle=15,
-                             defence=20,
+                             team_id=4,
+                             attack=random.randint(50, 85),
+                             middle=random.randint(50, 85),
+                             defence=random.randint(50, 85),
                              )
 
-            team.overall += player.overall
-            team.attack += player.attack
-            team.middle += player.middle
-            team.defence += player.defence
-
-            db.session.merge(team)
             db.session.add(player)
+            db.session.commit()
+
+
+            # Todo
+            attack = db.session.query(func.sum(Players.attack).filter_by(id=team_id)).first()
+            middle = db.session.query(func.sum(Players.middle)).first()
+            defence = db.session.query(func.sum(Players.defence)).first()
+            overall = db.session.query(func.sum(Players.overall)).first()
+
+            # db.session.merge(team)
+
             db.session.commit()
             flash('Your player has been created.')
 
