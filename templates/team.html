@@ -27,25 +27,25 @@
         <thead>
         <tr class="existing-header">
             <th>Name</th>
+            <th>Overall</th>
             <th>Attack</th>
             <th>Middle</th>
             <th>Defence</th>
-            <th>Overall</th>
         <tr>
         </thead>
 
         <tbody>
         {% for p in players %}
         <tr>
-            <td>Name</td>
-            <td>ATT</td>
-            <td>MID</td>
-            <td>Defence</td>
-            <td>Overall</td>
+            <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
+            <td class="team-stats">{{ p.overall }}</td>
+            <td class="team-stats">{{ p.attack }}</td>
+            <td class="team-stats">{{ p.middle }}</td>
+            <td class="team-stats">{{ p.defence }}</td>
         </tr>
         {% endfor %}
         </tbody>
-
+    </table>
 
 </div>
 

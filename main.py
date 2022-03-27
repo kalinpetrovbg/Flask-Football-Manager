@@ -43,7 +43,8 @@ def select_team():
 @app.route("/team/<team_id>.html")
 def team(team_id):
     team = Teams.query.filter_by(id=team_id).first()
-    return render_template("team.html", team=team)
+    players = Players.query.filter_by(team_id=team.id).all()
+    return render_template("team.html", team=team, players=players)
 
 
 @app.route("/existing.html")
@@ -82,6 +83,7 @@ def build_team():
 @app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
 def add_players(team_id):
     team = Teams.query.filter_by(id=team_id).first()
+    players = Players.query.filter_by(team_id=team.id).all()
 
     if request.method == 'POST':
         if not request.form['first_name'] or not request.form['last_name']:
@@ -89,51 +91,39 @@ def add_players(team_id):
         else:
             player = Players(first_name=request.form['first_name'],
                              last_name=request.form['last_name'],
-                             team_id=4,
-                             attack=random.randint(50, 85),
-                             middle=random.randint(50, 85),
-                             defence=random.randint(50, 85),
+                             team_id=2,
+
+                             attack=60,
+                             middle=50,
+                             defence=40,
+                             # attack=random.randint(50, 85),
+                             # middle=random.randint(50, 85),
+                             # defence=random.randint(50, 85),
                              )
 
             db.session.add(player)
             db.session.commit()
 
-            # Todo
-            attack = db.session.query(func.sum(Players.attack).filter_by(id=team_id)).first()
-            middle = db.session.query(func.sum(Players.middle)).first()
-            defence = db.session.query(func.sum(Players.defence)).first()
-            overall = db.session.query(func.sum(Players.overall)).first()
+            total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team_id).scalar()
+            team.attack = round(total_attack)
+            total_middle = db.session.query(func.avg(Players.middle)).filter(Players.team_id == team_id).scalar()
+            team.middle = round(total_middle)
+            total_defence = db.session.query(func.avg(Players.defence)).filter(Players.team_id == team_id).scalar()
+            team.defence = round(total_defence)
+            team_overall = (team.attack + team.middle + team.defence) // 3
+            team.overall = team_overall
 
-            # db.session.merge(team)
-
+            db.session.merge(team)
             db.session.commit()
+
             flash('Your player has been created.')
+            players = Players.query.filter_by(team_id=team.id).all()
 
-            return render_template("/add-players.html", team_id=team_id, team=team)
+            return render_template("/add-players.html", team_id=team_id, team=team, players=players)
 
-    return render_template("add-players.html", team_id=team_id, team=team)
 
-    # from fm.db.teams import Teams
-    # from fm.db.players import Players
-    #
-    # def add_player(self):
-    #     team = Teams.query.filter_by(id=self.team_id).first()
-    #
-    #     team.overall += self.overall
-    #     team.attack += self.attack
-    #     team.middle += self.middle
-    #     team.defence += self.defence
-    #
-    # def remove_player(self):
-    #     team = Teams.query.filter_by(id=self.team_id).first()
-    #
-    #     team.overall -= self.overall
-    #     team.attack -= self.attack
-    #     team.middle -= self.middle
-    #     team.defence -= self.defence
 
-    # p = Players(id=10, first_name="Kalin", last_name="Petrov", team_id=2, overall=20, attack=30, middle=10, defence=30)
-    # p.remove_player()
+    return render_template("add-players.html", team_id=team_id, team=team, players=players)
 
 
 @app.route("/choose-opponent.html")

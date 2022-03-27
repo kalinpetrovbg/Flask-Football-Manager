@@ -294,6 +294,7 @@ h1, h2, h3, h4, h5, h6 {
      width: 95%;
      margin-left: 20px;
      margin-right: 20px;
+     margin-bottom: 50px;
 }
  .existing-header th {
      border-bottom: 1px #ccc solid;
@@ -457,4 +458,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .select-btn button:hover {
     opacity: 85%;
+}
+
+.team-stats{
+    text-align: center;
+    color: #555;
+}
+
+.team-name {
+    padding-left: 30px;
+    color: #555;
+}
+
+.new-player-btn {
+    width: 39%!important;
+    height: 33px!important;
+    background: #58965d;
+    color: #fff!important;
+}
+
+
+.no-players {
+    color: red;
+    font-size: 14px;
+    text-align: center;
 }
