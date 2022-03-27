@@ -256,7 +256,6 @@ h1, h2, h3, h4, h5, h6 {
      color: #fff;
      border: 1px #ccc solid;
      display: block;
-     cursor: pointer;
 }
  .options-right {
      width: 45%;
@@ -267,7 +266,6 @@ h1, h2, h3, h4, h5, h6 {
      background: #f06464;
      color: #fff;
      border: 1px #ccc solid;
-     cursor: pointer;
 }
  .options-small {
      width: 20%;
@@ -321,6 +319,19 @@ h1, h2, h3, h4, h5, h6 {
      padding: 10px;
      margin: 10px;
 }
+
+.ex-tr a {
+    text-decoration: none;
+}
+
+.ex-tr:hover {
+    background: #f5f5f5;
+    cursor:pointer;
+    border: 1px #ccc solid;
+    margin: 0;
+    padding: 0;
+}
+
  .alert-danger {
      text-align: center;
      color: red;
@@ -422,5 +433,28 @@ h1, h2, h3, h4, h5, h6 {
     background: #ffedf4;
 }
 
+.team {
+    margin-top: 50px;
+}
+
+.new-text {
+    margin-left: 10px;
+}
 
 
+.select-btn {
+    padding-top: 120px;
+}
+
+.select-btn button {
+    font-size: 17px;
+    width: 50%;
+    height: 40px;
+    background: #58965d;
+    color: #fff;
+    cursor: pointer;
+}
+
+.select-btn button:hover {
+    opacity: 85%;
+}

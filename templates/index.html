@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="welcome">
+    <img width="100%" alt="stadium" src="{{url_for('static', filename='images/home-stadium.jpg')}}"/>
     <h1 class="welcome-title">Welcome to Python Football Manager</h1>
     <div class="welcome-text">
         <p>Python Football Manager is an online game where you can build a team, play matches and win cups.
@@ -11,7 +12,6 @@
         <p>But perhaps the most interesting part of PFM is the multiplayer game option.
             You can enjoy this game with a friend and see who is the best football manager. </p>
 
-        </p>
         <p>The game is based on Python 3.10 and Flask.</p>
     </div>
 
@@ -25,10 +25,11 @@
         <a href="/cup.html">Enter in a cup challenge</a>
     </div>
     <div class="multiplayer-game">
-        <a href="#">Play against a friend</a>
+        <a href="/multiplayer.html">Play against a friend</a>
     </div>
 
 </div>
+
 
 
 {% endblock %}

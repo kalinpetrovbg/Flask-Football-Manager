@@ -2,7 +2,6 @@ import random
 
 from flask import render_template, request, flash, redirect, url_for
 from sqlalchemy import func
-from sqlalchemy.orm.attributes import flag_modified
 
 from app import app
 from app import db
@@ -17,7 +16,7 @@ teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "I
 
 
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
 
 
@@ -41,6 +40,12 @@ def select_team():
     return render_template("select-team.html")
 
 
+@app.route("/team/<team_id>.html")
+def team(team_id):
+    team = Teams.query.filter_by(id=team_id).first()
+    return render_template("team.html", team=team)
+
+
 @app.route("/existing.html")
 def existing():
     all_teams = Teams.query.all()
@@ -49,7 +54,7 @@ def existing():
     for team in all_teams:
         players = Players.query.filter_by(team_id=team.id).all()
         stats = {'name': team.name, 'logo': team.logo,
-                 'league': team.league,
+                 'league': team.league, 'id': team.id,
                  'ovr': team.overall, 'att': team.attack,
                  'mid': team.middle, 'def': team.defence,
                  'count': len(players),
@@ -92,7 +97,6 @@ def add_players(team_id):
 
             db.session.add(player)
             db.session.commit()
-
 
             # Todo
             attack = db.session.query(func.sum(Players.attack).filter_by(id=team_id)).first()
@@ -204,6 +208,11 @@ def play():
 
     return render_template("play.html", content=Game.start(), home=home_team, away=away_team, score=score,
                            scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome, weather=weather)
+
+
+@app.route("/multiplayer.html")
+def multiplayer():
+    return render_template("multiplayer.html")
 
 
 if __name__ == '__main__':

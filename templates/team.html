@@ -3,12 +3,10 @@
 
 
 <div class="main-content">
-    <div class="main-title">Create Your Team</div>
-    <h3 class="h3-add">Add players to your team</h3>
 
-    <div class="new-team">
+    <div class="new-team team">
         <div class="new-logo">
-            <img width="80px" src="{{url_for('static', filename='images/clubs/no-logo.png')}}">
+            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px">
         </div>
         <div class="new-text">
             <div class="new-name">{{ team.name }}</div>
@@ -25,28 +23,29 @@
         </div>
     </div>
 
+    <table class="existing">
+        <thead>
+        <tr class="existing-header">
+            <th>Name</th>
+            <th>Attack</th>
+            <th>Middle</th>
+            <th>Defence</th>
+            <th>Overall</th>
+        <tr>
+        </thead>
 
-    {%- for category, message in get_flashed_messages(with_categories = true) %}
-    <div class="alert alert-danger">
-        {{ message }}
-    </div>
-    {%- endfor %}
+        <tbody>
+        {% for p in players %}
+        <tr>
+            <td>Name</td>
+            <td>ATT</td>
+            <td>MID</td>
+            <td>Defence</td>
+            <td>Overall</td>
+        </tr>
+        {% endfor %}
+        </tbody>
 
-    <div class="form-add">
-        <form action="{{ request.path }}" method="post">
-
-            <label>First name</label><br>
-            <input type="text" name="first_name" placeholder="First name"/><br>
-            <label>Last name</label><br>
-            <input type="text" name="last_name" placeholder="Last name"/><br>
-            <div class="hidden" style="display: none">
-                <input type="text" name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
-            </div>
-
-
-            <input type="submit" value="Submit"/>
-        </form>
-    </div>
 
 </div>
 

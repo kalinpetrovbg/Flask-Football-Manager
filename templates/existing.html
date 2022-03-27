@@ -21,17 +21,20 @@
         {% for team in data.values() %}
         <tbody>
         <tr class="ex-tr">
+
             <td class="ex-logo">
                 <img src="/static/images/clubs/{{ team['logo'] }}.png" width="50px">
             </td>
-            <td class="ex-name">{{ team['name'] }}<br/>
-                <span class="ex-league">{{ team['league'] }}</span>
+            <td class="ex-name">
+                <a href="/team/{{ team['id'] }}.html">{{ team['name'] }}<br/>
+                <span class="ex-league">{{ team['league'] }}</span></a>
             </td>
             <td class="ex-stats">{{ team['ovr'] }}</td>
             <td class="ex-stats">{{ team['att'] }}</td>
             <td class="ex-stats">{{ team['mid'] }}</td>
             <td class="ex-stats">{{ team['def'] }}</td>
             <td class="ex-stats">{{ team['count'] }}</td>
+
             {% endfor %}
         </tr>
         </tbody>
