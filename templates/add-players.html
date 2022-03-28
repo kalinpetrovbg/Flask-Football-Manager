@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="main-content">
+    <div class="main-title">Create Your Team</div>
+
+    <div class="new-team">
+        <div class="new-logo">
+            <img width="80px" src="{{url_for('static', filename='images/clubs/no-logo.png')}}">
+        </div>
+        <div class="new-text">
+            <div class="new-name">{{ team.name }}</div>
+            <div class="new-league">{{ team.league }}</div>
+        </div>
+    </div>
+
+    <div class="new-stats">
+        <div class="new-values">
+            <div class="n-val">Overall<br/>{{ team.overall }}</div>
+            <div class="n-val">Attack<br/>{{ team.attack }}</div>
+            <div class="n-val">Middle<br/>{{ team.middle }}</div>
+            <div class="n-val">Defence<br/>{{ team.defence }}</div>
+            <div class="n-val">Players<br/>{{ players | length }}</div>
+        </div>
+    </div>
+
+    <table class="existing">
+        <thead>
+        <tr class="existing-header">
+            <th>Name</th>
+            <th>Overall</th>
+            <th>Attack</th>
+            <th>Middle</th>
+            <th>Defence</th>
+        <tr>
+        </thead>
+        {% if not players %}
+        <tbody>
+        <tr>
+            <td colspan="5">
+                <p class="no-players">There are no players in this team.</p></td>
+        </tr>
+        </tbody>
+        {% else %}
+        <tbody>
+        {% for p in players %}
+        <tr>
+            <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
+            <td class="team-stats">{{ p.overall }}</td>
+            <td class="team-stats">{{ p.attack }}</td>
+            <td class="team-stats">{{ p.middle }}</td>
+            <td class="team-stats">{{ p.defence }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+
+    <h3 class="h3-add">Add players to your team</h3>
+
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {%- endfor %}
+
+    <div class="form-add">
+        <form action="{{ request.path }}" method="post">
+
+            <label>First name</label><br>
+            <input type="text" name="first_name" placeholder="First name"/><br>
+            <label>Last name</label><br>
+            <input type="text" name="last_name" placeholder="Last name"/><br>
+            <div class="hidden">
+                <label>Team ID</label><br>
+                <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
+            </div>
+            <div class="hidden">
+                <label>Overall</label><br>
+                <input type="text" disabled name="overall" placeholder="{{ overall }}" value="{{ overall }}"/><br>
+            </div>
+            <div class="hidden">
+                <label>Attack</label><br>
+                <input type="text" disabled name="attack" placeholder="{{ attack }}" value="{{ attack }}"/><br>
+            </div>
+            <div class="hidden">
+                <label>Middle</label><br>
+                <input type="text" disabled name="middle" placeholder="{{ middle }}" value="{{ middle }}"/><br>
+            </div>
+            <div class="hidden">
+                <label>Defence</label><br>
+                <input type="text" disabled name="defence" placeholder="{{ defence }}" value="{{ defence }}"/><br>
+            </div>
+            <input class="new-player-btn" type="submit" value="Add Player"/>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

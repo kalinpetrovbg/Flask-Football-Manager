@@ -12,15 +12,17 @@
 
 <div class="top-content">
     <div class="logo">
-        <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
+        <a href="/">
+            <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
+        </a>
     </div>
 
     <div class="menu">
         <div><a href="/">Home</a></div>
         <div><a href="/">Quick Game</a></div>
-        <div><a href="/cup">Play Cup</a></div>
-        <div><a href="/create">Create Team</a></div>
-        <div><a href="/settings">Settings</a></div>
+        <div><a href="/cup.html">Play Cup</a></div>
+        <div><a href="/build-team.html">Create Team</a></div>
+        <div><a href="/multiplayer.html">Multiplayer</a></div>
     </div>
 
 </div>
@@ -30,11 +32,11 @@
     <div class="nav">
         <div class="nav-title">Quick Game</div>
         <ul>
-            <li><a href="select-team.html">Select a Team</a></li>
-            <li><a href="choose-opponent.html">Choose Opponent</a></li>
-            <li><a href="lineup.html">Set Lineup</a></li>
-            <li><a href="play.html">Play</a></li>
-            <li><a href="">Quick Game Settings</a></li>
+            <li><a href="/select-team.html">Select a Team</a></li>
+            <li><a href="/choose-opponent.html">Choose Opponent</a></li>
+            <li><a href="/lineup.html">Set Lineup</a></li>
+            <li><a href="/play.html">Play</a></li>
+            <li><a href="/">Settings</a></li>
         </ul>
     </div>
 
@@ -45,9 +47,9 @@
 
 </div>
 
-<div id="footer">
+<div class="footer">
     {% block footer %}
-    &copy; Copyright 2022 by Kalin Petrov</a>.
+    &copy; Copyright 2022 by Kalin Petrov.
     {% endblock %}
 </div>
 </body>

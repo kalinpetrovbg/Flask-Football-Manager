@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="main-content">
+
+    <div class="new-team team">
+        <div class="new-logo">
+            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px">
+        </div>
+        <div class="new-text">
+            <div class="new-name">{{ team.name }}</div>
+            <div class="new-league">{{ team.league }}</div>
+        </div>
+    </div>
+
+    <div class="new-stats">
+        <div class="new-values">
+            <div class="n-val">Overall<br/>{{ team.overall }}</div>
+            <div class="n-val">Attack<br/>{{ team.attack }}</div>
+            <div class="n-val">Middle<br/>{{ team.middle }}</div>
+            <div class="n-val">Defence<br/>{{ team.defence }}</div>
+        </div>
+    </div>
+
+    <table class="existing">
+        <thead>
+        <tr class="existing-header">
+            <th>Name</th>
+            <th>Overall</th>
+            <th>Attack</th>
+            <th>Middle</th>
+            <th>Defence</th>
+        <tr>
+        </thead>
+        {% if not players %}
+        <tbody>
+        <tr>
+            <td colspan="5">
+                <p class="no-players">There are no players in this team.</p></td>
+        </tr>
+        </tbody>
+        {% else %}
+        <tbody>
+        {% for p in players %}
+        <tr>
+            <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
+            <td class="team-stats">{{ p.overall }}</td>
+            <td class="team-stats">{{ p.attack }}</td>
+            <td class="team-stats">{{ p.middle }}</td>
+            <td class="team-stats">{{ p.defence }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+
+</div>
+
+{% endblock %}

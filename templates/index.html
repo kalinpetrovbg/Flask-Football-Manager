@@ -1,6 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<div class="welcome">
+    <img width="100%" alt="stadium" src="{{url_for('static', filename='images/home-stadium.jpg')}}"/>
+    <h1 class="welcome-title">Welcome to Python Football Manager</h1>
+    <div class="welcome-text">
+        <p>Python Football Manager is an online game where you can build a team, play matches and win cups.
+            You have the opportunity to use a prebuild teams and try a quick game or spend some time by joining
+            one of the cups available here.
+
+        <p>But perhaps the most interesting part of PFM is the multiplayer game option.
+            You can enjoy this game with a friend and see who is the best football manager. </p>
+
+        <p>The game is based on Python 3.10 and Flask.</p>
+    </div>
+
+</div>
+
+<div class="game-types">
+    <div class="quick-game">
+        <a href="/play.html">Play a quick game</a>
+    </div>
+    <div class="cup-game">
+        <a href="/cup.html">Enter in a cup challenge</a>
+    </div>
+    <div class="multiplayer-game">
+        <a href="/multiplayer.html">Play against a friend</a>
+    </div>
+
+</div>
+
 
 
 {% endblock %}

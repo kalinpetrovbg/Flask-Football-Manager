@@ -1,8 +1,12 @@
 import random
 
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
+from flask import render_template, request, flash, redirect, url_for
+from sqlalchemy import func
 
+from app import app
+from app import db
+from fm.db.players import Players
+from fm.db.teams import Teams
 from fm.stadium.stadium import Stadium
 from fm.weather.weather import WEATHER_TYPES
 
@@ -10,16 +14,9 @@ teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "I
          "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
          ]
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-
 
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
 
 
@@ -33,9 +30,9 @@ def create():
     return "Create a New Team"
 
 
-@app.route("/cup")
+@app.route("/cup.html")
 def cup():
-    return "Play in a Cup"
+    return render_template("cup.html")
 
 
 @app.route("/select-team.html")
@@ -43,52 +40,90 @@ def select_team():
     return render_template("select-team.html")
 
 
+@app.route("/team/<team_id>.html")
+def team(team_id):
+    team = Teams.query.filter_by(id=team_id).first()
+    players = Players.query.filter_by(team_id=team.id).all()
+    return render_template("team.html", team=team, players=players)
+
+
 @app.route("/existing.html")
 def existing():
-    from fm.db.teams import Teams
-    from fm.db.players import Players
-
     all_teams = Teams.query.all()
 
     data = {}
     for team in all_teams:
-
         players = Players.query.filter_by(team_id=team.id).all()
-
-        stats = {'name': team.name, 'count': len(players),
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league, 'id': team.id,
                  'ovr': team.overall, 'att': team.attack,
                  'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
                  }
         data[team] = stats
     return render_template("existing.html", data=data)
 
 
-@app.route("/build-team.html")
+@app.route("/build-team.html", methods=['GET', 'POST'])
 def build_team():
+    if request.method == 'POST':
+        if not request.form['name'] or not request.form['league']:
+            flash('Please enter all the fields.', 'error')
+        else:
+            team = Teams(name=request.form['name'], league=request.form['league'])
+            db.session.add(team)
+            db.session.commit()
 
-    # from fm.db.teams import Teams
-    # from fm.db.players import Players
-    #
-    # def add_player(self):
-    #     team = Teams.query.filter_by(id=self.team_id).first()
-    #
-    #     team.overall += self.overall
-    #     team.attack += self.attack
-    #     team.middle += self.middle
-    #     team.defence += self.defence
-    #
-    # def remove_player(self):
-    #     team = Teams.query.filter_by(id=self.team_id).first()
-    #
-    #     team.overall -= self.overall
-    #     team.attack -= self.attack
-    #     team.middle -= self.middle
-    #     team.defence -= self.defence
-
-    # p = Players(id=10, first_name="Kalin", last_name="Petrov", team_id=2, overall=20, attack=30, middle=10, defence=30)
-    # p.remove_player()
+            team_id = team.id
+            return redirect(url_for('add_players', team_id=team_id))
 
     return render_template("build-team.html")
+
+
+@app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
+def add_players(team_id):
+    team = Teams.query.filter_by(id=team_id).first()
+    players = Players.query.filter_by(team_id=team.id).all()
+
+    if request.method == 'POST':
+        if not request.form['first_name'] or not request.form['last_name']:
+            flash('Please enter all the fields.', 'error')
+        else:
+            player = Players(first_name=request.form['first_name'],
+                             last_name=request.form['last_name'],
+                             team_id=2,   #Todo
+
+                             attack=60,
+                             middle=50,
+                             defence=40,
+                             # attack=random.randint(50, 85),
+                             # middle=random.randint(50, 85),
+                             # defence=random.randint(50, 85),
+                             )
+
+            db.session.add(player)
+            db.session.commit()
+
+            total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team_id).scalar()
+            team.attack = round(total_attack)
+            total_middle = db.session.query(func.avg(Players.middle)).filter(Players.team_id == team_id).scalar()
+            team.middle = round(total_middle)
+            total_defence = db.session.query(func.avg(Players.defence)).filter(Players.team_id == team_id).scalar()
+            team.defence = round(total_defence)
+            team_overall = (team.attack + team.middle + team.defence) // 3
+            team.overall = team_overall
+
+            db.session.merge(team)
+            db.session.commit()
+
+            flash('Your player has been created.')
+            players = Players.query.filter_by(team_id=team.id).all()
+
+            return render_template("/add-players.html", team_id=team_id, team=team, players=players)
+
+
+
+    return render_template("add-players.html", team_id=team_id, team=team, players=players)
 
 
 @app.route("/choose-opponent.html")
@@ -163,6 +198,11 @@ def play():
 
     return render_template("play.html", content=Game.start(), home=home_team, away=away_team, score=score,
                            scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome, weather=weather)
+
+
+@app.route("/multiplayer.html")
+def multiplayer():
+    return render_template("multiplayer.html")
 
 
 if __name__ == '__main__':
