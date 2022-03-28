@@ -91,7 +91,7 @@ def add_players(team_id):
         else:
             player = Players(first_name=request.form['first_name'],
                              last_name=request.form['last_name'],
-                             team_id=2,
+                             team_id=2,   #Todo
 
                              attack=60,
                              middle=50,

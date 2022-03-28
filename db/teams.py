@@ -15,7 +15,6 @@ class Teams(db.Model):
         return self.name
 
 
-"""Generate the database with teams."""
 teams = [Teams(name="Manchester United", league="English Premier League", logo="man"),
          Teams(name="Arsenal", league="English Premier League", logo="ars"),
          Teams(name="FC Kalin", league="Hattrick"),
@@ -26,6 +25,8 @@ teams = [Teams(name="Manchester United", league="English Premier League", logo="
          ]
 
 
+
+"""Generate the database with teams."""
 # db.create_all()
 #
 # for team in teams:

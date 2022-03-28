@@ -33,7 +33,14 @@
             <th>Defence</th>
         <tr>
         </thead>
-
+        {% if not players %}
+        <tbody>
+        <tr>
+            <td colspan="5">
+                <p class="no-players">There are no players in this team.</p></td>
+        </tr>
+        </tbody>
+        {% else %}
         <tbody>
         {% for p in players %}
         <tr>
@@ -45,6 +52,7 @@
         </tr>
         {% endfor %}
         </tbody>
+        {% endif %}
     </table>
 
 </div>

@@ -18,7 +18,7 @@ class Players(db.Model):
 
 """Generate the database with players."""
 
-
+#
 # db.create_all()
 #
 # p = Players(first_name="Kalin", last_name="Petrov", team_id=1)
