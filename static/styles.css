@@ -278,6 +278,10 @@ h1, h2, h3, h4, h5, h6 {
      text-align: center;
      cursor: pointer;
 }
+ .options-small a {
+    color: #444;
+ }
+
  .form-add {
      display: block;
      width:65%;
@@ -468,6 +472,7 @@ h1, h2, h3, h4, h5, h6 {
 .team-name {
     padding-left: 30px;
     color: #555;
+    max-width: 100px;
 }
 
 .new-player-btn {
@@ -482,4 +487,66 @@ h1, h2, h3, h4, h5, h6 {
     color: red;
     font-size: 14px;
     text-align: center;
+}
+
+.add-players {
+    float: right;
+    margin-right: 15%;
+}
+
+.quick-options {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.quick-options a{
+    text-decoration: none;
+}
+
+.quick-options button{
+    display: block;
+    margin: 0 auto;
+    margin-top:10px;
+    cursor: pointer;
+}
+
+.select-team {
+    border: 1px #ccc solid;
+    height: 50px;
+    padding: 10px;
+    width: 20%;
+    margin: 3px;
+}
+
+.select-opponent {
+    border: 1px #ccc solid;
+    height: 50px;
+    padding: 10px;
+    width: 20%;
+    margin: 3px;
+}
+
+.set-lineup {
+    border: 1px #ccc solid;
+    height: 50px;
+    padding: 10px;
+    width: 20%;
+    margin: 3px;
+}
+
+.quick-play {
+    border: 1px #ccc solid;
+    height: 50px;
+    padding: 10px;
+    width: 20%;
+    margin: 3px;
+}
+
+.quick-settings {
+    border: 1px #ccc solid;
+    height: 50px;
+    padding: 10px;
+    width: 20%;
+    margin: 3px;
 }

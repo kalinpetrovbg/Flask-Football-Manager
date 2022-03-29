@@ -24,8 +24,6 @@ teams = [Teams(name="Manchester United", league="English Premier League", logo="
          Teams(name="Real Madrid", league="Spain Primera Division", logo="rea"),
          ]
 
-
-
 """Generate the database with teams."""
 # db.create_all()
 #
