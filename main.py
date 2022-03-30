@@ -243,6 +243,7 @@ def opp_spain():
         data[team] = stats
     return render_template("opp-spain.html", data=data)
 
+
 @app.route("/opp-italy.html")
 def opp_italy():
     teams = Teams.query.filter_by(league="Italian Serie A").all()
@@ -258,6 +259,7 @@ def opp_italy():
                  }
         data[team] = stats
     return render_template("opp-italy.html", data=data)
+
 
 @app.route("/opp-germany.html")
 def opp_germany():

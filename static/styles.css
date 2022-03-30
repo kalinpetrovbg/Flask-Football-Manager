@@ -550,3 +550,28 @@ h1, h2, h3, h4, h5, h6 {
     width: 20%;
     margin: 3px;
 }
+
+.cup-options {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.cup-options a {
+    text-decoration: none;
+}
+
+.cup-options button{
+    display: block;
+    margin: 0 auto;
+    margin-top:10px;
+    cursor: pointer;
+}
+
+.first-cup {
+    border: 1px #ccc solid;
+    height: 150px;
+    padding: 10px;
+    width: 45%;
+    margin: 5px;
+}
