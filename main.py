@@ -34,6 +34,9 @@ def create():
 def cup():
     return render_template("cup.html")
 
+@app.route("/cup-champions.html")
+def cup_champions():
+    return render_template("cup-champions.html")
 
 @app.route("/select-team.html")
 def select_team():
