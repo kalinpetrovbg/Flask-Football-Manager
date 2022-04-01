@@ -10,7 +10,7 @@
 
 <body>
 
-<div class="top-content">
+<header>
     <div class="logo">
         <a href="/">
             <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
@@ -19,39 +19,53 @@
 
     <div class="menu">
         <div><a href="/">Home</a></div>
-        <div><a href="/">Quick Game</a></div>
+        <div><a href="/quick-game.html">Quick Game</a></div>
         <div><a href="/cup.html">Play Cup</a></div>
         <div><a href="/build-team.html">Create Team</a></div>
         <div><a href="/multiplayer.html">Multiplayer</a></div>
     </div>
 
-</div>
+</header>
 
-<div class="flex">
+<main>
+    <nav>
+        <div class="flex-nav">
+            <div class="nav-title">Quick Game</div>
+            <ul>
+                <li><a href="/select-team.html">Select a Team</a></li>
+                <li><a href="/choose-opponent.html">Choose Opponent</a></li>
+                <li><a href="/lineup.html">Set Lineup</a></li>
+                <li><a href="/play.html">Play</a></li>
+                <li><a href="/">Settings</a></li>
+            </ul>
+        </div>
 
-    <div class="nav">
-        <div class="nav-title">Quick Game</div>
-        <ul>
-            <li><a href="/select-team.html">Select a Team</a></li>
-            <li><a href="/choose-opponent.html">Choose Opponent</a></li>
-            <li><a href="/lineup.html">Set Lineup</a></li>
-            <li><a href="/play.html">Play</a></li>
-            <li><a href="/">Settings</a></li>
-        </ul>
-    </div>
+        <div class="flex-nav">
+            <div class="nav-title">Play Cup</div>
+            <ul>
+                <li><a href="/">Select a Team</a></li>
+                <li><a href="/">Select Cup</a></li>
+                <li><a href="/">Set Lineup</a></li>
+                <li><a href="/">Play</a></li>
+                <li><a href="/">Settings</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+    <article>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </article>
 
-</div>
+</main>
 
-<div class="footer">
+<footer>
     {% block footer %}
     &copy; Copyright 2022 by Kalin Petrov.
     {% endblock %}
-</div>
+</footer>
 </body>
 
 </html>

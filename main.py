@@ -34,6 +34,9 @@ def create():
 def cup():
     return render_template("cup.html")
 
+@app.route("/cup-champions.html")
+def cup_champions():
+    return render_template("cup-champions.html")
 
 @app.route("/select-team.html")
 def select_team():
@@ -82,6 +85,8 @@ def build_team():
 
 @app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
 def add_players(team_id):
+    # db.session.commit()
+    # db.session.close()
     team = Teams.query.filter_by(id=team_id).first()
     players = Players.query.filter_by(team_id=team.id).all()
 
@@ -91,15 +96,13 @@ def add_players(team_id):
         else:
             player = Players(first_name=request.form['first_name'],
                              last_name=request.form['last_name'],
-                             team_id=2,   #Todo
-
-                             attack=60,
-                             middle=50,
-                             defence=40,
-                             # attack=random.randint(50, 85),
-                             # middle=random.randint(50, 85),
-                             # defence=random.randint(50, 85),
+                             team_id=team_id,
+                             position="GK",  # Todo
+                             attack=random.randint(50, 85),
+                             middle=random.randint(50, 85),
+                             defence=random.randint(50, 85),
                              )
+            player.overall = round((player.attack + player.middle + player.defence) / 3)
 
             db.session.add(player)
             db.session.commit()
@@ -110,18 +113,18 @@ def add_players(team_id):
             team.middle = round(total_middle)
             total_defence = db.session.query(func.avg(Players.defence)).filter(Players.team_id == team_id).scalar()
             team.defence = round(total_defence)
-            team_overall = (team.attack + team.middle + team.defence) // 3
+
+            team_overall = round((team.attack + team.middle + team.defence) / 3)
             team.overall = team_overall
 
             db.session.merge(team)
             db.session.commit()
+            # db.session.close()
 
             flash('Your player has been created.')
             players = Players.query.filter_by(team_id=team.id).all()
 
             return render_template("/add-players.html", team_id=team_id, team=team, players=players)
-
-
 
     return render_template("add-players.html", team_id=team_id, team=team, players=players)
 
@@ -200,9 +203,99 @@ def play():
                            scorers=scorers, stadium=stadium, visitors=visitors, welcome=welcome, weather=weather)
 
 
+@app.route("/quick-game.html")
+def quick_game():
+    return render_template("quick-game.html")
+
+
 @app.route("/multiplayer.html")
 def multiplayer():
     return render_template("multiplayer.html")
+
+
+@app.route("/opp-england.html")
+def opp_england():
+    teams = Teams.query.filter_by(league="English Premier League").all()
+
+    data = {}
+    for team in teams:
+        players = Players.query.filter_by(team_id=team.id).all()
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league, 'id': team.id,
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
+                 }
+        data[team] = stats
+    return render_template("opp-england.html", data=data)
+
+
+@app.route("/opp-spain.html")
+def opp_spain():
+    teams = Teams.query.filter_by(league="Spain Primera Division").all()
+
+    data = {}
+    for team in teams:
+        players = Players.query.filter_by(team_id=team.id).all()
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league, 'id': team.id,
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
+                 }
+        data[team] = stats
+    return render_template("opp-spain.html", data=data)
+
+
+@app.route("/opp-italy.html")
+def opp_italy():
+    teams = Teams.query.filter_by(league="Italian Serie A").all()
+
+    data = {}
+    for team in teams:
+        players = Players.query.filter_by(team_id=team.id).all()
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league, 'id': team.id,
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
+                 }
+        data[team] = stats
+    return render_template("opp-italy.html", data=data)
+
+
+@app.route("/opp-germany.html")
+def opp_germany():
+    teams = Teams.query.filter_by(league="German Bundesliga").all()
+
+    data = {}
+    for team in teams:
+        players = Players.query.filter_by(team_id=team.id).all()
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league, 'id': team.id,
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
+                 }
+        data[team] = stats
+    return render_template("opp-germany.html", data=data)
+
+
+@app.route("/opp-france.html")
+def opp_france():
+    teams = Teams.query.filter_by(league="French Ligue 1").all()
+
+    data = {}
+    for team in teams:
+        players = Players.query.filter_by(team_id=team.id).all()
+        stats = {'name': team.name, 'logo': team.logo,
+                 'league': team.league, 'id': team.id,
+                 'ovr': team.overall, 'att': team.attack,
+                 'mid': team.middle, 'def': team.defence,
+                 'count': len(players),
+                 }
+        data[team] = stats
+    return render_template("opp-france.html", data=data)
 
 
 if __name__ == '__main__':

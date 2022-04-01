@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="main-content">
-    <img width="100%" alt="logos" src="{{url_for('static', filename='images/logos2.png')}}"/>
+    <div class="main-title">Spain Primera Division</div>
 
-    <div class="main-title">Select your team</div>
     <table class="existing">
         <thead>
         <tr class="existing-header">
@@ -18,8 +16,20 @@
             <th>PLAYERS</th>
         </tr>
         </thead>
-        {% for team in data.values() %}
+
         <tbody>
+        {% if not data %}
+        <tbody>
+        <tr>
+            <td colspan="5">
+                <p class="no-players">There are no teams in this team.</p>
+            </td>
+        </tr>
+        </tbody>
+        {% else %}
+
+        <tbody>
+        {% for team in data.values() %}
         <tr class="ex-tr">
 
             <td class="ex-logo">
@@ -38,7 +48,9 @@
             {% endfor %}
         </tr>
         </tbody>
+        {% endif %}
     </table>
+
 
 </div>
 

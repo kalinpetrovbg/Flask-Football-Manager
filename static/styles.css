@@ -1,485 +1,610 @@
 html {
-     font-family: sans-serif;
-     background: #58965d;
-     padding: 1rem;
+    background: #58965d;
+    font-family: sans-serif;
+    padding: 1rem
 }
- body {
-     max-width: 960px;
-     margin: 0 auto;
-     background: white;
-     border: 1px #ccc solid;
-}
-.footer {
-    padding: 10px;
-    text-align: right;
-    font-size: 11px;
-    }
 
-h1, h2, h3, h4, h5, h6 {
-     font-family: serif;
-     color: #377ba8;
-     margin: 1rem 0;
+body {
+    background: #fff;
+    border: 1px #ccc solid;
+    margin: 0 auto;
+    max-width: 960px
 }
- a {
-     color: #377ba8;
+
+footer {
+    font-size: 11px;
+    padding: 10px;
+    text-align: right
 }
- hr {
-     border: none;
-     border-top: 1px solid lightgray;
+
+h1,h2,h3,h4,h5,h6 {
+    color: #377ba8;
+    font-family: serif;
+    margin: 1rem 0
 }
- nav {
-     background: lightgray;
-     display: flex;
-     align-items: center;
-     padding: 0 0.5rem;
+
+a {
+    color: #377ba8
 }
- nav h1 {
-     flex: auto;
-     margin: 0;
+
+hr {
+    border: none;
+    border-top: 1px solid lightgray
 }
- nav h1 a {
-     text-decoration: none;
-     padding: 0.25rem 0.5rem;
+
+.content {
+    margin-right: 25px;
+    padding: 0;
+    width: 100%
 }
- nav ul {
-     display: flex;
-     list-style: none;
-     margin: 0;
-     padding: 0;
+
+.content > header {
+    align-items: flex-end;
+    border-bottom: 1px solid lightgray;
+    display: flex
 }
- nav ul li a, nav ul li span, header .action {
-     display: block;
-     padding: 0.5rem;
+
+.content > header h1 {
+    flex: auto;
+    margin: 1rem 0 .25rem
 }
- .content {
-     padding: 0;
-     width: 100%;
-     margin-right: 25px;
+
+.flash {
+    background: #cae6f6;
+    border: 1px solid #377ba8;
+    margin: 1em 0;
+    padding: 1em
 }
- .content > header {
-     border-bottom: 1px solid lightgray;
-     display: flex;
-     align-items: flex-end;
+
+.post > header {
+    align-items: flex-end;
+    display: flex;
+    font-size: .85em
 }
- .content > header h1 {
-     flex: auto;
-     margin: 1rem 0 0.25rem 0;
+
+.post > header > div:first-of-type {
+    flex: auto
 }
- .flash {
-     margin: 1em 0;
-     padding: 1em;
-     background: #cae6f6;
-     border: 1px solid #377ba8;
+
+.post > header h1 {
+    font-size: 1.5em;
+    margin-bottom: 0
 }
- .post > header {
-     display: flex;
-     align-items: flex-end;
-     font-size: 0.85em;
+
+.post .about {
+    color: #708090;
+    font-style: italic
 }
- .post > header > div:first-of-type {
-     flex: auto;
+
+.post .body {
+    white-space: pre-line
 }
- .post > header h1 {
-     font-size: 1.5em;
-     margin-bottom: 0;
+
+.content:last-child {
+    margin-bottom: 0
 }
- .post .about {
-     color: slategray;
-     font-style: italic;
+
+.content form {
+    display: flex;
+    flex-direction: column
 }
- .post .body {
-     white-space: pre-line;
+
+.content label {
+    font-weight: 700;
+    margin-bottom: 0
 }
- .content:last-child {
-     margin-bottom: 0;
+
+.content input,.content textarea,.content select {
+    color: #555;
+    font-size: 15px;
+    height: 25px;
+    margin: 0
 }
- .content form {
-     display: flex;
-     flex-direction: column;
+
+.content textarea {
+    min-height: 12em;
+    resize: vertical
 }
- .content label {
-     font-weight: bold;
-     margin-bottom: 0;
+
+input.danger {
+    color: #cc2f2e
 }
- .content input, .content textarea, .content select {
-     font-size: 15px;
-     height: 25px;
-     color: #555;
-     margin: 0;
+
+input[type=submit] {
+    align-self: start;
+    cursor: pointer;
+    margin-top: 35px;
+    min-width: 10em
 }
- .content textarea {
-     min-height: 12em;
-     resize: vertical;
+
+.logo {
+    margin: 15px
 }
- input.danger {
-     color: #cc2f2e;
+
+.menu {
+    background-color: #277f31;
+    border-radius: 10px;
+    color: #fff;
+    height: 35px;
+    margin-left: 1.5%;
+    width: 97%
 }
- input[type=submit] {
-     align-self: start;
-     min-width: 10em;
-     cursor: pointer;
-     margin-top: 35px;
+
+.menu > div {
+    background: inherit;
+    cursor: pointer;
+    float: left;
+    font-size: 15px;
+    font-weight: 700;
+    height: 35px;
+    letter-spacing: 0;
+    line-height: 35px;
+    margin: 0 0 0 10px;
+    padding-left: 50px;
+    padding-right: 40px;
+    position: relative
 }
- .logo {
-     margin: 15px;
+
+.menu>div a {
+    color: #fff;
+    text-decoration: none
 }
- .menu {
-     height: 35px;
-     background-color: #277f31;
-     color: #fff;
-     border-radius: 10px;
-     width: 97%;
-     margin-left: 1.5%;
+
+.header {
+    height: 100px
 }
- .menu > div {
-     padding-left: 50px;
-     padding-right:40px;
-     position: relative;
-     cursor: pointer;
-     float: left;
-     line-height: 35px;
-     font-size: 15px;
-     font-weight: 700;
-     letter-spacing: 0;
-     margin: 0 0 0 10px;
-     height: 35px;
-     background: inherit;
+
+.flex-nav {
+    font-size: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
 }
- .menu>div a{
-     text-decoration: none;
-     color: #fff;
+
+.nav-title {
+    background: #9aada1;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    padding: 9px;
+    text-align: center
 }
- .top-content {
-     height: 100px;
+
+.flex-nav ul {
+    line-height: 1.7;
+    list-style: none;
+    margin: 0;
+    padding-inline-start: 0px;
 }
- .nav {
-     margin-top: 10px;
-     margin-left: 15px;
-     height: 500px;
-     width: 22%;
-     font-size: 15px;
+
+.flex-nav ul li {
+    border: 1px #ccc solid;
+    padding-bottom: 1px;
+    padding-left: 10px;
+    padding-top: 4px
 }
- .nav-title {
-     text-align: center;
-     background: #9aada1;
-     padding: 9px;
-     color: #fff;
-     border-radius: 10px 10px 0 0;
+
+.flex-nav li a {
+    text-decoration: none
 }
- .nav ul {
-     list-style: none;
-     padding: 0;
-     margin: 0;
-     line-height: 1.5;
+
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 22%
 }
- .nav ul li {
-     border: 1px #ccc solid;
-     padding-left: 10px;
-     padding-top: 4px;
-     padding-bottom: 1px;
+
+article {
+    width: 75%;
 }
- .nav li a {
-     text-decoration: none;
+
+.top {
+    border: 1px #ccc solid;
+    display: grid;
+    height: 80px;
+    margin-left: 8px;
+    margin-right: 15px;
+    margin-top: 10px;
+    width: 95%
 }
- .flex {
-     display: flex;
-     width: 100%;
+
+.sub-top {
+    align-content: space-around;
+    display: grid;
+    height: 80px;
+    justify-content: center;
+    width: 100%
 }
- .top {
-     display: grid;
-     height:80px;
-     border: 1px #ccc solid;
-     margin-top: 10px;
-     width: 95%;
-     margin-left: 8px;
-     margin-right: 15px;
+
+.center-content {
+    border: 1px #ccc solid;
+    display: grid;
+    margin-top: 10px;
+    width: 100%
 }
- .sub-top {
-     display: grid;
-     justify-content: center;
-     height: 80px;
-     width: 100%;
-     align-content: space-around;
+
+.cnt {
+    margin: 0 auto;
+    width: 95%
 }
- .center-content {
-     display: grid;
-     border: 1px #ccc solid;
-     margin-top:10px;
-     width: 100%;
+
+main {
+    display: flex;
 }
- .cnt {
-     margin: 0 auto;
-     width: 95%;
+
+.main-content {
+    border: 1px #ccc solid;
+    display: block;
+    margin: 0 auto;
+    margin: 10px;
+    min-height: 500px;
+    min-width: 300px;
+    width: 100%
 }
- .main-content {
-     border: 1px #ccc solid;
-     width: 100%;
-     margin: 0 auto;
-     min-height: 500px;
-     min-width: 300px;
-     margin: 10px;
-     display: block;
+
+.main-title {
+    color: #666;
+    display: block;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 20px;
+    margin-left: -10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%
 }
- .main-title {
-     font-size:25px;
-     text-align: center;
-     width: 100%;
-     display: block;
-     margin: 20px;
-     margin-left: -10px;
-     color: #666;
-     text-transform: uppercase;
-     font-weight: 600;
+
+.sub-title {
+    text-align: center
 }
- .sub-title {
-     text-align: center;
+
+.options {
+    display: flex;
+    text-align: center;
+    width: 100%
 }
- .options {
-     display: flex;
-     width: 100%;
-     text-align: center;
+
+.options a {
+    color: #fff;
+    text-decoration: none
 }
- .options a{
-     text-decoration: none;
-     color: #fff;
+
+.options-left a: hover {
+    transparency: 50%
 }
- .options-left a: hover{
-     transparency: 50%;
+
+.options-left {
+    background: #7b9dd5;
+    border: 1px #ccc solid;
+    border: 1px #ccc solid;
+    color: #fff;
+    display: block;
+    height: 200px;
+    margin: 10px 5px 10px 10px;
+    padding: 10px;
+    width: 45%
 }
- .options-left {
-     width: 45%;
-     height: 200px;
-     border: 1px #ccc solid;
-     padding: 10px;
-     margin: 10px 5px 10px 10px;
-     background: #7b9dd5;
-     color: #fff;
-     border: 1px #ccc solid;
-     display: block;
+
+.options-right {
+    background: #f06464;
+    border: 1px #ccc solid;
+    border: 1px #ccc solid;
+    color: #fff;
+    height: 200px;
+    margin: 10px 10px 10px 5px;
+    padding: 10px;
+    width: 45%
 }
- .options-right {
-     width: 45%;
-     height: 200px;
-     border: 1px #ccc solid;
-     padding: 10px;
-     margin: 10px 10px 10px 5px;
-     background: #f06464;
-     color: #fff;
-     border: 1px #ccc solid;
+
+.options-small {
+    background: #f7f7f7;
+    border: 1px #ccc solid;
+    color: #333;
+    cursor: pointer;
+    height: 120px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 20%
 }
- .options-small {
-     width: 20%;
-     height: 120px;
-     border: 1px #ccc solid;
-     padding: 10px;
-     margin: 10px 10px 10px 10px;
-     background: #f7f7f7;
-     color: #333;
-     text-align: center;
-     cursor: pointer;
+
+.options-small a {
+    color: #444
 }
- .form-add {
-     display: block;
-     width:65%;
-     margin: 0 auto;
-     border: 1px #ccc solid;
-     padding: 20px;
+
+.form-add {
+    border: 1px #ccc solid;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    width: 65%
 }
- .h3-add {
-     padding: 10px;
-     text-align: center;
+
+.h3-add {
+    padding: 10px;
+    text-align: center
 }
- .existing {
-     min-width: 600px;
-     width: 95%;
-     margin-left: 20px;
-     margin-right: 20px;
-     margin-bottom: 50px;
+
+.existing {
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-width: 600px;
+    width: 95%
 }
- .existing-header th {
-     border-bottom: 1px #ccc solid;
-     color: #adb5bd;
-     font-weight: 5000;
-     line-height: 1.75em;
+
+.existing-header th {
+    border-bottom: 1px #ccc solid;
+    color: #adb5bd;
+    font-weight: 5000;
+    line-height: 1.75em
 }
- .existing tbody tr {
-     border: 1px #ccc solid;
-     color: #191919;
+
+.existing tbody tr {
+    border: 1px #ccc solid;
+    color: #191919
 }
- .ex-stats {
-     text-align: center;
+
+.ex-stats {
+    text-align: center
 }
- .ex-logo {
-     width: 70px;
+
+.ex-logo {
+    width: 70px
 }
- .ex-league {
-     font-size:13px;
-     color: #555;
+
+.ex-league {
+    color: #555;
+    font-size: 13px
 }
- .ex-tr tr {
-     padding: 10px;
-     margin: 10px;
+
+.ex-tr tr {
+    margin: 10px;
+    padding: 10px
 }
 
 .ex-tr a {
-    text-decoration: none;
+    text-decoration: none
 }
 
 .ex-tr:hover {
     background: #f5f5f5;
-    cursor:pointer;
     border: 1px #ccc solid;
+    cursor: pointer;
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
- .alert-danger {
-     text-align: center;
-     color: red;
-     font-size: 14px;
-     padding: 10px;
+.alert-danger {
+    color: red;
+    font-size: 14px;
+    padding: 10px;
+    text-align: center
 }
 
 .new-team {
-    width: 60%;
-    margin: 0 auto;
     display: flex;
+    margin: 0 auto;
     margin-bottom: 20px;
+    width: 60%
 }
 
 .new-name {
+    color: #191919;
     font-size: 22px;
     font-weight: 500;
-    padding-top: 27px;
     line-height: 1.5;
-    color: #191919
+    padding-top: 27px
 }
 
 .new-league {
-    font-size: 14px;
-    color: #191919
+    color: #191919;
+    font-size: 14px
 }
 
 .new-stats {
-    width: 80%;
+    background: #f1f3f566;
     border: 1px #ccc solid;
     margin: 0 auto;
-    background: #f1f3f566;
     margin-bottom: 20px;
+    width: 80%
 }
 
 .new-values {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around
 }
 
 .n-val {
-    text-align: center;
-    padding: 15px;
     line-height: 1.3;
+    padding: 15px;
+    text-align: center
 }
 
-
 .welcome {
-    width: 100%;
     border: 1px #ccc solid;
     margin: 10px;
+    width: 100%
 }
 
 .welcome-title {
-    font-size: 20px;
     color: #555;
-    text-align: center;
+    font-size: 20px;
+    text-align: center
 }
 
 .welcome-text {
-    padding: 20px;
+    padding: 20px
 }
 
 .game-types {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around
 }
 
-.quick-game, .cup-game, .multiplayer-game {
-    text-align: center;
-    width: 31%;
-    padding-top: 50px;
-    line-height: 1.3;
+.quick-game,.cup-game,.multiplayer-game {
     border: 1px #ccc solid;
-    height: 100px;
-    display: block;
     cursor: pointer;
+    display: block;
     font-size: 17px;
+    height: 100px;
+    line-height: 1.3;
     margin: 10px;
+    padding-top: 50px;
+    text-align: center;
+    width: 31%
 }
 
-.game-types a{
-    text-decoration: none;
+.game-types a {
+    text-decoration: none
 }
 
-.game-types a:hover{
-    font-size: 20px;
+.game-types a:hover {
+    font-size: 20px
 }
 
 .quick-game {
-    background: #edf9ff;
+    background: #edf9ff
 }
 
 .cup-game {
-    background: #e3f5dc;
+    background: #e3f5dc
 }
 
 .multiplayer-game {
-    background: #ffedf4;
+    background: #ffedf4
 }
 
 .team {
-    margin-top: 50px;
+    margin-top: 50px
 }
 
 .new-text {
-    margin-left: 10px;
+    margin-left: 10px
 }
 
-
 .select-btn {
-    padding-top: 120px;
+    padding-top: 120px
 }
 
 .select-btn button {
-    font-size: 17px;
-    width: 50%;
-    height: 40px;
     background: #58965d;
     color: #fff;
     cursor: pointer;
+    font-size: 17px;
+    height: 40px;
+    width: 50%
 }
 
 .select-btn button:hover {
-    opacity: 85%;
+    opacity: 85%
 }
 
-.team-stats{
-    text-align: center;
+.team-stats {
     color: #555;
+    text-align: center
 }
 
 .team-name {
-    padding-left: 30px;
     color: #555;
+    max-width: 100px;
+    padding-left: 30px
 }
 
 .new-player-btn {
-    width: 39%!important;
-    height: 33px!important;
     background: #58965d;
     color: #fff!important;
+    height: 33px!important;
+    width: 39%!important
 }
-
 
 .no-players {
     color: red;
     font-size: 14px;
-    text-align: center;
+    text-align: center
+}
+
+.add-players {
+    float: right;
+    margin-right: 15%
+}
+
+.quick-options {
+    display: flex;
+    justify-content: space-around;
+    text-align: center
+}
+
+.quick-options a {
+    text-decoration: none
+}
+
+.quick-options button {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px
+}
+
+.select-team {
+    border: 1px #ccc solid;
+    height: 50px;
+    margin: 3px;
+    padding: 10px;
+    width: 20%
+}
+
+.select-opponent {
+    border: 1px #ccc solid;
+    height: 50px;
+    margin: 3px;
+    padding: 10px;
+    width: 20%
+}
+
+.set-lineup {
+    border: 1px #ccc solid;
+    height: 50px;
+    margin: 3px;
+    padding: 10px;
+    width: 20%
+}
+
+.quick-play {
+    border: 1px #ccc solid;
+    height: 50px;
+    margin: 3px;
+    padding: 10px;
+    width: 20%
+}
+
+.quick-settings {
+    border: 1px #ccc solid;
+    height: 50px;
+    margin: 3px;
+    padding: 10px;
+    width: 20%
+}
+
+.cup-options {
+    display: flex;
+    justify-content: space-around;
+    text-align: center
+}
+
+.cup-options a {
+    text-decoration: none
+}
+
+.cup-options button {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px
+}
+
+.first-cup {
+    border: 1px #ccc solid;
+    height: 150px;
+    margin: 5px;
+    padding: 10px;
+    width: 45%
 }

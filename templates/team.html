@@ -27,24 +27,29 @@
         <thead>
         <tr class="existing-header">
             <th>Name</th>
+            <th>Position</th>
             <th>Overall</th>
             <th>Attack</th>
             <th>Middle</th>
             <th>Defence</th>
-        <tr>
+        </tr>
         </thead>
+
         {% if not players %}
         <tbody>
         <tr>
             <td colspan="5">
-                <p class="no-players">There are no players in this team.</p></td>
+                <p class="no-players">There are no players in this team.</p>
+            </td>
         </tr>
         </tbody>
         {% else %}
+
         <tbody>
         {% for p in players %}
         <tr>
             <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
+            <td class="team-stats">{{ p.position }}</td>
             <td class="team-stats">{{ p.overall }}</td>
             <td class="team-stats">{{ p.attack }}</td>
             <td class="team-stats">{{ p.middle }}</td>
@@ -52,9 +57,15 @@
         </tr>
         {% endfor %}
         </tbody>
+
         {% endif %}
     </table>
 
+    <p class="add-players">
+        <a href="/add-players/{{ team.id }}.html" target="_parent">
+            <button>Add players</button>
+        </a>
+    </p>
 </div>
 
 {% endblock %}

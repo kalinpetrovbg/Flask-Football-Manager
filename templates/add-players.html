@@ -7,7 +7,7 @@
 
     <div class="new-team">
         <div class="new-logo">
-            <img width="80px" src="{{url_for('static', filename='images/clubs/no-logo.png')}}">
+            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px">
         </div>
         <div class="new-text">
             <div class="new-name">{{ team.name }}</div>
@@ -29,6 +29,7 @@
         <thead>
         <tr class="existing-header">
             <th>Name</th>
+            <th>Position</th>
             <th>Overall</th>
             <th>Attack</th>
             <th>Middle</th>
@@ -47,6 +48,7 @@
         {% for p in players %}
         <tr>
             <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
+            <td class="team-stats">{{ p.position }}</td>
             <td class="team-stats">{{ p.overall }}</td>
             <td class="team-stats">{{ p.attack }}</td>
             <td class="team-stats">{{ p.middle }}</td>
@@ -76,22 +78,7 @@
                 <label>Team ID</label><br>
                 <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
             </div>
-            <div class="hidden">
-                <label>Overall</label><br>
-                <input type="text" disabled name="overall" placeholder="{{ overall }}" value="{{ overall }}"/><br>
-            </div>
-            <div class="hidden">
-                <label>Attack</label><br>
-                <input type="text" disabled name="attack" placeholder="{{ attack }}" value="{{ attack }}"/><br>
-            </div>
-            <div class="hidden">
-                <label>Middle</label><br>
-                <input type="text" disabled name="middle" placeholder="{{ middle }}" value="{{ middle }}"/><br>
-            </div>
-            <div class="hidden">
-                <label>Defence</label><br>
-                <input type="text" disabled name="defence" placeholder="{{ defence }}" value="{{ defence }}"/><br>
-            </div>
+
             <input class="new-player-btn" type="submit" value="Add Player"/>
         </form>
     </div>
