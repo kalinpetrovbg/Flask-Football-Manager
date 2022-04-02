@@ -310,12 +310,21 @@ main {
     color: #444
 }
 
-.form-add {
+.adding-players {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.form-add-gk, .form-add-def, .form-add-mid, .form-add-att  {
     border: 1px #ccc solid;
     display: block;
     margin: 0 auto;
     padding: 20px;
-    width: 65%
+    width: 30%
+}
+
+.hidden {
+    display: none;
 }
 
 .h3-add {
@@ -514,6 +523,18 @@ main {
     color: #fff!important;
     height: 33px!important;
     width: 39%!important
+}
+
+.new-player-gk {
+   background: #7b292b;
+}
+
+.new-player-mid {
+   background: #1c2390;
+}
+
+.new-player-att {
+   background: #353e46;
 }
 
 .no-players {
