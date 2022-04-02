@@ -7,6 +7,7 @@ from app import app
 from app import db
 from fm.db.players import Players
 from fm.db.teams import Teams
+from fm.db.names import spanish_l_names, spanish_f_names
 from fm.stadium.stadium import Stadium
 from fm.weather.weather import WEATHER_TYPES
 
@@ -91,11 +92,13 @@ def add_players(team_id):
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
 
-        if not request.form['first_name'] or not request.form['last_name']:
+        if not request.form['position'] :
             flash('Please enter all the fields.', 'error')
         else:
-            player = Players(first_name=request.form['first_name'],
-                             last_name=request.form['last_name'],
+            # Todo if position:
+
+            player = Players(first_name=random.choice(spanish_f_names),
+                             last_name=random.choice(spanish_l_names),
                              position=request.form['position'],
                              team_id=team_id,
                              attack=random.randint(50, 85),
