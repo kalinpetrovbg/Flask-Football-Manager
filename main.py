@@ -92,24 +92,52 @@ def add_players(team_id):
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
 
-        if not request.form['position'] :
+        position = request.form['position']
+        if not position:
             flash('Please enter all the fields.', 'error')
         else:
-            # Todo if position:
+            if position == "GK":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="GK",
+                                 team_id=team_id,
+                                 attack=random.randint(1, 5),
+                                 middle=random.randint(1, 10),
+                                 defence=random.randint(60, 85),
+                                 )
+            elif position == "DEF":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="DEF",
+                                 team_id=team_id,
+                                 attack=random.randint(10, 30),
+                                 middle=random.randint(20, 40),
+                                 defence=random.randint(60, 85),
+                                 )
 
-            player = Players(first_name=random.choice(spanish_f_names),
-                             last_name=random.choice(spanish_l_names),
-                             position=request.form['position'],
-                             team_id=team_id,
-                             attack=random.randint(50, 85),
-                             middle=random.randint(50, 85),
-                             defence=random.randint(50, 85),
-                             )
+            elif position == "MID":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="MID",
+                                 team_id=team_id,
+                                 attack=random.randint(15, 35),
+                                 middle=random.randint(60, 85),
+                                 defence=random.randint(15, 35),
+                                 )
+
+            elif position == "ATT":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="ATT",
+                                 team_id=team_id,
+                                 attack=random.randint(60, 85),
+                                 middle=random.randint(20, 40),
+                                 defence=random.randint(10, 30),
+                                 )
+
             player.overall = round((player.attack + player.middle + player.defence) / 3)
 
             db.session.add(player)
-            db.session.add(player) #new
-
             db.session.commit()
 
             total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team_id).scalar()
