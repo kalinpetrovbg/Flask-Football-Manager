@@ -67,22 +67,91 @@
     </div>
     {%- endfor %}
 
-    <div class="form-add">
-        <form action="{{ request.path }}" method="post">
+    <div class="adding-players">
+        <div class="form-add-gk">
+            <form action="{{ request.path }}" method="POST">
 
-            <label>First name</label><br>
-            <input type="text" name="first_name" placeholder="First name"/><br>
-            <label>Last name</label><br>
-            <input type="text" name="last_name" placeholder="Last name"/><br>
-            <div class="hidden">
-                <label>Team ID</label><br>
-                <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
-            </div>
+                <label>First name</label><br>
+                <input type="text" name="first_name" placeholder="First name"/><br>
+                <label>Last name</label><br>
+                <input type="text" name="last_name" placeholder="Last name"/><br>
+                <div class="hidden">
+                    <label>Team ID</label><br>
+                    <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
+                </div>
+                <div class="hidden">
+                    <label>Position</label><br>
+                    <input type="text" name="position" placeholder="position" value="GK"/><br>
+                </div>
 
-            <input class="new-player-btn" type="submit" value="Add Player"/>
-        </form>
+                <input class="new-player-btn  new-player-gk" type="submit" value="Add Goalkeeper"/>
+            </form>
+        </div>
+
+        <div class="form-add-gk">
+            <form action="{{ request.path }}" method="POST">
+
+                <label>First name</label><br>
+                <input type="text" name="first_name" placeholder="First name"/><br>
+                <label>Last name</label><br>
+                <input type="text" name="last_name" placeholder="Last name"/><br>
+                <div class="hidden">
+                    <label>Team ID</label><br>
+                    <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
+                </div>
+                <div class="hidden">
+                    <label>Position</label><br>
+                    <input type="text" name="position" placeholder="position" value="DEF"/><br>
+                </div>
+
+                <input class="new-player-btn" type="submit" value="Add Defender"/>
+            </form>
+        </div>
     </div>
 
+
+
+        <div class="adding-players">
+        <div class="form-add-mid">
+            <form action="{{ request.path }}" method="POST">
+
+                <label>First name</label><br>
+                <input type="text" name="first_name" placeholder="First name"/><br>
+                <label>Last name</label><br>
+                <input type="text" name="last_name" placeholder="Last name"/><br>
+                <div class="hidden">
+                    <label>Team ID</label><br>
+                    <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
+                </div>
+                <div class="hidden">
+                    <label>Position</label><br>
+                    <input type="text" name="position" placeholder="position" value="MID"/><br>
+                </div>
+
+                <input class="new-player-btn new-player-mid" type="submit" value="Add Middle"/>
+            </form>
+        </div>
+
+        <div class="form-add-att">
+            <form action="{{ request.path }}" method="POST">
+
+                <label>First name</label><br>
+                <input type="text" name="first_name" placeholder="First name"/><br>
+                <label>Last name</label><br>
+                <input type="text" name="last_name" placeholder="Last name"/><br>
+                <div class="hidden">
+                    <label>Team ID</label><br>
+                    <input type="text" disabled name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
+                </div>
+                <div class="hidden">
+                    <label>Position</label><br>
+                    <input type="text" name="position" placeholder="position" value="ATT"/><br>
+                </div>
+
+                <input class="new-player-btn new-player-att" type="submit" value="Add Attacker"/>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

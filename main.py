@@ -85,19 +85,19 @@ def build_team():
 
 @app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
 def add_players(team_id):
-    # db.session.commit()
-    # db.session.close()
-    team = Teams.query.filter_by(id=team_id).first()
-    players = Players.query.filter_by(team_id=team.id).all()
+
 
     if request.method == 'POST':
+        team = Teams.query.filter_by(id=team_id).first()
+        players = Players.query.filter_by(team_id=team.id).all()
+
         if not request.form['first_name'] or not request.form['last_name']:
             flash('Please enter all the fields.', 'error')
         else:
             player = Players(first_name=request.form['first_name'],
                              last_name=request.form['last_name'],
+                             position=request.form['position'],
                              team_id=team_id,
-                             position="GK",  # Todo
                              attack=random.randint(50, 85),
                              middle=random.randint(50, 85),
                              defence=random.randint(50, 85),
@@ -105,6 +105,8 @@ def add_players(team_id):
             player.overall = round((player.attack + player.middle + player.defence) / 3)
 
             db.session.add(player)
+            db.session.add(player) #new
+
             db.session.commit()
 
             total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team_id).scalar()
@@ -119,14 +121,16 @@ def add_players(team_id):
 
             db.session.merge(team)
             db.session.commit()
-            # db.session.close()
 
             flash('Your player has been created.')
-            players = Players.query.filter_by(team_id=team.id).all()
+            players.append(player)
 
             return render_template("/add-players.html", team_id=team_id, team=team, players=players)
+    else:
+        team = Teams.query.filter_by(id=team_id).first()
+        players = Players.query.filter_by(team_id=team.id).all()
 
-    return render_template("add-players.html", team_id=team_id, team=team, players=players)
+        return render_template("add-players.html", team_id=team_id, team=team, players=players)
 
 
 @app.route("/choose-opponent.html")
