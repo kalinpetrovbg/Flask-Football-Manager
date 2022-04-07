@@ -315,12 +315,17 @@ main {
     margin-bottom: 30px;
 }
 
-.form-add-gk, .form-add-def, .form-add-mid, .form-add-att  {
+.form-add {
+    width: 45%;
+    margin: 0 auto;
     border: 1px #ccc solid;
+    padding: 20px;
+}
+
+.form-add-gk, .form-add-def, .form-add-mid, .form-add-att  {
     display: block;
     margin: 0 auto;
-    padding: 20px;
-    width: 30%
+    padding: 10px;
 }
 
 .hidden {
@@ -545,7 +550,7 @@ main {
 
 .add-players {
     float: right;
-    margin-right: 15%
+    margin-right: 15%;
 }
 
 .quick-options {

@@ -7,6 +7,7 @@ from app import app
 from app import db
 from fm.db.players import Players
 from fm.db.teams import Teams
+from fm.db.names import spanish_l_names, spanish_f_names
 from fm.stadium.stadium import Stadium
 from fm.weather.weather import WEATHER_TYPES
 
@@ -91,22 +92,52 @@ def add_players(team_id):
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
 
-        if not request.form['first_name'] or not request.form['last_name']:
+        position = request.form['position']
+        if not position:
             flash('Please enter all the fields.', 'error')
         else:
-            player = Players(first_name=request.form['first_name'],
-                             last_name=request.form['last_name'],
-                             position=request.form['position'],
-                             team_id=team_id,
-                             attack=random.randint(50, 85),
-                             middle=random.randint(50, 85),
-                             defence=random.randint(50, 85),
-                             )
+            if position == "GK":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="GK",
+                                 team_id=team_id,
+                                 attack=random.randint(1, 5),
+                                 middle=random.randint(1, 10),
+                                 defence=random.randint(60, 85),
+                                 )
+            elif position == "DEF":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="DEF",
+                                 team_id=team_id,
+                                 attack=random.randint(10, 30),
+                                 middle=random.randint(20, 40),
+                                 defence=random.randint(60, 85),
+                                 )
+
+            elif position == "MID":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="MID",
+                                 team_id=team_id,
+                                 attack=random.randint(15, 35),
+                                 middle=random.randint(60, 85),
+                                 defence=random.randint(15, 35),
+                                 )
+
+            elif position == "ATT":
+                player = Players(first_name=random.choice(spanish_f_names),
+                                 last_name=random.choice(spanish_l_names),
+                                 position="ATT",
+                                 team_id=team_id,
+                                 attack=random.randint(60, 85),
+                                 middle=random.randint(20, 40),
+                                 defence=random.randint(10, 30),
+                                 )
+
             player.overall = round((player.attack + player.middle + player.defence) / 3)
 
             db.session.add(player)
-            db.session.add(player) #new
-
             db.session.commit()
 
             total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team_id).scalar()
@@ -301,6 +332,29 @@ def opp_france():
         data[team] = stats
     return render_template("opp-france.html", data=data)
 
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Here we use a class of some kind to represent and validate our
+    # client-side form data. For example, WTForms is a library that will
+    # handle this for us, and we use a custom LoginForm to validate.
+    form = LoginForm()
+    if form.validate_on_submit():
+        # Login and validate the user.
+        # user should be an instance of your `User` class
+        login_user(user)
+
+        flask.flash('Logged in successfully.')
+
+        next = flask.request.args.get('next')
+        # is_safe_url should check if the url is safe for redirects.
+        # See http://flask.pocoo.org/snippets/62/ for an example.
+        if not is_safe_url(next):
+            return flask.abort(400)
+
+        return flask.redirect(next or flask.url_for('index'))
+    return flask.render_template('login.html', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
