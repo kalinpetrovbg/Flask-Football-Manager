@@ -11,10 +11,19 @@
 <body>
 
 <header>
-    <div class="logo">
-        <a href="/">
-            <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
-        </a>
+    <div class="top-panel">
+        <div class="logo">
+            <a href="/">
+                <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
+            </a>
+        </div>
+
+        <div class="top-navigation">
+            <div class="top-links">
+                <div class="my-menu"><a href="/login.html">Login</a></div>
+                <div class="my-menu"><a href="/signup.html">Signup</a></div>
+            </div>
+        </div>
     </div>
 
     <div class="menu">

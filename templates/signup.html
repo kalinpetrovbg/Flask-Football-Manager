@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+    <div class="main-title">Sign Up</div>
+
+
+    {%- for category, message in get_flashed_messages(with_categories = true) %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {%- endfor %}
+
+
+    <div class="box">
+        <form method="POST" action="/signup.html">
+            <div class="field">
+                <div class="control">
+                    <label>Username</label>
+                    <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label>Password</label>
+                    <input class="input is-large" type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <button class="signup-button">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

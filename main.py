@@ -2,14 +2,17 @@ import random
 
 from flask import render_template, request, flash, redirect, url_for
 from sqlalchemy import func
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import app
 from app import db
+from fm.db.names import spanish_l_names, spanish_f_names
 from fm.db.players import Players
 from fm.db.teams import Teams
-from fm.db.names import spanish_l_names, spanish_f_names
+from fm.db.users import Users
 from fm.stadium.stadium import Stadium
 from fm.weather.weather import WEATHER_TYPES
+
 
 teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
          "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
@@ -35,9 +38,11 @@ def create():
 def cup():
     return render_template("cup.html")
 
+
 @app.route("/cup-champions.html")
 def cup_champions():
     return render_template("cup-champions.html")
+
 
 @app.route("/select-team.html")
 def select_team():
@@ -86,8 +91,6 @@ def build_team():
 
 @app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
 def add_players(team_id):
-
-
     if request.method == 'POST':
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
@@ -333,8 +336,7 @@ def opp_france():
     return render_template("opp-france.html", data=data)
 
 
-
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
     # Here we use a class of some kind to represent and validate our
     # client-side form data. For example, WTForms is a library that will
@@ -345,8 +347,6 @@ def login():
         # user should be an instance of your `User` class
         login_user(user)
 
-        flask.flash('Logged in successfully.')
-
         next = flask.request.args.get('next')
         # is_safe_url should check if the url is safe for redirects.
         # See http://flask.pocoo.org/snippets/62/ for an example.
@@ -355,6 +355,34 @@ def login():
 
         return flask.redirect(next or flask.url_for('index'))
     return flask.render_template('login.html', form=form)
+
+
+@app.route("/logout.html")
+def logout():
+    return render_template("logout.html")
+
+
+@app.route("/signup.html", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        existing = Users.query.filter_by(username=username).first()
+
+        if existing:
+            flash('There is already an user with this username.')
+            return redirect("/signup.html")  # Todo - to check it
+
+        user = Users(username=username, password=generate_password_hash(password, method="sha256"))
+
+        db.session.add(user)
+        db.session.commit()
+
+        return render_template("index.html")
+    else:
+        return render_template("signup.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
