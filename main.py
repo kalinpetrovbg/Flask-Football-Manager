@@ -1,6 +1,7 @@
 import random
 
 from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_user
 from sqlalchemy import func
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -12,7 +13,6 @@ from db.teams import Teams
 from db.users import Users
 from stadium.stadium import Stadium
 from weather.weather import WEATHER_TYPES
-
 
 teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
          "Lecce", "Man City", "Newcastle", "Paris", "Monaco", "Schalke", "Verona", "Lecce", "Borusia",
@@ -338,7 +338,6 @@ def opp_france():
 
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
-
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -348,10 +347,10 @@ def login():
 
         if not user or not check_password_hash(user.password, password):
             flash("Please check your login details and try again.")
-
             return render_template('login.html')
 
-        return redirect("/")    # Todo
+        login_user(user, remember=remember)
+        return redirect("/profile.html")  # Todo
 
     elif request.method == "GET":
         return render_template("/login.html")
@@ -372,7 +371,7 @@ def signup():
 
         if existing:
             flash('There is already an user with this username.')
-            return redirect("/signup.html")  # Todo - to check it
+            return redirect("/signup.html")
 
         user = Users(username=username, password=generate_password_hash(password, method="sha256"))
 

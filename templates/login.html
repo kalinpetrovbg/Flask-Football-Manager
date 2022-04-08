@@ -1,37 +1,39 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="main-content">
-    <div class="main-title">Login</div>
+    <div class="main-content">
+        <div class="main-title">Login</div>
 
-    {%- for category, message in get_flashed_messages(with_categories = true) %}
-    <div class="alert alert-danger">
-        {{ message }}
-    </div>
-    {%- endfor %}
+        {%- for category, message in get_flashed_messages(with_categories = true) %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {%- endfor %}
 
-    <div class="box">
-        <form method="POST" action="/login.html">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="">
+        <div class="box">
+            <form method="POST" action="/login.html">
+                <div class="field">
+                    <div class="control">
+                        <label>Username</label>
+                        <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="">
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                <div class="field">
+                    <div class="control">
+                        <label>Password</label>
+                        <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div>
-            <button class="signup-button">Login</button>
-        </form>
+                <div class="field">
+                    <label class="checkbox">
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+                </div>
+                <button class="signup-button">Login</button>
+            </form>
+        </div>
     </div>
-</div>
 
 {% endblock %}

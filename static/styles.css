@@ -90,8 +90,8 @@ hr {
 }
 
 .content label {
-    font-weight: 700;
-    margin-bottom: 0
+    margin-bottom: 0;
+    font-size: 14px;
 }
 
 .content input,.content textarea,.content select {
