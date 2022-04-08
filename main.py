@@ -338,23 +338,23 @@ def opp_france():
 
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
-    # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
-    # handle this for us, and we use a custom LoginForm to validate.
-    form = LoginForm()
-    if form.validate_on_submit():
-        # Login and validate the user.
-        # user should be an instance of your `User` class
-        login_user(user)
 
-        next = flask.request.args.get('next')
-        # is_safe_url should check if the url is safe for redirects.
-        # See http://flask.pocoo.org/snippets/62/ for an example.
-        if not is_safe_url(next):
-            return flask.abort(400)
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        remember = True if request.form.get('remember') else False
 
-        return flask.redirect(next or flask.url_for('index'))
-    return flask.render_template('login.html', form=form)
+        user = Users.query.filter_by(username=username).first()
+
+        if not user or not check_password_hash(user.password, password):
+            flash("Please check your login details and try again.")
+
+            return render_template('login.html')
+
+        return redirect("/")    # Todo
+
+    elif request.method == "GET":
+        return render_template("/login.html")
 
 
 @app.route("/logout.html")

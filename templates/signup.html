@@ -4,13 +4,11 @@
 <div class="main-content">
     <div class="main-title">Sign Up</div>
 
-
     {%- for category, message in get_flashed_messages(with_categories = true) %}
     <div class="alert alert-danger">
         {{ message }}
     </div>
     {%- endfor %}
-
 
     <div class="box">
         <form method="POST" action="/signup.html">
