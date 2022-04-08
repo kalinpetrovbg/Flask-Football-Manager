@@ -1,8 +1,8 @@
 from sqlalchemy import func
 
-from fm.app import db
-from fm.db.players import Players
-from fm.db.teams import teams
+from app import db
+from db.players import Players
+from db.teams import teams
 
 for team in teams:
     total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team.id).scalar()

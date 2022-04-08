@@ -1,8 +1,8 @@
 from sqlalchemy import func
 
-from fm.app import db
-from fm.db.players import Players
-from fm.db.teams import Teams
+from app import db
+from db.players import Players
+from db.teams import Teams
 
 
 def update_teams():

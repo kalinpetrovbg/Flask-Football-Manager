@@ -1,4 +1,4 @@
-from fm.app import db
+from app import db
 
 
 class Users(db.Model):

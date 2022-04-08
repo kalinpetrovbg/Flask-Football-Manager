@@ -6,12 +6,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import app
 from app import db
-from fm.db.names import spanish_l_names, spanish_f_names
-from fm.db.players import Players
-from fm.db.teams import Teams
-from fm.db.users import Users
-from fm.stadium.stadium import Stadium
-from fm.weather.weather import WEATHER_TYPES
+from db.names import spanish_l_names, spanish_f_names
+from db.players import Players
+from db.teams import Teams
+from db.users import Users
+from stadium.stadium import Stadium
+from weather.weather import WEATHER_TYPES
 
 
 teams = ["Juventus", "Arsenal", "Manchester", "Liverpool", "Bayern", "Milan", "Inter", "Barcelona", "Real Madrid",
