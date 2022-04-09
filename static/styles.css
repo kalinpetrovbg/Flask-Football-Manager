@@ -19,7 +19,6 @@ footer {
 
 h1,h2,h3,h4,h5,h6 {
     color: #377ba8;
-    font-family: serif;
     margin: 1rem 0
 }
 
@@ -218,9 +217,6 @@ article {
     width: 100%
 }
 
-.play-game {
-    margin: 0 auto;
-}
 
 main {
     display: flex;
@@ -381,6 +377,20 @@ main {
     cursor: pointer;
     margin: 0;
     padding: 0
+}
+
+.select-ex-team {
+    background: #ccc;
+    width: 70%;
+    cursor: pointer;
+    margin: 0 auto;
+    height: 23px;
+    box-shadow: 2px 3px #ccc;
+    border: 2px #888 solid;
+}
+
+.select-ex-team:hover {
+    box-shadow: 1px 1px #ccc;
 }
 
 .alert-danger {
@@ -692,4 +702,85 @@ main {
 
 .profile-text {
     padding: 10px;
+}
+
+.top-result {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+}
+
+.result {
+    font-size: 20px;
+    color: #58965d;
+    font-weight: 700;
+}
+
+.score {
+    color: #666;
+    font-size: 22px;
+}
+
+.kit-home {
+    height: 32px;
+    overflow: hidden;
+    border-bottom: 5px solid rgba(110,205,234,1);
+    padding: 1px;
+
+}
+
+.kit-away {
+    height: 32px;
+    overflow: hidden;
+    border-bottom: 5px solid rgba(209,94,94,1);
+    padding: 1px;
+}
+
+.game-weather {
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visitors-info {
+    padding: 20px;
+}
+
+
+.play-game {
+    padding: 20px;
+}
+
+.weather-icon {
+    margin-right: 10px;
+}
+
+
+.game-table {
+    width: 98%;
+    margin-left: 2%;
+}
+
+.event-container {
+    display: flex;
+    width: 100%;
+}
+
+.event-minute {
+    width: 8%;
+}
+
+.event-separator {
+    width: 8%;
+}
+
+.event-message {
+    width: 80%;
+}
+
+
+.final-result {
+    margin: 20px;
 }

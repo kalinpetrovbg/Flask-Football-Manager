@@ -35,10 +35,4 @@ class Storm(Weather):
         self.coefficient = 0.2
 
 
-WEATHER_TYPES = [
-    Cloudy(),
-    PartiallyCloudy(),
-    Rainy(),
-    Sunny(),
-    Storm()
-]
+WEATHER_TYPES = [Cloudy(), PartiallyCloudy(), Rainy(), Sunny(), Storm()]

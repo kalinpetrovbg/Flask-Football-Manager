@@ -1,36 +1,91 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    <div class="top">
+<div class="top">
 
-        <div class="sub-top">
-            <img width="30px" alt="weather" src="{{ url_for('static', filename='images/rainy.png') }}"/>
-            <div>
-                {{ weather }}
+    <div class="sub-top">
+        <div class="top-result">
+            <div class="kit-home">
+                <img alt="home-kit-icon" src="{{ url_for('static', filename='images/icons/home_kit.png') }}"/>
+            </div>
+            <div class="result">
+                {{ home.name }} <span class="score">{{ score[home.name] }} - {{ score[away.name] }}</span> {{ away.name }}
+            </div>
+            <div class="kit-away">
+                <img alt="away-kit-icon" src="{{ url_for('static', filename='images/icons/away_kit.png') }}"/>
+            </div>
+
+        </div>
+
+        <div class="visitors-info">
+
+            <div class="game-weather">
+
+            <div class="weather-icon">
+                {% if random_weather.type == "Rainy" %}
+                <div class="weather-icon"><img width="30px" alt="weather"
+                         src="{{ url_for('static', filename='images/weather/rainy.png') }}"/>
+                </div>
+
+                {% elif random_weather.type == "Cloudy" %}
+                <div class="weather-icon"><img width="30px" alt="weather"
+                         src="{{ url_for('static', filename='images/weather/cloudy.png') }}"/>
+                </div>
+
+                {% elif random_weather.type == "Sunny" %}
+                <div class="weather-icon"><img width="30px" alt="weather"
+                         src="{{ url_for('static', filename='images/weather/sunny.png') }}"/>
+                </div>
+
+                {% elif random_weather.type == "Storm" %}
+                <div class="weather-icon"><img width="30px" alt="weather"
+                         src="{{ url_for('static', filename='images/weather/storm.png') }}"/>
+                </div>
+
+                {% elif random_weather.type == "PartiallyCloudy" %}
+                <div class="weather-icon"><img width="30px" alt="weather"
+                         src="{{ url_for('static', filename='images/weather/partiallycloudy.png') }}"/>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="weather-info">
+            {{ weather }}
             </div>
         </div>
 
-        <div class="center-content">
-            <div class="play-game">
-
-                <h3>
-                    {{ home.name }} VS {{ away.name }}
-                    {{ score[home.name] }} : {{ score[away.name] }}
-                </h3>
-
-                <table>
-                    {% for min, team in scorers.items() %}
-                        <tr>
-                            <td>
-                                {{ min }} min, {{ team }} scores a GOAL!
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-
-
-            </div>
         </div>
     </div>
+
+    <div class="game-content">
+        <div class="play-game">
+
+
+            <table class="game-table">
+                {% for min, team in scorers.items() %}
+                    <tr class="event-container">
+                        <td class="event-minute">
+                                    {{ min }}'
+                        </td>
+                        <td class="event-separator">
+
+                        </td>
+
+                        <td class="event-message">
+                            {{ team }} scores a GOAL!
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        <hr>
+        <div class="final-result">
+            The game has finished and the score is {{ score[home.name] }} - {{ score[away.name]  }}
+        </div>
+
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -221,12 +221,16 @@ def lineup():
 @app.route("/play.html")
 def play():
     user = current_user
-    user_team = Teams.query.filter_by(id=user.team_id).first()
+    all_teams = len(Teams.query.all())
+
+    if user.team_id:
+        user_team = Teams.query.filter_by(id=user.team_id).first()
+    else:
+        user_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
     if session['opp_id']:
         opp_team = Teams.query.filter_by(id=session['opp_id']).first()
     else:
-        all_teams = len(Teams.query.all())
         opp_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
     home_team = HomeTeam(user_team.name, 23)
@@ -238,8 +242,10 @@ def play():
     stadium.generate_stadium()
 
     random_weather =  random.choice(WEATHER_TYPES)
+
     visitors = stadium.generate_visitors(weather=random_weather)
     weather = stadium.print_message(weather=random_weather)
+
 
     scorers = defaultdict()
     time = 0
@@ -264,7 +270,7 @@ def play():
 
     return render_template("play.html", home=home_team, away=away_team, score=score,
                            scorers=scorers, stadium=stadium, visitors=visitors, weather=weather,
-                           user_team=user_team)
+                           user_team=user_team, random_weather=random_weather)
 
 
 @app.route("/quick-game.html")
