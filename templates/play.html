@@ -1,35 +1,36 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="top">
+    <div class="top">
 
-    <div class="sub-top">
-        {{ content }}
-    </div>
-
-    <div class="center-content">
-        <div class="cnt">
-            <img width="30px" alt="weather" src="{{url_for('static', filename='images/rainy.png')}}"/>
+        <div class="sub-top">
+            <img width="30px" alt="weather" src="{{ url_for('static', filename='images/rainy.png') }}"/>
             <div>
-                {{ welcome }}
+                {{ weather }}
             </div>
+        </div>
 
-            <table>
-                {% for min, team in scorers.items() %}
-                <tr>
-                    <td>
-                        {{ min }} min, {{ team }} scores a GOAL!
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
+        <div class="center-content">
+            <div class="play-game">
 
-            <h3>
-                {{ home.name }} VS {{ away.name }}
-                {{ score[home.name] }} : {{ score[away.name] }}
-            </h3>
+                <h3>
+                    {{ home.name }} VS {{ away.name }}
+                    {{ score[home.name] }} : {{ score[away.name] }}
+                </h3>
+
+                <table>
+                    {% for min, team in scorers.items() %}
+                        <tr>
+                            <td>
+                                {{ min }} min, {{ team }} scores a GOAL!
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+
+            </div>
         </div>
     </div>
-</div>
 
 {% endblock %}

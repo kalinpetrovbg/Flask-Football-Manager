@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="main-content">
-    <div class="main-title">Profile</div>
+    <div class="main-content">
+        <div class="main-title">Profile</div>
+        <div class="box">
+            <div class="profile-title">Hi, {{ user.username }}!</div>
+            <div class="profile-text">
+                Your team: <a href="/team/{{ user_team.id }}.html">{{ user_team }}</a>
+            </div>
+            <div class="profile-text">
+                {% if not opp_team %}
+                    Your opponent: <a href="/choose-opponent.html">{{ opp_team }}</a>
+                {% else %}
+                    Your opponent: <a href="/team/{{ opp_team.id }}.html">{{ opp_team }}</a>
+                {% endif %}
+            </div>
+        </div>
 
-{% if current_user.is_authenticated %}
-  Hi {{ name }}!
-{% endif %}
-
-
-</div>
+    </div>
 
 {% endblock %}

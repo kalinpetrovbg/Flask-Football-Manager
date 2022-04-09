@@ -3,7 +3,7 @@
 
 
 <div class="main-content">
-    <img width="100%" alt="logos" src="{{url_for('static', filename='images/logos2.png')}}"/>
+    <img width="100%" alt="logos" src="{{ url_for('static', filename='images/logos2.png') }}"/>
 
     <div class="main-title">Select your team</div>
     <table class="existing">
@@ -15,12 +15,12 @@
             <th>ATT</th>
             <th>MID</th>
             <th>DEF</th>
-            <th>PLAYERS</th>
+            <th>SELECT</th>
         </tr>
         </thead>
         {% for team in data.values() %}
-        <tbody>
-        <tr class="ex-tr">
+            <tbody>
+            <tr class="ex-tr">
 
             <td class="ex-logo">
                 <img src="/static/images/clubs/{{ team['logo'] }}.png" width="50px">
@@ -33,9 +33,19 @@
             <td class="ex-stats">{{ team['att'] }}</td>
             <td class="ex-stats">{{ team['mid'] }}</td>
             <td class="ex-stats">{{ team['def'] }}</td>
-            <td class="ex-stats">{{ team['count'] }}</td>
+            <td>
 
-            {% endfor %}
+                <form action="{{ request.path }}" method="POST">
+                    <div class="hidden">
+                        <label>Team ID</label><br>
+                        <input type="text" name="team_id" placeholder="{{ team['id'] }}"
+                               value="{{ team['id'] }}"/><br>
+                    </div>
+                    <button>Select team</button>
+                </form>
+            </td>
+
+        {% endfor %}
         </tr>
         </tbody>
     </table>
