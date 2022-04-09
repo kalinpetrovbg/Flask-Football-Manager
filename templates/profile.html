@@ -4,6 +4,11 @@
 <div class="main-content">
     <div class="main-title">Profile</div>
 
+{% if current_user.is_authenticated %}
+  Hi {{ name }}!
+{% endif %}
+
+
 </div>
 
 {% endblock %}
