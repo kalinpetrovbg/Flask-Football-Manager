@@ -1,5 +1,5 @@
-from fm.app import db
-from fm.db.teams import Teams
+from app import db
+from db.teams import Teams
 
 
 class Players(db.Model):

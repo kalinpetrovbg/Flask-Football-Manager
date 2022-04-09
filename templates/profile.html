@@ -2,9 +2,9 @@
 {% block content %}
 
     <div class="main-content">
-
-        <div class="main-title">Build your Strategy and Lineup</div>
+        <div class="main-title">Profile</div>
         <div class="box">
+            <div class="profile-title">Hi, {{ user.username }}!</div>
             <div class="profile-text">
                 Your team: <a href="/team/{{ user_team.id }}.html">{{ user_team }}</a>
             </div>
@@ -15,16 +15,8 @@
                     Your opponent: <a href="/team/{{ opp_team.id }}.html">{{ opp_team }}</a>
                 {% endif %}
             </div>
-
-                    <a href="/play.html"><button>Play</button></a>
         </div>
 
-
-
-
     </div>
-
-
-
 
 {% endblock %}

@@ -3,8 +3,8 @@
 
 <head>
     {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>{% block title %}{% endblock %} - Manager</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <title>{% block title %}{% endblock %} - Manager</title>
     {% endblock %}
 </head>
 
@@ -14,15 +14,38 @@
     <div class="top-panel">
         <div class="logo">
             <a href="/">
-                <img width="165px" alt="logo" src="{{url_for('static', filename='images/logo.png')}}"/>
+                <img width="165px" alt="logo" src="{{ url_for('static', filename='images/logo.png') }}"/>
             </a>
         </div>
 
         <div class="top-navigation">
             <div class="top-links">
-                <div class="my-menu"><a href="/login.html">Login</a></div>
-                <div class="my-menu"><a href="/signup.html">Signup</a></div>
+                {% if not current_user.is_authenticated %}
+                    <div class="my-menu"><a href="/login.html">Login</a></div>
+                    <div class="my-menu"><a href="/signup.html">Signup</a></div>
+                {% endif %}
+
+                {% if current_user.is_authenticated %}
+                    <div class="my-menu-img">
+                        <img alt="head-icon" width="15px"
+                             src="{{ url_for('static', filename='images/icons/head1.png') }}"/>
+                    </div>
+                    <div class="my-menu"><a href="/profile.html">{{ current_user.username }}</a></div>
+                    <div class="my-menu"><a href="/logout.html">Logout</a></div>
+                {% endif %}
+
             </div>
+
+            {% if user_team %}
+            <div class="your-team">
+                Your team: <a href="/team/{{ user_team.id }}.html">{{ user_team }}</a>
+            </div>
+            {% else %}
+            <div class="your-team">
+                You don't have a team yet
+            </div>
+            {% endif %}
+
         </div>
     </div>
 
@@ -45,14 +68,12 @@
                 <li><a href="/choose-opponent.html">Choose Opponent</a></li>
                 <li><a href="/lineup.html">Set Lineup</a></li>
                 <li><a href="/play.html">Play</a></li>
-                <li><a href="/">Settings</a></li>
             </ul>
         </div>
 
         <div class="flex-nav">
             <div class="nav-title">Play Cup</div>
             <ul>
-                <li><a href="/">Select a Team</a></li>
                 <li><a href="/">Select Cup</a></li>
                 <li><a href="/">Set Lineup</a></li>
                 <li><a href="/">Play</a></li>
@@ -72,7 +93,7 @@
 
 <footer>
     {% block footer %}
-    &copy; Copyright 2022 by Kalin Petrov.
+        &copy; Copyright 2022 by Kalin Petrov.
     {% endblock %}
 </footer>
 </body>
