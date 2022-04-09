@@ -1,6 +1,6 @@
 import random
-
 from collections import defaultdict
+
 from flask import render_template, request, flash, redirect, url_for, session
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy import func
@@ -8,13 +8,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import app, login_manager
 from app import db
+from db.game import HomeTeam, AwayTeam
 from db.names import spanish_l_names, spanish_f_names
 from db.players import Players
 from db.teams import Teams
 from db.users import Users
-from db.game import HomeTeam, AwayTeam
 from stadium.stadium import Stadium
-from weather.weather import WEATHER_TYPES
+from weather.weather import Weather
 
 
 @login_manager.user_loader
@@ -223,6 +223,13 @@ def play():
     user = current_user
     all_teams = len(Teams.query.all())
 
+    matchday = defaultdict()
+
+    matchday['weather'] = Weather.generate_weather()
+    matchday['stadium'] = Stadium.generate_stadium()
+    matchday['visitors'] = Stadium.generate_visitors(weather=matchday['weather'])
+    matchday['message'] = Stadium.generate_message(weather=matchday['weather'])
+
     if user.team_id:
         user_team = Teams.query.filter_by(id=user.team_id).first()
     else:
@@ -233,21 +240,14 @@ def play():
     else:
         opp_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
-    home_team = HomeTeam(user_team.name, 23)
-    away_team = AwayTeam(opp_team.name, 12)
+    game = defaultdict()
 
-    score = {home_team.name: 0, away_team.name: 0}
+    game['home_team'] = HomeTeam(user_team.name, 23)
+    game['away_team'] = AwayTeam(opp_team.name, 12)
+    game['score'] = [0, 0]
 
-    stadium = Stadium()
-    stadium.generate_stadium()
+    matchdata = defaultdict()
 
-    random_weather =  random.choice(WEATHER_TYPES)
-
-    visitors = stadium.generate_visitors(weather=random_weather)
-    weather = stadium.print_message(weather=random_weather)
-
-
-    scorers = defaultdict()
     time = 0
     while time <= 90:
         minute = random.randint(1, 15)
@@ -260,17 +260,21 @@ def play():
         if goal == 0:
             continue
 
-        random_side = random.choice([home_team.name, away_team.name])
+        team = random.choice(["Home", "Away"])
+        event = random.choice(['Goal', 'Miss'])
 
-        scorers[time] = random_side
+        if event == "Goal" and team == "Home":
+            game['score'][0] += 1
+            team = game['home_team'].name
+        elif event == "Goal" and team == "Away":
+            game['score'][1] += 1
+            team = game['away_team'].name
 
-        score[random_side] += goal
+        matchdata[time] = [team, event]
 
     session['opp_id'] = ""
 
-    return render_template("play.html", home=home_team, away=away_team, score=score,
-                           scorers=scorers, stadium=stadium, visitors=visitors, weather=weather,
-                           user_team=user_team, random_weather=random_weather)
+    return render_template("play.html", game=game, matchdata=matchdata, matchday=matchday)
 
 
 @app.route("/quick-game.html")
