@@ -1,3 +1,4 @@
+"""Build the stadium from a dict with random real stadiums."""
 import random
 
 STADIUM_NAMES = {
@@ -30,36 +31,61 @@ STADIUM_NAMES = {
     "Parc Olympique Lyonnais": 59186,
     "Anfield": 54074,
     "Amsterdam Arena": 53748,
-    "St. James Park": 52339
+    "St. James Park": 52339,
 }
 
 
 class Stadium:
-    def __init__(self):
-        self.name = None
-        self.capacity = None
-        self.spectators = 0
+    """Build the stadium properies."""
+
+    name = None
+    spectators = 0
+    capacity = None
 
     def __str__(self):
-        return f"Stadium \"{self.name}\" with {self.capacity} capacity."
+        return f'Stadium "{Stadium.name}" with {self.capacity} capacity.'
 
-    def generate_stadium(self):
-        all_stadiums_as_list = list(STADIUM_NAMES.items())
-        generated_stadium = random.choice(all_stadiums_as_list)
-        self.name, self.capacity = generated_stadium
+    @staticmethod
+    def generate_stadium():
+        """Create a random stadium class."""
 
-    def generate_visitors(self, weather):
-        self.spectators = self.capacity * weather.coefficient
+        generated_stadium = random.choice(list(STADIUM_NAMES.items()))
+        Stadium.name, Stadium.capacity = generated_stadium
+        return Stadium
 
-    def print_message(self, weather):
+    @staticmethod
+    def generate_visitors(weather):
+        """Generate the number of visitors based on the weather conditions."""
+
+        Stadium.spectators = Stadium.capacity * weather.coefficient
+        return Stadium.spectators
+
+    @staticmethod
+    def generate_message(weather):
+        """Generate different intro message based on the weather conditions."""
+
         if weather.type == "Rainy":
-            return f"It had rained all day, but {int(self.spectators)} hardy fans still made it out to \"{self.name}\"."
+            return (
+                f"It had rained all day, but {int(Stadium.spectators)} hardy fans still made it out "
+                f'to "{Stadium.name}".'
+            )
         elif weather.type == "Sunny":
-            return f"It was an exceptionally hot day for the crowd of {int(self.spectators)} that came out to \"{self.name}\""
+            return (
+                f"It was an exceptionally hot day for the crowd of {int(Stadium.spectators)} that came out"
+                f' to "{Stadium.name}".'
+            )
         elif weather.type == "PartiallyCloudy":
-            return f"{int(self.spectators)} spectators arrived at \"{self.name}\", where weather conditions were pretty" \
-                   f" good for football."
+            return (
+                f'{int(Stadium.spectators)} spectators arrived at "{Stadium.name}",'
+                f"where weather conditions were pretty good for football."
+            )
         elif weather.type == "Cloudy":
-            return f"Clouds darkened the skies at \"{self.name}\" as {int(self.spectators)} spectators turned up for the match."
+            return (
+                f'Clouds darkened the skies at "{Stadium.name}" as {int(Stadium.spectators)} '
+                f"spectators turned up for the match."
+            )
         elif weather.type == "Storm":
-            return f"The storm has almost emptied \"{self.name}\" but there are still {int(self.spectators)} enthusiasts today."
+            return (
+                f'The storm has almost emptied "{Stadium.name}" but there are still {int(Stadium.spectators)} '
+                f"enthusiasts today."
+            )

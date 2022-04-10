@@ -1,3 +1,4 @@
+"""File that should be run to update newly created teams."""
 from sqlalchemy import func
 
 from app import db
@@ -6,18 +7,30 @@ from db.teams import Teams
 
 
 def update_teams():
-    """Updates team's statistics."""
+    """Updates team's statistics once team has been created."""
 
     teams = Teams.query.all()
 
     for team in teams:
 
         try:
-            total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team.id).scalar()
+            total_attack = (
+                db.session.query(func.avg(Players.attack))
+                .filter(Players.team_id == team.id)
+                .scalar()
+            )
             team.attack = round(total_attack)
-            total_middle = db.session.query(func.avg(Players.middle)).filter(Players.team_id == team.id).scalar()
+            total_middle = (
+                db.session.query(func.avg(Players.middle))
+                .filter(Players.team_id == team.id)
+                .scalar()
+            )
             team.middle = round(total_middle)
-            total_defence = db.session.query(func.avg(Players.defence)).filter(Players.team_id == team.id).scalar()
+            total_defence = (
+                db.session.query(func.avg(Players.defence))
+                .filter(Players.team_id == team.id)
+                .scalar()
+            )
             team.defence = round(total_defence)
             team_overall = round((team.attack + team.middle + team.defence) / 3)
             team.overall = team_overall
@@ -33,10 +46,7 @@ def update_teams():
 
 def update_players():
     """Updates player's statistics."""
-
-    players = Players.query.all()
     pass
-
 
 
 update_teams()

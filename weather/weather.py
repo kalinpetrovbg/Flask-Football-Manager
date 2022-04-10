@@ -1,8 +1,11 @@
+import random
 from abc import ABC
 
 
 class Weather(ABC):
-    pass
+    @staticmethod
+    def generate_weather():
+        return random.choice(weathers)
 
 
 class Cloudy(Weather):
@@ -35,10 +38,4 @@ class Storm(Weather):
         self.coefficient = 0.2
 
 
-WEATHER_TYPES = [
-    Cloudy(),
-    PartiallyCloudy(),
-    Rainy(),
-    Sunny(),
-    Storm()
-]
+weathers = [Cloudy(), PartiallyCloudy(), Rainy(), Sunny(), Storm()]
