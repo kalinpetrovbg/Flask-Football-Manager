@@ -1,3 +1,5 @@
+"""Build general Flask settings."""
+
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
@@ -12,6 +14,3 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-
-

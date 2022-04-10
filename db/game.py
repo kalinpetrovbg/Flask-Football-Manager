@@ -1,4 +1,9 @@
+"""Classes for the home and away teams in a game."""
+
+
 class HomeTeam:
+    """Build the home team properies."""
+
     def __init__(self, name, power):
         self.name = name
         self.power = power
@@ -8,6 +13,8 @@ class HomeTeam:
 
 
 class AwayTeam:
+    """Build the away team properies."""
+
     def __init__(self, name, power):
         self.name = name
         self.power = power

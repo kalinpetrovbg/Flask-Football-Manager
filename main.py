@@ -1,3 +1,5 @@
+"""Main file rendering all website pages."""
+
 import random
 from collections import defaultdict
 
@@ -13,38 +15,40 @@ from db.names import spanish_l_names, spanish_f_names
 from db.players import Players
 from db.teams import Teams
 from db.users import Users
+from misc.oponents import teams_data
 from stadium.stadium import Stadium
 from weather.weather import Weather
 
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Flask-login user loader."""
+    # Todo - place it somewhere else
+
     return Users.query.get(int(user_id))
 
 
 @app.route("/")
 def index():
+    """Renders Home page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("index.html", user_team=user_team)
 
 
-@app.route("/settings")
+@app.route("/settings.html")
 def settings():
+    """Renders Settings page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("settings.html", user_team=user_team)
 
 
-@app.route("/create")
-def create():
-    user = current_user
-    user_team = Teams.query.filter_by(id=user.team_id).first()
-    return "Create a New Team"
-
-
 @app.route("/cup.html")
 def cup():
+    """Renders Play Cup page"""
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("cup.html", user_team=user_team)
@@ -52,6 +56,8 @@ def cup():
 
 @app.route("/cup-champions.html")
 def cup_champions():
+    """Renders Champions Cup page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("cup-champions.html", user_team=user_team)
@@ -59,13 +65,17 @@ def cup_champions():
 
 @app.route("/select-team.html")
 def select_team():
+    """Renders Select a Team page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("select-team.html", user_team=user_team)
 
 
 @app.route("/team/<team_id>.html")
-def team(team_id):
+def team_page(team_id):
+    """Renders a page for each team."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     team = Teams.query.filter_by(id=team_id).first()
@@ -74,7 +84,9 @@ def team(team_id):
 
 
 @app.route("/existing.html", methods=["POST", "GET"])
-def existing():
+def existing_teams():
+    """Renders Select your team page."""
+
     if request.method == "POST":
         user = current_user
         user_team = request.form.get("team_id")
@@ -88,23 +100,16 @@ def existing():
     else:
         user = current_user
         user_team = Teams.query.filter_by(id=user.team_id).first()
-        all_teams = Teams.query.all()
+        teams = Teams.query.all()
+        data = teams_data(teams)
 
-        data = {}
-        for team in all_teams:
-            players = Players.query.filter_by(team_id=team.id).all()
-            stats = {'name': team.name, 'logo': team.logo,
-                     'league': team.league, 'id': team.id,
-                     'ovr': team.overall, 'att': team.attack,
-                     'mid': team.middle, 'def': team.defence,
-                     'count': len(players),
-                     }
-            data[team] = stats
         return render_template("existing.html", data=data, user_team=user_team)
 
 
 @app.route("/build-team.html", methods=['GET', 'POST'])
 def build_team():
+    """Renders build your team page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     if request.method == 'POST':
@@ -123,15 +128,20 @@ def build_team():
 
 @app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
 def add_players(team_id):
+    """Renders the page for adding new players to a team."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
+
     if request.method == 'POST':
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
-
+        player = ""
         position = request.form['position']
+
         if not position:
             flash('Please enter all the fields.', 'error')
+            
         else:
             if position == "GK":
                 player = Players(first_name=random.choice(spanish_f_names),
@@ -193,7 +203,7 @@ def add_players(team_id):
             flash('Your player has been created.')
             players.append(player)
 
-            return render_template("/add-players.html", team_id=team_id, team=team, players=players,
+            return render_template("add-players.html", team_id=team_id, team=team, players=players,
                                    user_team=user_team)
     else:
         team = Teams.query.filter_by(id=team_id).first()
@@ -204,6 +214,8 @@ def add_players(team_id):
 
 @app.route("/choose-opponent.html")
 def choose_opponent():
+    """Renders Choose Opponent page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("choose-opponent.html", user_team=user_team)
@@ -211,6 +223,8 @@ def choose_opponent():
 
 @app.route("/lineup.html")
 def lineup():
+    """Renders Set Lineup page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
@@ -220,6 +234,8 @@ def lineup():
 
 @app.route("/play.html")
 def play():
+    """Renders Play page inside Quick Game menu."""
+
     user = current_user
     all_teams = len(Teams.query.all())
 
@@ -279,6 +295,8 @@ def play():
 
 @app.route("/quick-game.html")
 def quick_game():
+    """Renders Quick Game page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("quick-game.html", user_team=user_team)
@@ -286,6 +304,8 @@ def quick_game():
 
 @app.route("/multiplayer.html")
 def multiplayer():
+    """Renders Multiplayer page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     return render_template("multiplayer.html", user_team=user_team)
@@ -293,6 +313,8 @@ def multiplayer():
 
 @app.route("/opp-england.html", methods=["POST", "GET"])
 def opp_england():
+    """Renders English opponents page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
@@ -303,101 +325,64 @@ def opp_england():
         return redirect("/lineup.html")
 
     else:
-        user = current_user
-        user_team = Teams.query.filter_by(id=user.team_id).first()
         teams = Teams.query.filter_by(league="English Premier League").all()
+        data = teams_data(teams)
 
-        data = {}
-        for team in teams:
-            players = Players.query.filter_by(team_id=team.id).all()
-            stats = {'name': team.name, 'logo': team.logo,
-                     'league': team.league, 'id': team.id,
-                     'ovr': team.overall, 'att': team.attack,
-                     'mid': team.middle, 'def': team.defence,
-                     'count': len(players),
-                     }
-            data[team] = stats
         return render_template("opp-england.html", data=data, user_team=user_team)
 
 
 @app.route("/opp-spain.html")
 def opp_spain():
+    """Renders Spanish opponents page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     teams = Teams.query.filter_by(league="Spain Primera Division").all()
+    data = teams_data(teams)
 
-    data = {}
-    for team in teams:
-        players = Players.query.filter_by(team_id=team.id).all()
-        stats = {'name': team.name, 'logo': team.logo,
-                 'league': team.league, 'id': team.id,
-                 'ovr': team.overall, 'att': team.attack,
-                 'mid': team.middle, 'def': team.defence,
-                 'count': len(players),
-                 }
-        data[team] = stats
     return render_template("opp-spain.html", data=data, user_team=user_team)
 
 
 @app.route("/opp-italy.html")
 def opp_italy():
+    """Renders Italian opponents page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     teams = Teams.query.filter_by(league="Italian Serie A").all()
+    data = teams_data(teams)
 
-    data = {}
-    for team in teams:
-        players = Players.query.filter_by(team_id=team.id).all()
-        stats = {'name': team.name, 'logo': team.logo,
-                 'league': team.league, 'id': team.id,
-                 'ovr': team.overall, 'att': team.attack,
-                 'mid': team.middle, 'def': team.defence,
-                 'count': len(players),
-                 }
-        data[team] = stats
     return render_template("opp-italy.html", data=data, user_team=user_team)
 
 
 @app.route("/opp-germany.html")
 def opp_germany():
+    """Renders German opponents page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     teams = Teams.query.filter_by(league="German Bundesliga").all()
+    data = teams_data(teams)
 
-    data = {}
-    for team in teams:
-        players = Players.query.filter_by(team_id=team.id).all()
-        stats = {'name': team.name, 'logo': team.logo,
-                 'league': team.league, 'id': team.id,
-                 'ovr': team.overall, 'att': team.attack,
-                 'mid': team.middle, 'def': team.defence,
-                 'count': len(players),
-                 }
-        data[team] = stats
     return render_template("opp-germany.html", data=data, user_team=user_team)
 
 
 @app.route("/opp-france.html")
 def opp_france():
+    """Renders French opponents page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     teams = Teams.query.filter_by(league="French Ligue 1").all()
+    data = teams_data(teams)
 
-    data = {}
-    for team in teams:
-        players = Players.query.filter_by(team_id=team.id).all()
-        stats = {'name': team.name, 'logo': team.logo,
-                 'league': team.league, 'id': team.id,
-                 'ovr': team.overall, 'att': team.attack,
-                 'mid': team.middle, 'def': team.defence,
-                 'count': len(players),
-                 }
-        data[team] = stats
     return render_template("opp-france.html", data=data, user_team=user_team)
 
 
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
+    """Renders Login page."""
+
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -413,25 +398,29 @@ def login():
         return redirect("/profile.html")  # Todo
 
     elif request.method == "GET":
-        return render_template("/login.html")
+        return render_template("login.html")
 
 
 @app.route("/logout.html")
 @login_required
 def logout():
+    """Renders Logout page."""
+
     logout_user()
     return redirect("/")
 
 
 @app.route("/signup.html", methods=["GET", "POST"])
 def signup():
+    """Renders Signup page."""
+
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
 
-        existing = Users.query.filter_by(username=username).first()
+        existing_user = Users.query.filter_by(username=username).first()
 
-        if existing:
+        if existing_user:
             flash('There is already an user with this username.')
             return redirect("/signup.html")
 
@@ -448,6 +437,8 @@ def signup():
 @app.route("/profile.html")
 @login_required
 def profile():
+    """Renders Profile page."""
+
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
     opp_team = Teams.query.filter_by(id=session['opp_id']).first()

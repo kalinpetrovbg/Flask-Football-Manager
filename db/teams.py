@@ -1,7 +1,10 @@
+"""Generate teams database table."""
 from app import db
 
 
 class Teams(db.Model):
+    """Build teams datatable model."""
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
     logo = db.Column(db.Text, default="no-logo")

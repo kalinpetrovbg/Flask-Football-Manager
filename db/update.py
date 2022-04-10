@@ -1,3 +1,4 @@
+"""File that should be run to update newly created teams."""
 from sqlalchemy import func
 
 from app import db
@@ -6,7 +7,7 @@ from db.teams import Teams
 
 
 def update_teams():
-    """Updates team's statistics."""
+    """Updates team's statistics once team has been created."""
 
     teams = Teams.query.all()
 
@@ -33,10 +34,7 @@ def update_teams():
 
 def update_players():
     """Updates player's statistics."""
-
-    players = Players.query.all()
     pass
-
 
 
 update_teams()

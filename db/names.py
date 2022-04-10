@@ -1,3 +1,5 @@
+"""Data with all player names. Used for generating newly created players."""
+
 spanish_f_names = [
     "Raúl", "Rafael", "Saturnino", "Santiago", "Hernando", "Vito", "Narciso", "Nico", "Joel", "Juan Manuel", "Edelmiro",
     "Bartolomé", "Amando", "Valerio", "Miguelito", "Leopoldo", "Jerónimo", "Demetrio", "Orlando", "Lucas", "Roque",
