@@ -3,7 +3,6 @@ from abc import ABC
 
 
 class Weather(ABC):
-
     @staticmethod
     def generate_weather():
         return random.choice(weathers)

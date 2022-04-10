@@ -31,7 +31,7 @@ STADIUM_NAMES = {
     "Parc Olympique Lyonnais": 59186,
     "Anfield": 54074,
     "Amsterdam Arena": 53748,
-    "St. James Park": 52339
+    "St. James Park": 52339,
 }
 
 
@@ -43,7 +43,7 @@ class Stadium:
     capacity = None
 
     def __str__(self):
-        return f"Stadium \"{Stadium.name}\" with {self.capacity} capacity."
+        return f'Stadium "{Stadium.name}" with {self.capacity} capacity.'
 
     @staticmethod
     def generate_stadium():
@@ -65,17 +65,27 @@ class Stadium:
         """Generate different intro message based on the weather conditions."""
 
         if weather.type == "Rainy":
-            return f"It had rained all day, but {int(Stadium.spectators)} hardy fans still made it out " \
-                   f"to \"{Stadium.name}\"."
+            return (
+                f"It had rained all day, but {int(Stadium.spectators)} hardy fans still made it out "
+                f'to "{Stadium.name}".'
+            )
         elif weather.type == "Sunny":
-            return f"It was an exceptionally hot day for the crowd of {int(Stadium.spectators)} that came out" \
-                   f" to \"{Stadium.name}\"."
+            return (
+                f"It was an exceptionally hot day for the crowd of {int(Stadium.spectators)} that came out"
+                f' to "{Stadium.name}".'
+            )
         elif weather.type == "PartiallyCloudy":
-            return f"{int(Stadium.spectators)} spectators arrived at \"{Stadium.name}\"," \
-                   f"where weather conditions were pretty good for football."
+            return (
+                f'{int(Stadium.spectators)} spectators arrived at "{Stadium.name}",'
+                f"where weather conditions were pretty good for football."
+            )
         elif weather.type == "Cloudy":
-            return f"Clouds darkened the skies at \"{Stadium.name}\" as {int(Stadium.spectators)} " \
-                   f"spectators turned up for the match."
+            return (
+                f'Clouds darkened the skies at "{Stadium.name}" as {int(Stadium.spectators)} '
+                f"spectators turned up for the match."
+            )
         elif weather.type == "Storm":
-            return f"The storm has almost emptied \"{Stadium.name}\" but there are still {int(Stadium.spectators)} " \
-                   f"enthusiasts today."
+            return (
+                f'The storm has almost emptied "{Stadium.name}" but there are still {int(Stadium.spectators)} '
+                f"enthusiasts today."
+            )

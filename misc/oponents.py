@@ -12,12 +12,17 @@ def teams_data(teams):
 
     for team in teams:
         players = Players.query.filter_by(team_id=team.id).all()
-        stats = {'name': team.name, 'logo': team.logo,
-                 'league': team.league, 'id': team.id,
-                 'ovr': team.overall, 'att': team.attack,
-                 'mid': team.middle, 'def': team.defence,
-                 'count': len(players),
-                 }
+        stats = {
+            "name": team.name,
+            "logo": team.logo,
+            "league": team.league,
+            "id": team.id,
+            "ovr": team.overall,
+            "att": team.attack,
+            "mid": team.middle,
+            "def": team.defence,
+            "count": len(players),
+        }
         data[team] = stats
 
     return data

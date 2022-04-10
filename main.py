@@ -106,92 +106,108 @@ def existing_teams():
         return render_template("existing.html", data=data, user_team=user_team)
 
 
-@app.route("/build-team.html", methods=['GET', 'POST'])
+@app.route("/build-team.html", methods=["GET", "POST"])
 def build_team():
     """Renders build your team page."""
 
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
-    if request.method == 'POST':
-        if not request.form['name'] or not request.form['league']:
-            flash('Please enter all the fields.', 'error')
+    if request.method == "POST":
+        if not request.form["name"] or not request.form["league"]:
+            flash("Please enter all the fields.", "error")
         else:
-            team = Teams(name=request.form['name'], league=request.form['league'])
+            team = Teams(name=request.form["name"], league=request.form["league"])
             db.session.add(team)
             db.session.commit()
 
             team_id = team.id
-            return redirect(url_for('add_players', team_id=team_id))
+            return redirect(url_for("add_players", team_id=team_id))
 
     return render_template("build-team.html", user_team=user_team)
 
 
-@app.route("/add-players/<team_id>.html", methods=['GET', 'POST'])
+@app.route("/add-players/<team_id>.html", methods=["GET", "POST"])
 def add_players(team_id):
     """Renders the page for adding new players to a team."""
 
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
-    if request.method == 'POST':
+    if request.method == "POST":
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
         player = ""
-        position = request.form['position']
+        position = request.form["position"]
 
         if not position:
-            flash('Please enter all the fields.', 'error')
-            
+            flash("Please enter all the fields.", "error")
+
         else:
             if position == "GK":
-                player = Players(first_name=random.choice(spanish_f_names),
-                                 last_name=random.choice(spanish_l_names),
-                                 position="GK",
-                                 team_id=team_id,
-                                 attack=random.randint(1, 5),
-                                 middle=random.randint(1, 10),
-                                 defence=random.randint(60, 85),
-                                 )
+                player = Players(
+                    first_name=random.choice(spanish_f_names),
+                    last_name=random.choice(spanish_l_names),
+                    position="GK",
+                    team_id=team_id,
+                    attack=random.randint(1, 5),
+                    middle=random.randint(1, 10),
+                    defence=random.randint(60, 85),
+                )
             elif position == "DEF":
-                player = Players(first_name=random.choice(spanish_f_names),
-                                 last_name=random.choice(spanish_l_names),
-                                 position="DEF",
-                                 team_id=team_id,
-                                 attack=random.randint(10, 30),
-                                 middle=random.randint(20, 40),
-                                 defence=random.randint(60, 85),
-                                 )
+                player = Players(
+                    first_name=random.choice(spanish_f_names),
+                    last_name=random.choice(spanish_l_names),
+                    position="DEF",
+                    team_id=team_id,
+                    attack=random.randint(10, 30),
+                    middle=random.randint(20, 40),
+                    defence=random.randint(60, 85),
+                )
 
             elif position == "MID":
-                player = Players(first_name=random.choice(spanish_f_names),
-                                 last_name=random.choice(spanish_l_names),
-                                 position="MID",
-                                 team_id=team_id,
-                                 attack=random.randint(15, 35),
-                                 middle=random.randint(60, 85),
-                                 defence=random.randint(15, 35),
-                                 )
+                player = Players(
+                    first_name=random.choice(spanish_f_names),
+                    last_name=random.choice(spanish_l_names),
+                    position="MID",
+                    team_id=team_id,
+                    attack=random.randint(15, 35),
+                    middle=random.randint(60, 85),
+                    defence=random.randint(15, 35),
+                )
 
             elif position == "ATT":
-                player = Players(first_name=random.choice(spanish_f_names),
-                                 last_name=random.choice(spanish_l_names),
-                                 position="ATT",
-                                 team_id=team_id,
-                                 attack=random.randint(60, 85),
-                                 middle=random.randint(20, 40),
-                                 defence=random.randint(10, 30),
-                                 )
+                player = Players(
+                    first_name=random.choice(spanish_f_names),
+                    last_name=random.choice(spanish_l_names),
+                    position="ATT",
+                    team_id=team_id,
+                    attack=random.randint(60, 85),
+                    middle=random.randint(20, 40),
+                    defence=random.randint(10, 30),
+                )
 
             player.overall = round((player.attack + player.middle + player.defence) / 3)
 
             db.session.add(player)
             db.session.commit()
 
-            total_attack = db.session.query(func.avg(Players.attack)).filter(Players.team_id == team_id).scalar()
+            total_attack = (
+                db.session.query(func.avg(Players.attack))
+                .filter(Players.team_id == team_id)
+                .scalar()
+            )
             team.attack = round(total_attack)
-            total_middle = db.session.query(func.avg(Players.middle)).filter(Players.team_id == team_id).scalar()
+            total_middle = (
+                db.session.query(func.avg(Players.middle))
+                .filter(Players.team_id == team_id)
+                .scalar()
+            )
             team.middle = round(total_middle)
-            total_defence = db.session.query(func.avg(Players.defence)).filter(Players.team_id == team_id).scalar()
+            total_defence = (
+                db.session.query(func.avg(Players.defence))
+                .filter(Players.team_id == team_id)
+                .scalar()
+            )
             team.defence = round(total_defence)
 
             team_overall = round((team.attack + team.middle + team.defence) / 3)
@@ -200,16 +216,27 @@ def add_players(team_id):
             db.session.merge(team)
             db.session.commit()
 
-            flash('Your player has been created.')
+            flash("Your player has been created.")
             players.append(player)
 
-            return render_template("add-players.html", team_id=team_id, team=team, players=players,
-                                   user_team=user_team)
+            return render_template(
+                "add-players.html",
+                team_id=team_id,
+                team=team,
+                players=players,
+                user_team=user_team,
+            )
     else:
         team = Teams.query.filter_by(id=team_id).first()
         players = Players.query.filter_by(team_id=team.id).all()
 
-        return render_template("add-players.html", team_id=team_id, team=team, players=players, user_team=user_team)
+        return render_template(
+            "add-players.html",
+            team_id=team_id,
+            team=team,
+            players=players,
+            user_team=user_team,
+        )
 
 
 @app.route("/choose-opponent.html")
@@ -228,7 +255,7 @@ def lineup():
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
-    opp_team = Teams.query.filter_by(id=session['opp_id']).first()
+    opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
     return render_template("lineup.html", user_team=user_team, opp_team=opp_team)
 
 
@@ -241,26 +268,26 @@ def play():
 
     matchday = defaultdict()
 
-    matchday['weather'] = Weather.generate_weather()
-    matchday['stadium'] = Stadium.generate_stadium()
-    matchday['visitors'] = Stadium.generate_visitors(weather=matchday['weather'])
-    matchday['message'] = Stadium.generate_message(weather=matchday['weather'])
+    matchday["weather"] = Weather.generate_weather()
+    matchday["stadium"] = Stadium.generate_stadium()
+    matchday["visitors"] = Stadium.generate_visitors(weather=matchday["weather"])
+    matchday["message"] = Stadium.generate_message(weather=matchday["weather"])
 
     if user.team_id:
         user_team = Teams.query.filter_by(id=user.team_id).first()
     else:
         user_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
-    if session['opp_id']:
-        opp_team = Teams.query.filter_by(id=session['opp_id']).first()
+    if session["opp_id"]:
+        opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
     else:
         opp_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
     game = defaultdict()
 
-    game['home_team'] = HomeTeam(user_team.name, 23)
-    game['away_team'] = AwayTeam(opp_team.name, 12)
-    game['score'] = [0, 0]
+    game["home_team"] = HomeTeam(user_team.name, 23)
+    game["away_team"] = AwayTeam(opp_team.name, 12)
+    game["score"] = [0, 0]
 
     matchdata = defaultdict()
 
@@ -277,20 +304,22 @@ def play():
             continue
 
         team = random.choice(["Home", "Away"])
-        event = random.choice(['Goal', 'Miss'])
+        event = random.choice(["Goal", "Miss"])
 
         if event == "Goal" and team == "Home":
-            game['score'][0] += 1
-            team = game['home_team'].name
+            game["score"][0] += 1
+            team = game["home_team"].name
         elif event == "Goal" and team == "Away":
-            game['score'][1] += 1
-            team = game['away_team'].name
+            game["score"][1] += 1
+            team = game["away_team"].name
 
         matchdata[time] = [team, event]
 
-    session['opp_id'] = ""
+    session["opp_id"] = ""
 
-    return render_template("play.html", game=game, matchdata=matchdata, matchday=matchday)
+    return render_template(
+        "play.html", game=game, matchdata=matchdata, matchday=matchday
+    )
 
 
 @app.route("/quick-game.html")
@@ -320,7 +349,7 @@ def opp_england():
 
     if request.method == "POST":
         opp_id = request.form.get("team_id")
-        session['opp_id'] = opp_id
+        session["opp_id"] = opp_id
 
         return redirect("/lineup.html")
 
@@ -379,20 +408,20 @@ def opp_france():
     return render_template("opp-france.html", data=data, user_team=user_team)
 
 
-@app.route('/login.html', methods=['GET', 'POST'])
+@app.route("/login.html", methods=["GET", "POST"])
 def login():
     """Renders Login page."""
 
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        remember = True if request.form.get('remember') else False
+        remember = True if request.form.get("remember") else False
 
         user = Users.query.filter_by(username=username).first()
 
         if not user or not check_password_hash(user.password, password):
             flash("Please check your login details and try again.")
-            return render_template('login.html')
+            return render_template("login.html")
 
         login_user(user, remember=remember)
         return redirect("/profile.html")  # Todo
@@ -421,10 +450,13 @@ def signup():
         existing_user = Users.query.filter_by(username=username).first()
 
         if existing_user:
-            flash('There is already an user with this username.')
+            flash("There is already an user with this username.")
             return redirect("/signup.html")
 
-        user = Users(username=username, password=generate_password_hash(password, method="sha256"))
+        user = Users(
+            username=username,
+            password=generate_password_hash(password, method="sha256"),
+        )
 
         db.session.add(user)
         db.session.commit()
@@ -441,10 +473,12 @@ def profile():
 
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
-    opp_team = Teams.query.filter_by(id=session['opp_id']).first()
+    opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
 
-    return render_template("profile.html", user=user, user_team=user_team, opp_team=opp_team)
+    return render_template(
+        "profile.html", user=user, user_team=user_team, opp_team=opp_team
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
