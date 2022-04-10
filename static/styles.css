@@ -784,3 +784,12 @@ main {
 .final-result {
     margin: 20px;
 }
+
+.name {
+    margin-bottom: 15px;
+}
+
+.league {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

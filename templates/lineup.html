@@ -1,34 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    <div class="main-content">
+<div class="main-content">
+    <div class="main-title">Build your Strategy and Lineup</div>
+    <div class="box">
+        <div class="profile-text">
+            {% if not user_team %}
+                Your team: <a href="/select-team.html">{{ user_team }}</a>
+            {% else %}
+                Your team: <a href="/team/{{ user_team.id }}.html">{{ user_team }}</a>
+            {% endif %}
+        </div>
+        <div class="profile-text">
+            {% if not opp_team %}
+                Your opponent: <a href="/choose-opponent.html">{{ opp_team }}</a>
+            {% else %}
+                Your opponent: <a href="/team/{{ opp_team.id }}.html">{{ opp_team }}</a>
+            {% endif %}
+        </div>
 
-        <div class="main-title">Build your Strategy and Lineup</div>
-        <div class="box">
-            <div class="profile-text">
-                {% if not user_team %}
-                    Your team: <a href="/select-team.html">{{ user_team }}</a>
-                {% else %}
-                    Your team: <a href="/team/{{ user_team.id }}.html">{{ user_team }}</a>
-                {% endif %}
-            </div>
-            <div class="profile-text">
-                {% if not opp_team %}
-                    Your opponent: <a href="/choose-opponent.html">{{ opp_team }}</a>
-                {% else %}
-                    Your opponent: <a href="/team/{{ opp_team.id }}.html">{{ opp_team }}</a>
-                {% endif %}
-            </div>
-
+        <div class="play-button">
             <a href="/play.html">
                 <button>Play</button>
             </a>
         </div>
-
-
     </div>
-
-
-
+</div>
 
 {% endblock %}

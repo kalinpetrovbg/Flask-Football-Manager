@@ -15,17 +15,21 @@
     <div class="form-add">
         <form action="{{ request.path }}" method="post">
 
-            <label>Team name</label><br>
-            <input type="text" name="name" placeholder="Name"/><br>
-            <label>League</label><br>
-            <select name="league" id="league">
-                <option value="English Premier League">English Premier League</option>
-                <option value="Spain Primera Division">Spain Primera Division</option>
-                <option value="Italian Serie A">Italian Serie A</option>
-                <option value="German Bundesliga">German Bundesliga</option>
-                <option value="French Ligue">French Ligue</option>
-            </select>
+            <label>
+                <div class="name">Team name</div>
+                <input type="text" name="name" placeholder="Name"/>
+            </label>
 
+            <label>
+                <div class="league">League</div>
+                <select name="league" id="league">
+                    <option value="English Premier League">English Premier League</option>
+                    <option value="Spain Primera Division">Spain Primera Division</option>
+                    <option value="Italian Serie A">Italian Serie A</option>
+                    <option value="German Bundesliga">German Bundesliga</option>
+                    <option value="French Ligue">French Ligue</option>
+                </select>
+            </label>
             <input type="submit" value="Submit"/>
         </form>
     </div>
