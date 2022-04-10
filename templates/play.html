@@ -1,90 +1,75 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    <div class="top">
-
-        <div class="sub-top">
-            <div class="top-result">
-                <div class="kit-home">
-                    <img alt="home-kit-icon" src="{{ url_for('static', filename='images/icons/home_kit.png') }}"/>
-                </div>
-                <div class="result">
-                    {{ game["home_team"].name }} <span
-                        class="score">{{ game["score"][0] }} - {{ game["score"][1] }}</span> {{ game["away_team"].name }}
-                </div>
-                <div class="kit-away">
-                    <img alt="away-kit-icon" src="{{ url_for('static', filename='images/icons/away_kit.png') }}"/>
-                </div>
-
+<div class="top">
+    <div class="sub-top">
+        <div class="top-result">
+            <div class="kit-home">
+                <img alt="home-kit-icon" src="{{ url_for('static', filename='images/icons/home_kit.png') }}"/>
             </div>
-
-            <div class="visitors-info">
-
-                <div class="game-weather">
-
-                    <div class="weather-icon">
-                        {% if matchday['weather'].type == "Rainy" %}
-                            <div class="weather-icon"><img width="30px" alt="weather"
-                                                           src="{{ url_for('static', filename='images/weather/rainy.png') }}"/>
-                            </div>
-
-                        {% elif matchday['weather'].type == "Cloudy" %}
-                            <div class="weather-icon"><img width="30px" alt="weather"
-                                                           src="{{ url_for('static', filename='images/weather/cloudy.png') }}"/>
-                            </div>
-
-                        {% elif matchday['weather'].type == "Sunny" %}
-                            <div class="weather-icon"><img width="30px" alt="weather"
-                                                           src="{{ url_for('static', filename='images/weather/sunny.png') }}"/>
-                            </div>
-
-                        {% elif matchday['weather'].type == "Storm" %}
-                            <div class="weather-icon"><img width="30px" alt="weather"
-                                                           src="{{ url_for('static', filename='images/weather/storm.png') }}"/>
-                            </div>
-
-                        {% elif matchday['weather'].type == "PartiallyCloudy" %}
-                            <div class="weather-icon"><img width="30px" alt="weather"
-                                                           src="{{ url_for('static', filename='images/weather/partially-cloudy.png') }}"/>
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="weather-info">
-                        {{ matchday['message'] }}
-                    </div>
-                </div>
-
+            <div class="result">
+                {{ game["home_team"].name }} <span
+                    class="score">{{ game["score"][0] }} - {{ game["score"][1] }}</span> {{ game["away_team"].name }}
+            </div>
+            <div class="kit-away">
+                <img alt="away-kit-icon" src="{{ url_for('static', filename='images/icons/away_kit.png') }}"/>
             </div>
         </div>
 
-        <div class="game-content">
-            <div class="play-game">
+        <div class="visitors-info">
+            <div class="game-weather">
+                <div class="weather-icon">
+                    {% if matchday['weather'].type == "Rainy" %}
+                        <div class="weather-icon"><img width="30px" alt="weather"
+                                                       src="{{ url_for('static', filename='images/weather/rainy.png') }}"/>
+                        </div>
 
+                    {% elif matchday['weather'].type == "Cloudy" %}
+                        <div class="weather-icon"><img width="30px" alt="weather"
+                                                       src="{{ url_for('static', filename='images/weather/cloudy.png') }}"/>
+                        </div>
 
-                <table class="game-table">
-                    {% for minute, event in matchdata.items() %}
-                        <tr class="event-container">
-                            <td class="event-minute">
-                                {{ minute }}'
-                            </td>
-                            <td class="event-separator"></td>
+                    {% elif matchday['weather'].type == "Sunny" %}
+                        <div class="weather-icon"><img width="30px" alt="weather"
+                                                       src="{{ url_for('static', filename='images/weather/sunny.png') }}"/>
+                        </div>
 
-                            <td class="event-message">
-                                {{ event[0] }} - {{ event[1] }}
-                            </td>
+                    {% elif matchday['weather'].type == "Storm" %}
+                        <div class="weather-icon"><img width="30px" alt="weather"
+                                                       src="{{ url_for('static', filename='images/weather/storm.png') }}"/>
+                        </div>
 
-                        </tr>
-                    {% endfor %}
-                </table>
-                <hr>
-                <div class="final-result">
-                    The game has finished and the score is {{ game["score"][0] }} - {{ game["score"][1] }}
+                    {% elif matchday['weather'].type == "PartiallyCloudy" %}
+                        <div class="weather-icon"><img width="30px" alt="weather"
+                                                       src="{{ url_for('static', filename='images/weather/partially-cloudy.png') }}"/>
+                        </div>
+                    {% endif %}
                 </div>
-
-
+                <div class="weather-info">
+                    {{ matchday['message'] }}
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="game-content">
+        <div class="play-game">
+
+            <table class="game-table">
+                {% for minute, event in matchdata.items() %}
+                <tr class="event-container">
+                    <td class="event-minute">{{ minute }}'</td>
+                    <td class="event-separator"></td>
+                    <td class="event-message">{{ event[0] }} - {{ event[1] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr>
+            <div class="final-result">
+                The game has finished and the score is {{ game["score"][0] }} - {{ game["score"][1] }}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

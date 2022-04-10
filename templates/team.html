@@ -1,18 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="main-content">
-
     <div class="new-team team">
         <div class="new-logo">
-            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px">
+            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px" alt="team logo">
         </div>
         <div class="new-text">
             <div class="new-name">{{ team.name }}</div>
             <div class="new-league">{{ team.league }}</div>
         </div>
-
     </div>
 
     <div class="new-stats">
@@ -45,20 +42,18 @@
         </tr>
         </tbody>
         {% else %}
-
         <tbody>
         {% for p in players %}
-        <tr>
-            <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
-            <td class="team-stats">{{ p.position }}</td>
-            <td class="team-stats">{{ p.overall }}</td>
-            <td class="team-stats">{{ p.attack }}</td>
-            <td class="team-stats">{{ p.middle }}</td>
-            <td class="team-stats">{{ p.defence }}</td>
-        </tr>
+            <tr>
+                <td class="team-name">{{ p.first_name }} {{ p.last_name }}</td>
+                <td class="team-stats">{{ p.position }}</td>
+                <td class="team-stats">{{ p.overall }}</td>
+                <td class="team-stats">{{ p.attack }}</td>
+                <td class="team-stats">{{ p.middle }}</td>
+                <td class="team-stats">{{ p.defence }}</td>
+            </tr>
         {% endfor %}
         </tbody>
-
         {% endif %}
     </table>
 

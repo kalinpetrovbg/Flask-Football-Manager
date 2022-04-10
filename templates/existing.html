@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="main-content">
     <img width="100%" alt="logos" src="{{ url_for('static', filename='images/logos2.png') }}"/>
 
@@ -18,22 +17,22 @@
             <th>SELECT</th>
         </tr>
         </thead>
+
         {% for team in data.values() %}
             <tbody>
             <tr class="ex-tr">
-
-            <td class="ex-logo">
-                <img src="/static/images/clubs/{{ team['logo'] }}.png" width="50px">
-            </td>
-            <td class="ex-name">
-                <a href="/team/{{ team['id'] }}.html">{{ team['name'] }}<br/>
-                    <span class="ex-league">{{ team['league'] }}</span></a>
-            </td>
-            <td class="ex-stats">{{ team['ovr'] }}</td>
-            <td class="ex-stats">{{ team['att'] }}</td>
-            <td class="ex-stats">{{ team['mid'] }}</td>
-            <td class="ex-stats">{{ team['def'] }}</td>
-            <td>
+                <td class="ex-logo">
+                    <img src="/static/images/clubs/{{ team['logo'] }}.png" width="50px" alt="team logo">
+                </td>
+                <td class="ex-name">
+                    <a href="/team/{{ team['id'] }}.html">{{ team['name'] }}<br/>
+                        <span class="ex-league">{{ team['league'] }}</span></a>
+                </td>
+                <td class="ex-stats">{{ team['ovr'] }}</td>
+                <td class="ex-stats">{{ team['att'] }}</td>
+                <td class="ex-stats">{{ team['mid'] }}</td>
+                <td class="ex-stats">{{ team['def'] }}</td>
+                <td>
 
                 <form action="{{ request.path }}" method="POST">
                     <div class="hidden">
@@ -43,14 +42,12 @@
                     </div>
                     <button class="select-ex-team">Select team</button>
                 </form>
-            </td>
-
+                </td>
         {% endfor %}
         </tr>
         </tbody>
     </table>
 
 </div>
-
 
 {% endblock %}

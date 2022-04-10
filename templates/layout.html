@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
 <header>
     <div class="top-panel">
         <div class="logo">
@@ -33,7 +32,6 @@
                     <div class="my-menu"><a href="/profile.html">{{ current_user.username }}</a></div>
                     <div class="my-menu"><a href="/logout.html">Logout</a></div>
                 {% endif %}
-
             </div>
 
             {% if user_team %}
@@ -45,7 +43,6 @@
                 You don't have a team yet
             </div>
             {% endif %}
-
         </div>
     </div>
 
@@ -56,7 +53,6 @@
         <div><a href="/build-team.html">Create Team</a></div>
         <div><a href="/multiplayer.html">Multiplayer</a></div>
     </div>
-
 </header>
 
 <main>
@@ -88,7 +84,6 @@
             {% endblock %}
         </div>
     </article>
-
 </main>
 
 <footer>
@@ -96,6 +91,6 @@
         &copy; Copyright 2022 by Kalin Petrov.
     {% endblock %}
 </footer>
-</body>
 
+</body>
 </html>

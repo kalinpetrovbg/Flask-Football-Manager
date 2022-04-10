@@ -1,13 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="main-content">
     <div class="main-title">Create Your Team</div>
 
     <div class="new-team">
         <div class="new-logo">
-            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px">
+            <img src="/static/images/clubs/{{ team.logo }}.png" width="90px" alt="team logo">
         </div>
         <div class="new-text">
             <div class="new-name">{{ team.name }}</div>
@@ -39,8 +38,7 @@
         {% if not players %}
         <tbody>
         <tr>
-            <td colspan="5">
-                <p class="no-players">There are no players in this team.</p></td>
+            <td colspan="5"><p class="no-players">There are no players in this team.</p></td>
         </tr>
         </tbody>
         {% else %}
@@ -62,9 +60,7 @@
     <h3 class="h3-add">Add players to your team</h3>
 
     {%- for category, message in get_flashed_messages(with_categories = true) %}
-    <div class="alert alert-danger">
-        {{ message }}
-    </div>
+    <div class="alert alert-danger">{{ message }}</div>
     {%- endfor %}
 
     <div class="adding-players">

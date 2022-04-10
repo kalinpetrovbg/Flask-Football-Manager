@@ -31,9 +31,8 @@
         <tbody>
         {% for team in data.values() %}
         <tr class="ex-tr">
-
             <td class="ex-logo">
-                <img src="/static/images/clubs/{{ team['logo'] }}.png" width="50px">
+                <img src="/static/images/clubs/{{ team['logo'] }}.png" width="50px" alt="club logo">
             </td>
             <td class="ex-name">
                 <a href="/team/{{ team['id'] }}.html">{{ team['name'] }}<br/>
@@ -44,17 +43,11 @@
             <td class="ex-stats">{{ team['mid'] }}</td>
             <td class="ex-stats">{{ team['def'] }}</td>
             <td class="ex-stats">{{ team['count'] }}</td>
-
-            {% endfor %}
+        {% endfor %}
         </tr>
         </tbody>
         {% endif %}
     </table>
-
-
-
 </div>
-
-
 
 {% endblock %}

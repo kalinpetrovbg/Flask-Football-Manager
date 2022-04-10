@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
 <div class="main-content">
     <div class="main-title">Create Your Team</div>
     <h3 class="h3-add">Add players to your team</h3>
@@ -25,11 +24,8 @@
         </div>
     </div>
 
-
     {%- for category, message in get_flashed_messages(with_categories = true) %}
-    <div class="alert alert-danger">
-        {{ message }}
-    </div>
+    <div class="alert alert-danger">{{ message }}</div>
     {%- endfor %}
 
     <div class="form-add">
@@ -42,8 +38,6 @@
             <div class="hidden" style="display: none">
                 <input type="text" name="team_id" placeholder="{{ team_id }}" value="{{ team_id }}"/><br>
             </div>
-
-
             <input type="submit" value="Submit"/>
         </form>
     </div>
