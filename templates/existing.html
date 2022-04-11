@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
+
+{% block title %}Select a team{% endblock %}
+
 {% block content %}
 
 <div class="main-content">
-    <img width="100%" alt="logos" src="{{ url_for('static', filename='images/logos2.png') }}"/>
+    <img width="100%" src="{{ url_for('static', filename='images/logos2.png') }}" alt="logos"/>
 
     <div class="main-title">Select your team</div>
     <table class="existing">
