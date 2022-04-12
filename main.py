@@ -3,15 +3,14 @@
 import random
 from collections import defaultdict
 
-from flask import render_template, request, flash, redirect, url_for, session
-from flask_login import login_user, login_required, logout_user, current_user
+from flask import flash, redirect, render_template, request, session, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 from sqlalchemy import func
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
-from app import app, login_manager
-from app import db
-from db.game import HomeTeam, AwayTeam
-from db.names import spanish_l_names, spanish_f_names
+from app import app, db, login_manager
+from db.game import AwayTeam, HomeTeam
+from db.names import spanish_f_names, spanish_l_names
 from db.players import Players
 from db.teams import Teams
 from db.users import Users
@@ -255,7 +254,10 @@ def lineup():
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
-    opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+    if session:
+        opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+    else:
+        return render_template("lineup.html", user_team=user_team, opp_team=None)
     return render_template("lineup.html", user_team=user_team, opp_team=opp_team)
 
 
@@ -278,7 +280,7 @@ def play():
     else:
         user_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
-    if session["opp_id"]:
+    if session:
         opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
     else:
         opp_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
@@ -314,8 +316,6 @@ def play():
             team = game["away_team"].name
 
         matchdata[time] = [team, event]
-
-    session["opp_id"] = ""
 
     return render_template(
         "play.html", game=game, matchdata=matchdata, matchday=matchday
