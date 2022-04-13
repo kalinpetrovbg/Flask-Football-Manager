@@ -551,7 +551,8 @@ main{
     flex-direction:row;
     padding:10px;
     margin-top:-30px;
-    align-items:center
+    align-items:center;
+    justify-content: flex-end;
 }
 .your-team{
     font-size:14px;
@@ -651,4 +652,13 @@ main{
 .league{
     margin-top:15px;
     margin-bottom:15px
+}
+
+.alert-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.alert-message a{
+    text-decoration: none;
 }

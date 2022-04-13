@@ -86,18 +86,16 @@ def team_page(team_id):
 def existing_teams():
     """Renders Select your team page."""
 
-    if request.method == "POST":
-        user = current_user
-        user_team = request.form.get("team_id")
-        print(user_team)
-        user.team_id = user_team
+    user = current_user
 
+    if request.method == "POST":
+        user_team = request.form.get("team_id")
+        user.team_id = user_team
         db.session.commit()
 
         return redirect("/profile.html")
 
     else:
-        user = current_user
         user_team = Teams.query.filter_by(id=user.team_id).first()
         teams = Teams.query.all()
         data = teams_data(teams)
@@ -120,6 +118,9 @@ def build_team():
             db.session.commit()
 
             team_id = team.id
+            user.team_id = team.id
+            db.session.commit()
+
             return redirect(url_for("add_players", team_id=team_id))
 
     return render_template("build-team.html", user_team=user_team)
@@ -467,17 +468,32 @@ def signup():
 
 
 @app.route("/profile.html")
-@login_required
 def profile():
     """Renders Profile page."""
 
     user = current_user
+    if not current_user.is_authenticated:
+        return redirect(url_for("nologin"))
+
     user_team = Teams.query.filter_by(id=user.team_id).first()
-    opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+
+    try:
+        opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+    except KeyError:
+        return render_template(
+            "profile.html", user=user, user_team=user_team, opp_team=None
+        )
 
     return render_template(
         "profile.html", user=user, user_team=user_team, opp_team=opp_team
     )
+
+
+@app.route("/no-login.html")
+def nologin():
+    """Error page for unauthorized users."""
+
+    return render_template("no-login.html")
 
 
 if __name__ == "__main__":
