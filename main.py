@@ -93,7 +93,7 @@ def existing_teams():
         user.team_id = user_team
         db.session.commit()
 
-        return redirect("/profile.html")
+        return redirect(url_for("profile"))
 
     else:
         user_team = Teams.query.filter_by(id=user.team_id).first()
@@ -348,11 +348,12 @@ def opp_england():
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
+    # Todo add this to other opponent pages or remove it if not needed.
     if request.method == "POST":
         opp_id = request.form.get("team_id")
         session["opp_id"] = opp_id
 
-        return redirect("/lineup.html")
+        return redirect(url_for("lineup"))
 
     else:
         teams = Teams.query.filter_by(league="English Premier League").all()
@@ -407,6 +408,19 @@ def opp_france():
     data = teams_data(teams)
 
     return render_template("opp-france.html", data=data, user_team=user_team)
+
+
+@app.route("/opp-restofworld.html")
+def opp_france():
+    """Renders Rest of World opponents page."""
+
+    user = current_user
+    user_team = Teams.query.filter_by(id=user.team_id).first()
+    # Todo league
+    teams = Teams.query.filter_by(league="Rest of World").all()
+    data = teams_data(teams)
+
+    return render_template("opp-restofworld.html", data=data, user_team=user_team)
 
 
 @app.route("/login.html", methods=["GET", "POST"])
