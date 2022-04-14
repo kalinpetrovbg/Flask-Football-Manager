@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 
-{% block clubtable %}
+{% block title %}Rest of the World{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="main-title">Rest of the World</div>
 
     <table class="existing">
         <thead>
@@ -11,7 +16,7 @@
             <th>ATT</th>
             <th>MID</th>
             <th>DEF</th>
-            <th>SELECT</th>
+            <th>PLAYERS</th>
         </tr>
         </thead>
 
@@ -40,22 +45,12 @@
             <td class="ex-stats">{{ team['att'] }}</td>
             <td class="ex-stats">{{ team['mid'] }}</td>
             <td class="ex-stats">{{ team['def'] }}</td>
-            <td>
-
-                <form action="{{ request.path }}" method="POST">
-                    <div class="hidden">
-                        <label>Team ID</label><br>
-                        <input type="text" name="team_id" placeholder="{{ team['id'] }}"
-                               value="{{ team['id'] }}"/><br>
-                    </div>
-                    <button class="select-ex-team">Select team</button>
-                </form>
-            </td>
-
+            <td class="ex-stats">{{ team['count'] }}</td>
         {% endfor %}
         </tr>
         </tbody>
         {% endif %}
     </table>
+</div>
 
 {% endblock %}

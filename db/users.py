@@ -1,5 +1,5 @@
 """Generate users database table."""
-from flask_login import UserMixin, AnonymousUserMixin
+from flask_login import AnonymousUserMixin, UserMixin
 
 from app import db, login_manager
 

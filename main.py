@@ -3,15 +3,14 @@
 import random
 from collections import defaultdict
 
-from flask import render_template, request, flash, redirect, url_for, session
-from flask_login import login_user, login_required, logout_user, current_user
+from flask import flash, redirect, render_template, request, session, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 from sqlalchemy import func
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
-from app import app, login_manager
-from app import db
-from db.game import HomeTeam, AwayTeam
-from db.names import spanish_l_names, spanish_f_names
+from app import app, db, login_manager
+from db.game import AwayTeam, HomeTeam
+from db.names import spanish_f_names, spanish_l_names
 from db.players import Players
 from db.teams import Teams
 from db.users import Users
@@ -87,18 +86,16 @@ def team_page(team_id):
 def existing_teams():
     """Renders Select your team page."""
 
-    if request.method == "POST":
-        user = current_user
-        user_team = request.form.get("team_id")
-        print(user_team)
-        user.team_id = user_team
+    user = current_user
 
+    if request.method == "POST":
+        user_team = request.form.get("team_id")
+        user.team_id = user_team
         db.session.commit()
 
-        return redirect("/profile.html")
+        return redirect(url_for("profile"))
 
     else:
-        user = current_user
         user_team = Teams.query.filter_by(id=user.team_id).first()
         teams = Teams.query.all()
         data = teams_data(teams)
@@ -121,6 +118,9 @@ def build_team():
             db.session.commit()
 
             team_id = team.id
+            user.team_id = team.id
+            db.session.commit()
+
             return redirect(url_for("add_players", team_id=team_id))
 
     return render_template("build-team.html", user_team=user_team)
@@ -255,7 +255,10 @@ def lineup():
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
-    opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+    if session:
+        opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+    else:
+        return render_template("lineup.html", user_team=user_team, opp_team=None)
     return render_template("lineup.html", user_team=user_team, opp_team=opp_team)
 
 
@@ -278,7 +281,7 @@ def play():
     else:
         user_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
 
-    if session["opp_id"]:
+    if session:
         opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
     else:
         opp_team = Teams.query.filter_by(id=random.randint(1, all_teams)).first()
@@ -315,8 +318,6 @@ def play():
 
         matchdata[time] = [team, event]
 
-    session["opp_id"] = ""
-
     return render_template(
         "play.html", game=game, matchdata=matchdata, matchday=matchday
     )
@@ -347,11 +348,12 @@ def opp_england():
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
 
+    # Todo add this to other opponent pages or remove it if not needed.
     if request.method == "POST":
         opp_id = request.form.get("team_id")
         session["opp_id"] = opp_id
 
-        return redirect("/lineup.html")
+        return redirect(url_for("lineup"))
 
     else:
         teams = Teams.query.filter_by(league="English Premier League").all()
@@ -406,6 +408,19 @@ def opp_france():
     data = teams_data(teams)
 
     return render_template("opp-france.html", data=data, user_team=user_team)
+
+
+@app.route("/opp-restofworld.html")
+def opp_france():
+    """Renders Rest of World opponents page."""
+
+    user = current_user
+    user_team = Teams.query.filter_by(id=user.team_id).first()
+    # Todo league
+    teams = Teams.query.filter_by(league="Rest of World").all()
+    data = teams_data(teams)
+
+    return render_template("opp-restofworld.html", data=data, user_team=user_team)
 
 
 @app.route("/login.html", methods=["GET", "POST"])
@@ -467,17 +482,32 @@ def signup():
 
 
 @app.route("/profile.html")
-@login_required
 def profile():
     """Renders Profile page."""
 
     user = current_user
+    if not current_user.is_authenticated:
+        return redirect(url_for("nologin"))
+
     user_team = Teams.query.filter_by(id=user.team_id).first()
-    opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+
+    try:
+        opp_team = Teams.query.filter_by(id=session["opp_id"]).first()
+    except KeyError:
+        return render_template(
+            "profile.html", user=user, user_team=user_team, opp_team=None
+        )
 
     return render_template(
         "profile.html", user=user, user_team=user_team, opp_team=opp_team
     )
+
+
+@app.route("/no-login.html")
+def nologin():
+    """Error page for unauthorized users."""
+
+    return render_template("no-login.html")
 
 
 if __name__ == "__main__":
