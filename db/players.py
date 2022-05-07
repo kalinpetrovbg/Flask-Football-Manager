@@ -25,8 +25,9 @@ class Players(db.Model):
 
 """Generate the database with players."""
 
+# """Manchester United players"""
 # db.create_all()
-"""Manchester United players"""
+#
 # player1 = Players(
 #     first_name="David", last_name="De Gea", team_id=1, position="GK", overall=31, attack=4, middle=3, defence=87)
 # player2 = Players(
@@ -53,120 +54,126 @@ class Players(db.Model):
 # player11 = Players(
 #     first_name="Cristiano", last_name="Ronaldo", team_id=1,
 #     position="ATT", overall=50, attack=91, middle=36, defence=22)
-
-
-"""Arsenal players"""
-player1 = Players(
-    first_name="Aaron",
-    last_name="Ramsdale",
-    team_id=2,
-    position="GK",
-    overall=29,
-    attack=2,
-    middle=3,
-    defence=81,
-)
-player2 = Players(
-    first_name="Kieran",
-    last_name="Tierney",
-    team_id=2,
-    position="DEF",
-    overall=41,
-    attack=20,
-    middle=22,
-    defence=81,
-)
-player3 = Players(
-    first_name="Gabriel",
-    last_name="Magalhães",
-    team_id=2,
-    position="DEF",
-    overall=45,
-    attack=22,
-    middle=31,
-    defence=81,
-)
-player4 = Players(
-    first_name="Benjamin",
-    last_name="White",
-    team_id=2,
-    position="DEF",
-    overall=43,
-    attack=21,
-    middle=29,
-    defence=80,
-)
-player5 = Players(
-    first_name="T",
-    last_name="Tomiyasu",
-    team_id=2,
-    position="DEF",
-    overall=42,
-    attack=23,
-    middle=26,
-    defence=78,
-)
-player6 = Players(
-    first_name="Gabriel",
-    last_name="Silva",
-    team_id=2,
-    position="MID",
-    overall=39,
-    attack=20,
-    middle=79,
-    defence=18,
-)
-player7 = Players(
-    first_name="Granit",
-    last_name="Xhaka",
-    team_id=2,
-    position="MID",
-    overall=44,
-    attack=19,
-    middle=79,
-    defence=33,
-)
-player8 = Players(
-    first_name="Thomas",
-    last_name="Partey",
-    team_id=2,
-    position="MID",
-    overall=48,
-    attack=23,
-    middle=84,
-    defence=37,
-)
-player9 = Players(
-    first_name="Bukayo",
-    last_name="Saka",
-    team_id=2,
-    position="MID",
-    overall=43,
-    attack=27,
-    middle=83,
-    defence=18,
-)
-player10 = Players(
-    first_name="Martin",
-    last_name="Ødegaard",
-    team_id=2,
-    position="ATT",
-    overall=41,
-    attack=83,
-    middle=24,
-    defence=16,
-)
-player11 = Players(
-    first_name="Alexandre",
-    last_name="Lacazette",
-    team_id=2,
-    position="ATT",
-    overall=38,
-    attack=82,
-    middle=20,
-    defence=11,
-)
-
+#
+# players = (player1 + player2) + (player3 + player4) + (player5 + player6) + (player7 + player8) + (player9 + player10)
+# players.append(player11)
+#
+# for p in players:
+#     db.session.add(p)
+# db.session.commit()
+#
+# """Arsenal players"""
+# player1 = Players(
+#     first_name="Aaron",
+#     last_name="Ramsdale",
+#     team_id=2,
+#     position="GK",
+#     overall=29,
+#     attack=2,
+#     middle=3,
+#     defence=81,
+# )
+# player2 = Players(
+#     first_name="Kieran",
+#     last_name="Tierney",
+#     team_id=2,
+#     position="DEF",
+#     overall=41,
+#     attack=20,
+#     middle=22,
+#     defence=81,
+# )
+# player3 = Players(
+#     first_name="Gabriel",
+#     last_name="Magalhães",
+#     team_id=2,
+#     position="DEF",
+#     overall=45,
+#     attack=22,
+#     middle=31,
+#     defence=81,
+# )
+# player4 = Players(
+#     first_name="Benjamin",
+#     last_name="White",
+#     team_id=2,
+#     position="DEF",
+#     overall=43,
+#     attack=21,
+#     middle=29,
+#     defence=80,
+# )
+# player5 = Players(
+#     first_name="T",
+#     last_name="Tomiyasu",
+#     team_id=2,
+#     position="DEF",
+#     overall=42,
+#     attack=23,
+#     middle=26,
+#     defence=78,
+# )
+# player6 = Players(
+#     first_name="Gabriel",
+#     last_name="Silva",
+#     team_id=2,
+#     position="MID",
+#     overall=39,
+#     attack=20,
+#     middle=79,
+#     defence=18,
+# )
+# player7 = Players(
+#     first_name="Granit",
+#     last_name="Xhaka",
+#     team_id=2,
+#     position="MID",
+#     overall=44,
+#     attack=19,
+#     middle=79,
+#     defence=33,
+# )
+# player8 = Players(
+#     first_name="Thomas",
+#     last_name="Partey",
+#     team_id=2,
+#     position="MID",
+#     overall=48,
+#     attack=23,
+#     middle=84,
+#     defence=37,
+# )
+# player9 = Players(
+#     first_name="Bukayo",
+#     last_name="Saka",
+#     team_id=2,
+#     position="MID",
+#     overall=43,
+#     attack=27,
+#     middle=83,
+#     defence=18,
+# )
+# player10 = Players(
+#     first_name="Martin",
+#     last_name="Ødegaard",
+#     team_id=2,
+#     position="ATT",
+#     overall=41,
+#     attack=83,
+#     middle=24,
+#     defence=16,
+# )
+# player11 = Players(
+#     first_name="Alexandre",
+#     last_name="Lacazette",
+#     team_id=2,
+#     position="ATT",
+#     overall=38,
+#     attack=82,
+#     middle=20,
+#     defence=11,
+# )
+#
 # players = (player1 + player2) + (player3 + player4) + (player5 + player6) + (player7 + player8) + (player9 + player10)
 # players.append(player11)
 #
