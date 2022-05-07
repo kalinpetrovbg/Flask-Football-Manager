@@ -1,6 +1,6 @@
-# Python-Football-Manager
+# Python Footlball Manager
 
-A Python based online Football game.
+PM (Python Manager) is a Python & Flask based online football game.
 
 ## Features
 You can select a team and play matches in a single or multiplayer mode.
