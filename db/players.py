@@ -19,6 +19,7 @@ class Players(db.Model):
     def __repr__(self):
         return self.first_name
 
+
 """Generate the database with players."""
 
 # """Manchester United players"""

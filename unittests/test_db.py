@@ -1,5 +1,7 @@
-"""Unit tests for players."""
+"""Unit tests for db folder."""
+
 from db.game import HomeTeam, AwayTeam
+from db.names import spanish_f_names
 from db.players import Players
 from db.teams import Teams
 from db.update import update_teams
@@ -11,6 +13,9 @@ def test_player_if_correctly_created():
                          middle=36, defence=22)
 
     assert new_player.overall == 50
+    assert new_player.position == "ATT"
+    assert new_player.first_name == "Cristiano"
+    assert new_player.last_name == "Ronaldo"
     assert new_player.__repr__() == "Cristiano"
 
 
@@ -37,9 +42,11 @@ def test_users_are_created_correctly():
     new_user = Users()
     new_user.username = "Kalin"
     new_user.password = "f15s@"
+    new_user.team_id = 1
 
     assert new_user.username == "Kalin"
     assert new_user.password == "f15s@"
+    assert new_user.team_id == 1
 
 
 def test_annonymouse_user_if_it_has_no_team():
@@ -52,6 +59,11 @@ def test_update_teams_functionality():
     team1 = Teams(name="Manchester United", league="English Premier League", logo="man")
     team2 = Teams(name="Newcastle", league="English Premier League", logo="man")
 
-    teams = [team1, team2]
-
     # Todo finish this.
+
+
+def test_spanish_names():
+
+    names = spanish_f_names
+
+    assert "Santiago" in names
