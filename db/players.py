@@ -19,10 +19,6 @@ class Players(db.Model):
     def __repr__(self):
         return self.first_name
 
-    def __add__(self, other):
-        return [self, other]
-
-
 """Generate the database with players."""
 
 # """Manchester United players"""
@@ -54,9 +50,6 @@ class Players(db.Model):
 # player11 = Players(
 #     first_name="Cristiano", last_name="Ronaldo", team_id=1,
 #     position="ATT", overall=50, attack=91, middle=36, defence=22)
-#
-# players = (player1 + player2) + (player3 + player4) + (player5 + player6) + (player7 + player8) + (player9 + player10)
-# players.append(player11)
 #
 # for p in players:
 #     db.session.add(p)
@@ -173,9 +166,6 @@ class Players(db.Model):
 #     middle=20,
 #     defence=11,
 # )
-#
-# players = (player1 + player2) + (player3 + player4) + (player5 + player6) + (player7 + player8) + (player9 + player10)
-# players.append(player11)
 #
 # for p in players:
 #     db.session.add(p)
