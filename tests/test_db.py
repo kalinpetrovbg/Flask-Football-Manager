@@ -19,7 +19,7 @@ def test_player_if_correctly_created():
     assert new_player.__repr__() == "Cristiano"
 
 
-def test_teams_if_correctly_created():
+def test_team_if_correctly_created():
     new_team = Teams(name="Manchester United", league="English Premier League", logo="man")
 
     assert new_team.league == "English Premier League"
@@ -47,12 +47,17 @@ def test_users_are_created_correctly():
     assert new_user.username == "Kalin"
     assert new_user.password == "f15s@"
     assert new_user.team_id == 1
+    assert new_user.is_authenticated
+    assert new_user.is_active
+    assert not new_user.is_anonymous
 
 
 def test_annonymouse_user_if_it_has_no_team():
     new_guest_user = AnonymousUser()
 
     assert new_guest_user.team_id is None
+    assert not new_guest_user.is_authenticated
+    assert new_guest_user.is_anonymous
 
 
 def test_update_teams_functionality():
