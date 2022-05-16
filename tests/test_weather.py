@@ -8,4 +8,8 @@ def test_random_weather_choice():
 
     current_weather = wea.generate_weather()
 
-    assert current_weather.type == "Rainy" or "Cloudy" or "Partiallycloudy" or "Sinny" or "Stormy"
+    assert current_weather.type == "Rainy" \
+           or current_weather.type == "Cloudy" \
+           or current_weather.type == "PartiallyCloudy" \
+           or current_weather.type == "Sunny" \
+           or current_weather.type == "Stormy"
