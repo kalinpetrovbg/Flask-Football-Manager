@@ -2,12 +2,11 @@
 
 from app import app
 
-def test_index_page():
-    client = app.test_client()
-    url = "/"
 
+def test_login_page():
+    client = app.test_client()
+    url = "/login.html"
     response = client.get(url)
-    # html = landing.data.decode()
 
     assert response.status_code == 200
 
