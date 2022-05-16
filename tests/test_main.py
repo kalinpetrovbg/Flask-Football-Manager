@@ -5,8 +5,10 @@ from app import app
 
 def test_login_page():
     client = app.test_client()
-    url = "/login.html"
+    url = "/"
     response = client.get(url)
+
+    # Todo
 
     assert response.status_code == 200
 

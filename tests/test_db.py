@@ -60,6 +60,15 @@ def test_annonymouse_user_if_it_has_no_team():
     assert new_guest_user.is_anonymous
 
 
+def test_annonymouse_user_with_a_new_team():
+    new_guest_user = AnonymousUser()
+
+    new_guest_user.team_id = 2
+
+    assert new_guest_user.team_id == 2
+    assert new_guest_user.is_anonymous
+
+
 def test_update_teams_functionality():
     team1 = Teams(name="Manchester United", league="English Premier League", logo="man")
     team2 = Teams(name="Newcastle", league="English Premier League", logo="man")
