@@ -4,6 +4,16 @@ from sqlalchemy import delete
 from app import app
 from app import db
 from db.users import Users
+from weather.weather import weathers
+
+
+@pytest.fixture(params=weathers)
+def weather_type(request):
+    """Params type of fixure with all wather types."""
+    current_weather = request.param
+
+    return current_weather
+
 
 
 @pytest.fixture(scope="session")

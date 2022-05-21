@@ -1,6 +1,8 @@
 """Unit tests for main.py file."""
 
 from app import app
+from db.teams import Teams
+from db.users import Users
 
 
 def test_login_page():
@@ -8,7 +10,17 @@ def test_login_page():
     url = "/"
     response = client.get(url)
 
-    # Todo
+    # Todo - add db.
 
-    assert response.status_code == 200
+    team = Teams()
+
+    user = Users()
+    user.username = "kalin_petrov"
+    user.password = "0Ury@gaj82"
+    user.team_id = 1
+    user_team = "Manchester United"
+
+
+    assert user.username == "kalin_petrov"
+    assert user_team == "Manchester United"
 
