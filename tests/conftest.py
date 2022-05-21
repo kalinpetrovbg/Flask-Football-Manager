@@ -26,10 +26,13 @@ def flask_app():
 
 
 @pytest.fixture()
-def app_with_teams():
-    """Fixture for adding Teams to the database."""
+def app_with_team():
+    """Fixture for adding a Team to the database."""
 
-    team = Teams(name="Manchester United", league="English Premier League", logo="man")
+    team = Teams(name="Manchester United",
+                 logo="man",
+                 league="English Premier League"
+                 )
     db.session.add(team)
     db.session.commit()
 
@@ -40,7 +43,39 @@ def app_with_teams():
 
 
 @pytest.fixture()
-def app_with_players():
+def app_with_two_teams():
+    """Fixture for adding two Teams to the database."""
+
+    team1 = Teams(name="Manchester United",
+                  logo="man",
+                  league="English Premier League",
+                  overall=50,
+                  attack=60,
+                  middle=50,
+                  defence=40
+                  )
+    team2 = Teams(name="Arsenal",
+                  logo="ars",
+                  league="English Premier League",
+                  overall=100,
+                  attack=120,
+                  middle=100,
+                  defence=80
+                  )
+
+    db.session.add(team1)
+    db.session.add(team2)
+    db.session.commit()
+
+    yield team1, team2
+
+    db.session.delete(team1)
+    db.session.delete(team2)
+    db.session.commit()
+
+
+@pytest.fixture()
+def app_with_player():
     """Fixture for adding Players to the database."""
 
     player = Players(first_name="Cristiano",
@@ -48,6 +83,7 @@ def app_with_players():
                      team_id=1, position="ATT",
                      overall=50, attack=91,
                      middle=36, defence=22)
+
     db.session.add(player)
     db.session.commit()
 
