@@ -22,4 +22,4 @@ class AnonymousUser(AnonymousUserMixin):
 
 login_manager.anonymous_user = AnonymousUser
 
-# db.create_all()
+db.create_all()
