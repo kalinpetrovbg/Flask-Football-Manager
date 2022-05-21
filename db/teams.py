@@ -15,7 +15,7 @@ class Teams(db.Model):
     defence = db.Column(db.Integer, default=0)
 
     def __repr__(self):
-        return self.name
+        return str(self.name)
 
 
 """Generate the database with teams."""
