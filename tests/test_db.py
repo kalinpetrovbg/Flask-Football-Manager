@@ -1,4 +1,5 @@
 """Unit tests for db folder."""
+from pytest import mark
 
 from db.game import HomeTeam, AwayTeam
 from db.names import spanish_f_names
@@ -81,3 +82,9 @@ def test_spanish_names():
     names = spanish_f_names
 
     assert "Santiago" in names
+
+
+@mark.skip(reason="Function is not ready")
+def test_update_teams_function():
+    update_teams()
+    assert True
