@@ -81,7 +81,8 @@ def app_with_two_teams():
 def app_with_player():
     """Fixture for adding Players to the database."""
 
-    player = Players(first_name="Cristiano",
+    player = Players(id=1000,
+                     first_name="Cristiano",
                      last_name="Ronaldo",
                      team_id=1000, position="ATT",
                      overall=50, attack=91,
