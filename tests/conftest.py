@@ -29,7 +29,8 @@ def flask_app():
 def app_with_team():
     """Fixture for adding a Team to the database."""
 
-    team = Teams(name="Manchester United",
+    team = Teams(id=1000,
+                 name="Manchester United",
                  logo="man",
                  league="English Premier League"
                  )
@@ -46,7 +47,8 @@ def app_with_team():
 def app_with_two_teams():
     """Fixture for adding two Teams to the database."""
 
-    team1 = Teams(name="Manchester United",
+    team1 = Teams(id=1000,
+                  name="Manchester United",
                   logo="man",
                   league="English Premier League",
                   overall=50,
@@ -54,7 +56,8 @@ def app_with_two_teams():
                   middle=50,
                   defence=40
                   )
-    team2 = Teams(name="Arsenal",
+    team2 = Teams(id=1001,
+                  name="Arsenal",
                   logo="ars",
                   league="English Premier League",
                   overall=100,
@@ -80,7 +83,7 @@ def app_with_player():
 
     player = Players(first_name="Cristiano",
                      last_name="Ronaldo",
-                     team_id=1, position="ATT",
+                     team_id=1000, position="ATT",
                      overall=50, attack=91,
                      middle=36, defence=22)
 
@@ -100,7 +103,7 @@ def app_with_user():
     user = Users()
     user.username = "kalin_petrov"
     user.password = "0Ury@gaj82"
-    user.team_id = 1
+    user.team_id = 1000
 
     db.session.add(user)
     db.session.commit()

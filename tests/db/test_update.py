@@ -11,7 +11,7 @@ def test_if_update_function_gets_all_teams_from_db(app_with_two_teams):
     assert team1.overall == 50
     assert team2.overall == 100
 
-    teams = Teams.query.all()
+    teams = Teams.query.all()   # Todo
     teams = [str(t) for t in teams]
 
     assert teams == ['Manchester United', 'Arsenal']
@@ -26,7 +26,7 @@ def test_if_update_function_gives_correct_values(app_with_team, app_with_player)
     assert team.defence == 0
     assert team.overall == 0
 
-    teams_players = db.session.query(Players).filter(Players.team_id == 1).all()
+    teams_players = db.session.query(Players).filter(Players.team_id == 1000).all()
 
     assert len(teams_players) == 1
 
@@ -42,7 +42,7 @@ def test_if_update_function_gives_correct_values(app_with_team, app_with_player)
 def test_if_adding_second_player_gives_correct_values(app_with_team, app_with_player):
     team = app_with_team
 
-    teams_players = db.session.query(Players).filter(Players.team_id == 1).all()
+    teams_players = db.session.query(Players).filter(Players.team_id == 1000).all()
 
     assert len(teams_players) == 1
 
@@ -57,16 +57,16 @@ def test_if_adding_second_player_gives_correct_values(app_with_team, app_with_pl
     """Adding new player to Team 1."""
     new_player = Players(first_name="Michael",
                          last_name="Owen",
-                         team_id=1, position="ATT",
+                         team_id=1000, position="ATT",
                          overall=40, attack=80,
                          middle=30, defence=10)
 
     db.session.add(new_player)
     db.session.commit()
 
-    teams = db.session.query(Players).filter(Players.team_id == 1).all()
+    teams_players = db.session.query(Players).filter(Players.team_id == 1000).all()
 
-    assert len(teams) == 2
+    assert len(teams_players) == 2
 
     update_teams()
 
@@ -78,3 +78,19 @@ def test_if_adding_second_player_gives_correct_values(app_with_team, app_with_pl
 
     db.session.delete(new_player)
     db.session.commit()
+
+
+def test_update_team_if_there_are_no_players(app_with_team):
+    team = app_with_team
+
+    assert team.attack == 0
+    assert team.middle == 0
+    assert team.defence == 0
+    assert team.overall == 0
+
+    update_teams()
+
+    assert team.attack == 0
+    assert team.middle == 0
+    assert team.defence == 0
+    assert team.overall == 0
