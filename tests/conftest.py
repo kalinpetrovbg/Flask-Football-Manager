@@ -1,28 +1,25 @@
 import pytest
 
-from app import app
-from app import db
+# from main2 import create_app
+from app import create_app
 from db.players import Players
 from db.teams import Teams
 from db.users import Users
 from weather.weather import weathers
 
 
-@pytest.fixture(params=weathers)
-def weather_type(request):
-    """Params type of fixure with all wather types."""
-    current_weather = request.param
-
-    return current_weather
-
-
-@pytest.fixture(scope="session")
-def flask_app():
+@pytest.fixture()
+def app():
     """Main flask app fixture."""
-    test_app = app
-    client = test_app.test_client()
+    app = create_app()
+    app.config.update({"TESTING": True})
 
-    yield client
+    yield app
+
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
 
 
 @pytest.fixture()
@@ -113,3 +110,11 @@ def app_with_user():
 
     db.session.delete(user)
     db.session.commit()
+
+
+@pytest.fixture(params=weathers)
+def weather_type(request):
+    """Params type of fixure with all wather types."""
+    current_weather = request.param
+
+    return current_weather
