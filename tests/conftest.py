@@ -1,45 +1,120 @@
 import pytest
-from sqlalchemy import delete
 
-from app import app
-from app import db
+# from main2 import create_app
+from app import create_app
+from db.players import Players
+from db.teams import Teams
 from db.users import Users
+from weather.weather import weathers
 
 
-@pytest.fixture(scope="session")
-def flask_app():
+@pytest.fixture()
+def app():
     """Main flask app fixture."""
-    test_app = app
-    client = test_app.test_client()
-    ctx = test_app.test_request_context()
-    ctx.push()
+    app = create_app()
+    app.config.update({"TESTING": True})
 
-    yield client
-    ctx.pop()
+    yield app
 
 
-@pytest.fixture(scope="session")
-def app_with_db(flask_app):
-    """Fixture for conntecting to the database."""
-    db.create_all()
+@pytest.fixture()
+def client(app):
+    return app.test_client()
 
-    yield flask_app
+
+@pytest.fixture()
+def app_with_team():
+    """Fixture for adding a Team to the database."""
+
+    team = Teams(id=1000,
+                 name="Manchester United",
+                 logo="man",
+                 league="English Premier League"
+                 )
+    db.session.add(team)
     db.session.commit()
-    db.drop_all()
+
+    yield team
+
+    db.session.delete(team)
+    db.session.commit()
 
 
-@pytest.fixture(scope="session")
-def app_with_data(app_with_db):
-    """Instert some data in the database."""
+@pytest.fixture()
+def app_with_two_teams():
+    """Fixture for adding two Teams to the database."""
+
+    team1 = Teams(id=1000,
+                  name="Manchester United",
+                  logo="man",
+                  league="English Premier League",
+                  overall=50,
+                  attack=60,
+                  middle=50,
+                  defence=40
+                  )
+    team2 = Teams(id=1001,
+                  name="Arsenal",
+                  logo="ars",
+                  league="English Premier League",
+                  overall=100,
+                  attack=120,
+                  middle=100,
+                  defence=80
+                  )
+
+    db.session.add(team1)
+    db.session.add(team2)
+    db.session.commit()
+
+    yield team1, team2
+
+    db.session.delete(team1)
+    db.session.delete(team2)
+    db.session.commit()
+
+
+@pytest.fixture()
+def app_with_player():
+    """Fixture for adding Players to the database."""
+
+    player = Players(id=1000,
+                     first_name="Cristiano",
+                     last_name="Ronaldo",
+                     team_id=1000, position="ATT",
+                     overall=50, attack=91,
+                     middle=36, defence=22)
+
+    db.session.add(player)
+    db.session.commit()
+
+    yield player
+
+    db.session.delete(player)
+    db.session.commit()
+
+
+@pytest.fixture()
+def app_with_user():
+    """Instert a user data in the database."""
+
     user = Users()
     user.username = "kalin_petrov"
     user.password = "0Ury@gaj82"
-    user.team_id = 1
+    user.team_id = 1000
 
     db.session.add(user)
     db.session.commit()
 
-    yield app_with_db
+    yield user
 
-    db.session.execute(delete(Users))
+    db.session.delete(user)
     db.session.commit()
+
+
+@pytest.fixture(params=weathers)
+def weather_type(request):
+    """Params type of fixure with all wather types."""
+    current_weather = request.param
+
+    return current_weather

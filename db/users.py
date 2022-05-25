@@ -17,9 +17,10 @@ class AnonymousUser(AnonymousUserMixin):
     """For non logged users."""
 
     def __init__(self):
+        self.username = "Anonymous"
         self.team_id = None
 
 
 login_manager.anonymous_user = AnonymousUser
 
-# db.create_all()
+db.create_all()
