@@ -168,6 +168,5 @@ class Players(db.Model):
 #     defence=11,
 # )
 #
-# for p in players:
-#     db.session.add(p)
+# db.session.add(player11)
 # db.session.commit()
