@@ -411,7 +411,7 @@ def opp_france():
 
 
 @app.route("/opp-restofworld.html")
-def opp_rest():
+def opp_restofworld():
     """Renders Rest of World opponents page."""
 
     user = current_user
