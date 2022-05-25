@@ -17,6 +17,7 @@ class AnonymousUser(AnonymousUserMixin):
     """For non logged users."""
 
     def __init__(self):
+        self.username = "Anonymous"
         self.team_id = None
 
 

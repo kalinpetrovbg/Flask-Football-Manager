@@ -1,5 +1,6 @@
 """Main file rendering all website pages."""
 
+import logging
 import random
 from collections import defaultdict
 
@@ -18,6 +19,15 @@ from misc.oponents import teams_data
 from stadium.stadium import Stadium
 from weather.weather import Weather
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+file_handler = logging.FileHandler('main.log')
+logger.addHandler(file_handler)
+
+stream_handler = logging.StreamHandler()
+logger.addHandler(stream_handler)
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -33,6 +43,8 @@ def index():
 
     user = current_user
     user_team = Teams.query.filter_by(id=user.team_id).first()
+
+    logger.info(f"User {user.username} just visited Home page")
     return render_template("index.html", user_team=user_team)
 
 
@@ -193,20 +205,20 @@ def add_players(team_id):
 
             total_attack = (
                 db.session.query(func.avg(Players.attack))
-                .filter(Players.team_id == team_id)
-                .scalar()
+                    .filter(Players.team_id == team_id)
+                    .scalar()
             )
             team.attack = round(total_attack)
             total_middle = (
                 db.session.query(func.avg(Players.middle))
-                .filter(Players.team_id == team_id)
-                .scalar()
+                    .filter(Players.team_id == team_id)
+                    .scalar()
             )
             team.middle = round(total_middle)
             total_defence = (
                 db.session.query(func.avg(Players.defence))
-                .filter(Players.team_id == team_id)
-                .scalar()
+                    .filter(Players.team_id == team_id)
+                    .scalar()
             )
             team.defence = round(total_defence)
 
