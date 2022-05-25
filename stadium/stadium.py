@@ -43,7 +43,7 @@ class Stadium:
     capacity = None
 
     def __str__(self):
-        return f'Stadium "{Stadium.name}" with {self.capacity} capacity.'
+        return f'Stadium "{self.name}" with {self.capacity} capacity.'
 
     @staticmethod
     def generate_stadium():
