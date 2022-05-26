@@ -2,8 +2,8 @@
 from sqlalchemy import func
 
 from app import db
-from db.players import Players
-from db.teams import Teams
+from application.db.players import Players
+from application.db.teams import Teams
 
 
 def update_teams():

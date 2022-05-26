@@ -2,10 +2,10 @@ import pytest
 
 # from main2 import create_app
 from app import create_app
-from db.players import Players
-from db.teams import Teams
-from db.users import Users
-from weather.weather import weathers
+from application.db import Players
+from application.db.teams import Teams
+from application.db.users import Users
+from application.weather.weather import weathers
 
 
 @pytest.fixture()

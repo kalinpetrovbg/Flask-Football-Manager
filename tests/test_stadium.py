@@ -2,9 +2,9 @@
 
 import random
 
-from stadium.stadium import STADIUM_NAMES
-from stadium.stadium import Stadium
-from weather.weather import Sunny, Rainy, PartiallyCloudy, Cloudy, Storm
+from application.stadium import STADIUM_NAMES
+from application.stadium import Stadium
+from application.weather.weather import Sunny, Rainy, PartiallyCloudy, Cloudy, Storm
 
 
 def test_if_stadium_exist_in_list_with_stadiums():

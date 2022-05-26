@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from db.players import Players
+from application.db import Players
 
 
 def teams_data(teams):

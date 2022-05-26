@@ -1,23 +1,23 @@
 """Generate players database table."""
-from app import db
-from db.teams import Teams
+from application import db
+from application.db.teams import Teams
 
 
-class Players(db.Model):
-    """Build all players' data model."""
-
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String, nullable=True)
-    last_name = db.Column(db.String, nullable=True)
-    team_id = db.Column(db.Integer, db.ForeignKey(Teams.id), nullable=True)
-    position = db.Column(db.String, default="NA")
-    overall = db.Column(db.Integer, default=0)
-    attack = db.Column(db.Integer, default=0)
-    middle = db.Column(db.Integer, default=0)
-    defence = db.Column(db.Integer, default=0)
-
-    def __repr__(self):
-        return self.first_name
+# class Players(db.Model):
+#     """Build all players' data model."""
+#
+#     id = db.Column(db.Integer, primary_key=True)
+#     first_name = db.Column(db.String, nullable=True)
+#     last_name = db.Column(db.String, nullable=True)
+#     team_id = db.Column(db.Integer, db.ForeignKey(Teams.id), nullable=True)
+#     position = db.Column(db.String, default="NA")
+#     overall = db.Column(db.Integer, default=0)
+#     attack = db.Column(db.Integer, default=0)
+#     middle = db.Column(db.Integer, default=0)
+#     defence = db.Column(db.Integer, default=0)
+#
+#     def __repr__(self):
+#         return self.first_name
 
 
 """Generate the database with players."""

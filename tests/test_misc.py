@@ -1,7 +1,7 @@
 """Unit tests for misc folder."""
 
-from db.teams import Teams
-from misc.oponents import teams_data
+from application.db.teams import Teams
+from application.misc.oponents import teams_data
 
 teams = [
     Teams(name="Manchester United", league="English Premier League", logo="man"),

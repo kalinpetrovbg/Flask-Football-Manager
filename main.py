@@ -1,23 +1,23 @@
-"""Main file rendering all website pages."""
-
-import logging
-import random
-from collections import defaultdict
-
-from flask import flash, redirect, render_template, request, session, url_for
-from flask_login import current_user, login_required, login_user, logout_user
-from sqlalchemy import func
-from werkzeug.security import check_password_hash, generate_password_hash
-
-from app import app, db, login_manager
-from db.game import AwayTeam, HomeTeam
-from db.names import spanish_f_names, spanish_l_names
-from db.players import Players
-from db.teams import Teams
-from db.users import Users
-from misc.oponents import teams_data
-from stadium.stadium import Stadium
-from weather.weather import Weather
+# """Main file rendering all website pages."""
+#
+# import logging
+# import random
+# from collections import defaultdict
+#
+# from flask import flash, redirect, render_template, request, session, url_for
+# from flask_login import current_user, login_required, login_user, logout_user
+# from sqlalchemy import func
+# from werkzeug.security import check_password_hash, generate_password_hash
+#
+# # from app import app, db, login_manager
+# from application.db.game import AwayTeam, HomeTeam
+# from application.db.names import spanish_f_names, spanish_l_names
+# from application.db import Players
+# from application.db.teams import Teams
+# from application.db.users import Users
+# from application.misc.oponents import teams_data
+# from application.stadium import Stadium
+# from application.weather.weather import Weather
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -37,15 +37,7 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 
-@app.route("/")
-def index():
-    """Renders Home page."""
 
-    user = current_user
-    user_team = Teams.query.filter_by(id=user.team_id).first()
-
-    logger.info(f"User {user.username} just visited Home page")
-    return render_template("index.html", user_team=user_team)
 
 
 @app.route("/settings.html")
