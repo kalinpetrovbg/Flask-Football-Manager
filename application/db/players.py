@@ -1,6 +1,6 @@
 """Generate players database table."""
-from application import db
-from application.db.teams import Teams
+# from application import db
+# from application.db.teams import Teams
 
 
 # class Players(db.Model):

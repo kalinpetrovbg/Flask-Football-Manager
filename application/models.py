@@ -1,7 +1,7 @@
 """Data models."""
 from flask_login import UserMixin, AnonymousUserMixin
 
-from . import db, login_manager
+from application import db, login_manager
 
 
 class Users(db.Model, UserMixin):
