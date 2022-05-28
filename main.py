@@ -5,7 +5,7 @@
 # from collections import defaultdict
 #
 # from flask import flash, redirect, render_template, request, session, url_for
-# from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import current_user, login_required, login_user, logout_user
 # from sqlalchemy import func
 # from werkzeug.security import check_password_hash, generate_password_hash
 #
@@ -19,14 +19,6 @@
 # from application.stadium import Stadium
 # from application.weather.weather import Weather
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-file_handler = logging.FileHandler('main.log')
-logger.addHandler(file_handler)
-
-stream_handler = logging.StreamHandler()
-logger.addHandler(stream_handler)
 
 
 @login_manager.user_loader

@@ -1,7 +1,7 @@
 """Data models."""
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 
-from . import db
+from . import db, login_manager
 
 
 class Users(db.Model, UserMixin):
@@ -11,6 +11,9 @@ class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+
+    # Todo hash the password with werkzeug.security
+
     team_id = db.Column(db.Integer, default=None)
 
     def __repr__(self):
@@ -52,12 +55,12 @@ class Players(db.Model):
         return self.first_name
 
 
+class AnonymousUser(AnonymousUserMixin):
+    """For non logged users."""
 
-# class AnonymousUser(AnonymousUserMixin):
-#     """For non logged users."""
-#
-#     def __init__(self):
-#         self.username = "Anonymous"
-#         self.team_id = None
+    def __init__(self):
+        self.username = "Anonymous"
+        self.team_id = None
 
-# login_manager.anonymous_user = AnonymousUser
+
+login_manager.anonymous_user = AnonymousUser
