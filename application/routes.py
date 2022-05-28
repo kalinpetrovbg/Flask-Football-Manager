@@ -8,8 +8,8 @@ from sqlalchemy import func
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from application import login_manager, db
-from .db.game import HomeTeam, AwayTeam
-from .db.names import spanish_f_names, spanish_l_names
+# from db.game import HomeTeam, AwayTeam
+# from db.names import spanish_f_names, spanish_l_names
 from .misc.oponents import teams_data
 from .models import Users, Teams, Players
 from .stadium.stadium import Stadium

@@ -11,7 +11,7 @@ class Config:
     """Base config."""
 
     FLASK_APP = 'wsgi.py'
-    FLASK_ENV = "production"
+    FLASK_ENV = "development"
     FLASK_DEBUG = True
     SECRET_KEY = environ.get('SECRET_KEY')
 
