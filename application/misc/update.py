@@ -1,9 +1,8 @@
 """File that should be run to update newly created teams."""
 from sqlalchemy import func
 
-from app import db
-from application.db.players import Players
-from application.db.teams import Teams
+from application import db
+from application.models import Teams, Players
 
 
 def update_teams():

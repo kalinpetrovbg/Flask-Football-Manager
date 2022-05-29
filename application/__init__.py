@@ -1,6 +1,9 @@
+"""Create application and build database."""
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -16,10 +19,18 @@ def create_app():
 
     with app.app_context():
         from . import routes
-        from . import auth
+        from application.misc.sample_db import create_sample
+        from application.misc.update import update_teams
 
         app.register_blueprint(routes.app_bp)
 
-        db.create_all()
+        database = inspect(db.engine)
+
+        if not database.has_table("fm_teams"):
+
+            db.create_all()
+
+            create_sample()
+            update_teams()
 
         return app

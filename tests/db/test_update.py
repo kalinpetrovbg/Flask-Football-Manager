@@ -4,7 +4,7 @@ import pytest
 from app import db
 from application.db import Players
 from application.db.teams import Teams
-from application.db.update import update_teams, update_player
+from application.misc.update import update_teams, update_player
 
 
 def test_if_update_function_gets_all_teams_from_db(app_with_two_teams):
