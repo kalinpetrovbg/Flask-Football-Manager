@@ -11,4 +11,4 @@ There are a couple of different game options - to play a quick game, participate
 Download this repository and start the file /Python-Football-Manager/main.py
 This will start a local server on port 5000 with the game.
 
-![FM preview](static/images/fm-preview.JPG)
+![FM preview](application/static/images/fm-preview.JPG)

@@ -1,5 +1,5 @@
 """Unit tests for db.names file."""
-from db.names import spanish_f_names, spanish_l_names
+from application.misc.names import spanish_f_names, spanish_l_names
 
 
 def test_spanish_names():

@@ -1,5 +1,5 @@
 """Unit tests for db.game file."""
-from db.game import AwayTeam, HomeTeam
+from application.misc.game import AwayTeam, HomeTeam
 
 
 def test_home_team_correct_initialization():

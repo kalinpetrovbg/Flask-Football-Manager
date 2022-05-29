@@ -1,6 +1,6 @@
 """Unit tests for weather folder."""
 
-from weather.weather import Weather
+from application.weather.weather import Weather
 
 
 def test_random_weather_choice():
