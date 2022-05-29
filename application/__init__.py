@@ -18,11 +18,19 @@ def create_app():
     login_manager.init_app(app)
 
     with app.app_context():
-        from . import routes
+        from application.pages.main import main
+        from application.pages.create_team import create_team
+        from application.pages.multiplayer import multiplayer
+        from application.pages.play_cup import play_cup
+        from application.pages.quick_game import quick_game
         from application.misc.sample_db import create_sample
         from application.misc.update import update_teams
 
-        app.register_blueprint(routes.app_bp)
+        app.register_blueprint(main)
+        app.register_blueprint(create_team)
+        app.register_blueprint(multiplayer)
+        app.register_blueprint(play_cup)
+        app.register_blueprint(quick_game)
 
         database = inspect(db.engine)
 

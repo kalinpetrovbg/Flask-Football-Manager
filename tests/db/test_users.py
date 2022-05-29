@@ -1,5 +1,5 @@
 """Unit tests for Users model."""
-from application.db.users import AnonymousUser
+from application.models import AnonymousUser
 
 
 def test_if_user_is_added_in_db_correctly(app_with_user):

@@ -2,8 +2,8 @@
 
 import random
 
-from application.stadium import STADIUM_NAMES
-from application.stadium import Stadium
+from application.stadium.stadium import STADIUM_NAMES
+from application.stadium.stadium import Stadium
 from application.weather.weather import Sunny, Rainy, PartiallyCloudy, Cloudy, Storm
 
 

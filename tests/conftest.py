@@ -1,10 +1,9 @@
 import pytest
 
-# from main2 import create_app
-from app import create_app
-from application.db import Players
-from application.db.teams import Teams
-from application.db.users import Users
+from application import create_app, db
+from application.models import Players
+from application.models import Teams
+from application.models import Users
 from application.weather.weather import weathers
 
 
@@ -14,20 +13,22 @@ def app():
     app = create_app()
     app.config.update({"TESTING": True})
 
-    yield app
+    with app.app_context():
+        yield app
 
 
 @pytest.fixture()
 def client(app):
+    """Create test client."""
     return app.test_client()
 
 
 @pytest.fixture()
-def app_with_team():
+def app_with_team(app, client):
     """Fixture for adding a Team to the database."""
 
     team = Teams(id=1000,
-                 name="Manchester United",
+                 name="Manchester United 2",
                  logo="man",
                  league="English Premier League"
                  )
@@ -41,11 +42,11 @@ def app_with_team():
 
 
 @pytest.fixture()
-def app_with_two_teams():
+def app_with_two_teams(app):
     """Fixture for adding two Teams to the database."""
 
     team1 = Teams(id=1000,
-                  name="Manchester United",
+                  name="Manchester United 2",
                   logo="man",
                   league="English Premier League",
                   overall=50,
@@ -54,7 +55,7 @@ def app_with_two_teams():
                   defence=40
                   )
     team2 = Teams(id=1001,
-                  name="Arsenal",
+                  name="Arsenal 2",
                   logo="ars",
                   league="English Premier League",
                   overall=100,
@@ -75,7 +76,7 @@ def app_with_two_teams():
 
 
 @pytest.fixture()
-def app_with_player():
+def app_with_player(app):
     """Fixture for adding Players to the database."""
 
     player = Players(id=1000,
@@ -95,7 +96,7 @@ def app_with_player():
 
 
 @pytest.fixture()
-def app_with_user():
+def app_with_user(app):
     """Instert a user data in the database."""
 
     user = Users()
