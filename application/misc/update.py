@@ -1,46 +1,48 @@
 """File that should be run to update newly created teams."""
 from sqlalchemy import func
 
-from application import db
+from application import db, create_app
 from application.models import Teams, Players
 
 
 def update_teams():
+
+    app = create_app()
     """Updates team's statistics once team has been created."""
+    with app.app_context():
+        teams = Teams.query.all()
 
-    teams = Teams.query.all()
+        for team in teams:
 
-    for team in teams:
+            try:
+                total_attack = (
+                    db.session.query(func.avg(Players.attack))
+                        .filter(Players.team_id == team.id)
+                        .scalar()
+                )
+                team.attack = round(total_attack)
+                total_middle = (
+                    db.session.query(func.avg(Players.middle))
+                        .filter(Players.team_id == team.id)
+                        .scalar()
+                )
+                team.middle = round(total_middle)
+                total_defence = (
+                    db.session.query(func.avg(Players.defence))
+                        .filter(Players.team_id == team.id)
+                        .scalar()
+                )
+                team.defence = round(total_defence)
+                team_overall = round((team.attack + team.middle + team.defence) / 3)
+                team.overall = team_overall
 
-        try:
-            total_attack = (
-                db.session.query(func.avg(Players.attack))
-                    .filter(Players.team_id == team.id)
-                    .scalar()
-            )
-            team.attack = round(total_attack)
-            total_middle = (
-                db.session.query(func.avg(Players.middle))
-                    .filter(Players.team_id == team.id)
-                    .scalar()
-            )
-            team.middle = round(total_middle)
-            total_defence = (
-                db.session.query(func.avg(Players.defence))
-                    .filter(Players.team_id == team.id)
-                    .scalar()
-            )
-            team.defence = round(total_defence)
-            team_overall = round((team.attack + team.middle + team.defence) / 3)
-            team.overall = team_overall
+            except TypeError:
+                team.attack = 0
+                team.middle = 0
+                team.defence = 0
+                team.overall = 0
 
-        except TypeError:
-            team.attack = 0
-            team.middle = 0
-            team.defence = 0
-            team.overall = 0
-
-        db.session.commit()
+            db.session.commit()
 
 
 def update_player(player_id):

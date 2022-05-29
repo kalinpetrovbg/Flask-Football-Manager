@@ -5,5 +5,5 @@ def test_login_page(client):
     url = "/"
     response = client.get(url)
 
-    assert b"Hello, World" in response.data
+    assert b"<title>Python Manager</title>" in response.data
 
