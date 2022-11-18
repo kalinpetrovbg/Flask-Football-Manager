@@ -1,6 +1,6 @@
-# Python Footlball Manager
+# Flask Footlball Manager
 
-PM (Python Manager) is a Python & Flask based online football game.
+FFM is a web based online football game based on Python and Flask.
 
 ## Features
 You can select a team and play matches in a single or multiplayer mode.
